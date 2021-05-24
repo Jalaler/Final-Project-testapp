@@ -1,0 +1,256 @@
+.write-review {
+    margin-left: 20%;
+    margin-top: 12%;
+}
+.topic-review {
+    margin-top: 4%;
+}
+
+
+.write-review-2 {
+    margin-left: 23%;
+    margin-top: 2%;
+}
+.grade-button {
+    margin-top: 2%;
+    cursor: pointer;
+}
+.g-btn {
+    background-color: rgba(196, 196, 196, 1);
+    border-color: rgba(196, 196, 196, 1);
+    color: rgb(0, 0, 0);
+    padding: 10px 14px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline;
+    margin-left: 3%;
+    font-size: 14px;
+}
+.g-btn:hover {
+    background-color: rgb(255, 125, 125);
+}
+.g-btn:focus {
+    background-color: rgb(255, 155, 155);
+}
+
+
+.text-section {
+    padding-top: 8px;
+}
+.text-teacher {
+    padding-top: 8px;
+}
+.section-teacher {
+    display: grid;
+    grid-template-columns: 10% auto;
+    row-gap: 30px;
+    margin-top: 5%;
+}
+.box-input-section {
+    width: 10%;
+    border: 3px solid rgba(196, 196, 196, 1);
+    border-right: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    height: 20px;
+    /* border-radius: 5px 0 0 5px; */
+    outline: none;
+    color: #000000;
+    background-color: rgba(196, 196, 196, 1);
+}
+.box-input-section:focus {
+    color: #000000;
+    background-color: rgba(229, 229, 229, 1);
+    border: 3px solid rgba(196, 196, 196, 1);
+}
+.box-input-teacher {
+    width: 20%;
+    border: 3px solid rgba(196, 196, 196, 1);
+    border-right: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    height: 20px;
+    /* border-radius: 5px 0 0 5px; */
+    outline: none;
+    color: #000000;
+    background-color: rgba(196, 196, 196, 1);
+}
+.box-input-teacher:focus {
+    color: #000000;
+    background-color: rgba(229, 229, 229, 1);
+    border: 3px solid rgba(196, 196, 196, 1);
+}
+
+
+.big-review {
+    margin-top: 4%;
+}
+.big-review-input {
+    margin-bottom: 1%;
+}
+
+.box-big-review-input {
+    width: 63%;
+    border: 3px solid rgba(196, 196, 196, 1);
+    border-right: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    height: 200px;
+    /* border-radius: 5px 0 0 5px; */
+    outline: none;
+    color: #000000;
+    background-color: rgba(196, 196, 196, 1);
+    margin-top: 2%;
+    margin-left: 3%;
+    /* margin-right: 20%; */
+
+    word-wrap: break-word;
+}
+.box-big-review-input:focus {
+    color: #000000;
+    background-color: rgba(229, 229, 229, 1);
+    border: 3px solid rgba(196, 196, 196, 1);
+
+    word-wrap: break-word;
+}
+.d1 {
+    margin-left: 3%;
+    font-size: 15px;
+    color: rgb(148, 148, 148);
+}
+.d2 {
+    margin-left: 3%;
+    font-size: 15px;
+    color: rgb(148, 148, 148);
+}
+
+
+.number-of-task {
+    padding-top: 8px;
+}
+.teaching-method {
+    padding-top: 8px;
+}
+.bringing-knowledge-to-practical-use {
+    padding-top: 8px;
+}
+.rate-this-subject {
+    padding-top: 8px;
+}
+
+
+.score-review {
+    display: grid;
+    grid-template-columns: 25% 5% 5% 5% 5% 5%;
+    row-gap: 40px;
+    margin-top: 5%;
+}
+.s1-btn {
+    background-color: rgba(196, 196, 196, 1);
+    border-color: rgba(196, 196, 196, 1);
+    color: rgb(0, 0, 0);
+    /* padding: 8px 14px; */
+    padding-top: 13%;
+    padding-bottom: 13%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.s2-btn {
+    background-color: rgba(196, 196, 196, 1);
+    border-color: rgba(196, 196, 196, 1);
+    color: rgb(0, 0, 0);
+    /* padding: 8px 14px; */
+    padding-top: 13%;
+    padding-bottom: 13%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.s3-btn {
+    background-color: rgba(196, 196, 196, 1);
+    border-color: rgba(196, 196, 196, 1);
+    color: rgb(0, 0, 0);
+    /* padding: 8px 14px; */
+    padding-top: 13%;
+    padding-bottom: 13%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.s4-btn {
+    background-color: rgba(196, 196, 196, 1);
+    border-color: rgba(196, 196, 196, 1);
+    color: rgb(0, 0, 0);
+    /* padding: 8px 14px; */
+    padding-top: 13%;
+    padding-bottom: 13%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.s1-btn:hover {
+    background-color: rgb(255, 125, 125);
+}
+.s1-btn:focus {
+    background-color: rgb(255, 155, 155);
+}
+.s1-btn:visited {
+    background-color: rgb(255, 155, 155);
+}
+
+.s2-btn:hover {
+    background-color: rgb(255, 125, 125);
+}
+.s2-btn:focus {
+    background-color: rgb(255, 155, 155);
+}
+
+.s3-btn:hover {
+    background-color: rgb(255, 125, 125);
+}
+.s3-btn:focus {
+    background-color: rgb(255, 155, 155);
+}
+
+.s4-btn:hover {
+    background-color: rgb(255, 125, 125);
+}
+.s4-btn:focus {
+    background-color: rgb(255, 155, 155);
+}
+
+
+.submit-review {
+    margin-top: 5%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+.submit-button {
+    background-color: rgba(196, 196, 196, 1);
+    color: rgb(0, 0, 0);
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+.submit-button:hover {
+    background-color: rgb(255, 125, 125);
+}

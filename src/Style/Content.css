@@ -1,0 +1,20 @@
+.app-grid {
+    display: grid;
+    /* column-gap: 16px; */
+    row-gap: 32px;
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.content {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: 12% auto 12%;
+    row-gap: 30px;
+    /* border: 1px solid rgb(0, 0, 0); */
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: rgba(229, 229, 229, 1);
+}
