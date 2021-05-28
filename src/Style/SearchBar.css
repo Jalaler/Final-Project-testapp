@@ -5,7 +5,7 @@
   }
   .searchTerm {
     width: 100%;
-    border: 3px solid rgba(196, 196, 196, 1);
+    border: 3px solid rgba(229, 229, 229, 1);
     border-right: none;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -14,7 +14,7 @@
     /* border-radius: 5px 0 0 5px; */
     outline: none;
     color: #000000;
-    background-color: rgba(196, 196, 196, 1);
+    background-color: rgba(229, 229, 229, 1);
   }
   .searchTerm:focus{
     color: #000000;

@@ -14,8 +14,8 @@ function AppHeader() {
             <div className="brand">
                 <h2>MOD Checkup</h2>
             </div>
-            <div className="menu-login">
-                <a href="#" className="login"><b>LOGIN</b></a>
+            <div className="login">
+                <input type="button" className="login-button" value="LOGIN"></input>
             </div>
         </header>
 

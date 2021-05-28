@@ -8,7 +8,7 @@ function BeforeContent() {
                 <div className="latest-reviews">Latest reviews</div>
             </div>
             <div className="b-review">
-                <a href="#" className="review-button">Review Now!</a>
+                <a href="/review" className="review-button">Review Now!</a>
             </div>
         </div>
 

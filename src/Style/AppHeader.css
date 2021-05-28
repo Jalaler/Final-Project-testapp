@@ -57,19 +57,21 @@
 
 .login {
     position: absolute;
-    top: 18px;
+    top: 17px;
     right: 15%;
     font-size: 14px;
     color: black;
 }
-.menu-login a {
+.login input {
     background-color: rgba(196, 196, 196, 1);
+    border-color: rgba(196, 196, 196, 1);
     color: rgb(0, 0, 0);
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    font-weight: bold;
 }
-.menu-login a:hover {
+.login input:hover {
     background-color: rgb(255, 125, 125);
 }
