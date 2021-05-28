@@ -49,7 +49,7 @@ function PageReview() {
 
         console.log(studentReview);
 
-        axios.post('http://localhost:3000/review', studentReview)
+        axios.post('http://localhost:5000/create', studentReview)
         .then(res => console.log.res.data);
 
         setAllStudentReview((prevAllStudentReview) => {
