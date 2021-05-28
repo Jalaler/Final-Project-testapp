@@ -5,6 +5,7 @@ import SearchbarReview from '../Style/SearchbarReview.css';
 import OpenMessageReview from '../Style/OpenMessageReview.css';
 import WriteReview from '../Style/WriteReview.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 
 function PageReview() {
@@ -36,11 +37,26 @@ function PageReview() {
     function onReviewSubmit(event) {
         event.preventDefault();
 
+        const review = {
+            grade_received: this.state.gradeReceive,
+            scetion: this.state.sectionNo,
+            teacher_id: this.state.teacherName,
+            review_detail: this.state.reviewContent,
+            teacher_rating: this.state.scoreTeaching,
+            usefulness_rating: this.state.scoreKnowledge,
+            subject_rating: this.state.rateSubject
+        }
+
         console.log(studentReview);
+
+        axios.post('http://localhost:3000/review', studentReview)
+        .then(res => console.log.res.data);
 
         setAllStudentReview((prevAllStudentReview) => {
             return [...prevAllStudentReview, studentReview];
         });
+
+        window.location = '/';
     }
 
     // Element
