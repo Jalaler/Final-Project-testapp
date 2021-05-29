@@ -18,7 +18,8 @@ function PageReview() {
         reviewContent: '',
         scoreTeaching: '',
         scoreKnowledge: '',
-        rateSubject: ''
+        scoreParticipation: ''
+        //rateSubject: ''
     });
 
     const [allStudentReview, setAllStudentReview] = useState([]);
@@ -37,48 +38,48 @@ function PageReview() {
     function onReviewSubmit(event) {
         event.preventDefault();
 
-        const review = {
-            grade_received: this.state.gradeReceive,
-            scetion: this.state.sectionNo,
-            teacher_id: this.state.teacherName,
-            review_detail: this.state.reviewContent,
-            teacher_rating: this.state.scoreTeaching,
-            usefulness_rating: this.state.scoreKnowledge,
-            subject_rating: this.state.rateSubject
-        }
+        // const review = {
+        //     grade_received: this.state.gradeReceive,
+        //     section: this.state.sectionNo,
+        //     //teacher_id: this.state.teacherName,
+        //     review_detail: this.state.reviewContent,
+        //     teacher_rating: this.state.scoreTeaching,
+        //     usefulness_rating: this.state.scoreKnowledge,
+        //     paticipation_rating: this.state.scoreParticipation
+        //     //subject_rating: this.state.rateSubject
+        // }
 
         console.log(studentReview);
 
-        axios.post('http://localhost:5000/create', studentReview)
-        .then(res => console.log.res.data);
+        // axios.post('http://localhost:5000/create', review)
+        //     .then(res => console.log.res.data);
 
-        setAllStudentReview((prevAllStudentReview) => {
-            return [...prevAllStudentReview, studentReview];
-        });
+        // setAllStudentReview((prevAllStudentReview) => {
+        //     return [...prevAllStudentReview, review];
+        // });
 
-        window.location = '/';
+        // window.location = '/';
     }
 
+    
     // Element
-    const ReviewElement = allStudentReview.map((theReview, index) => {          // ไอไปใส่ใต้ form แต่มันเอ๋อ ดูได้ข้างล่าง
-        return (
-            <div key={index} className="content">
-                {theReview.gradeReceive}                    {/*input ที่เป็น radio รับค่าไม่ได้อ่ะ ลอง console log ได้แค่ text*/}
-                {theReview.sectionNo}
-                {theReview.teacherName}
-                {theReview.reviewContent}
-                {theReview.scoreTeaching}
-                {theReview.scoreKnowledge}
-                {theReview.rateSubject}
-            </div>
-        )
-    })
+    // const ReviewElement = allStudentReview.map((theReview, index) => {          // ไอไปใส่ใต้ form แต่มันเอ๋อ ดูได้ข้างล่าง
+    //     return (
+    //         <div key={index} className="content">
+    //             {theReview.gradeReceive}                    {/*input ที่เป็น radio รับค่าไม่ได้อ่ะ ลอง console log ได้แค่ text*/}
+    //             {theReview.sectionNo}
+    //             {theReview.teacherName}
+    //             {theReview.reviewContent}
+    //             {theReview.scoreTeaching}
+    //             {theReview.scoreKnowledge}
+    //             {theReview.rateSubject}
+    //         </div>
+    //     )
+    // })
 
     //---------------------------------------------------        ลองทำให้ Radio รับค่าได้
     // let grade=["A", "B+", "B", "C+", "C", "D+", "D", "F"]
     // const [displayGrade, setGrade] = useState('');
-
-
 
 
     return (
@@ -111,28 +112,31 @@ function PageReview() {
                 </div>
 
                     <div className="radio-grade">
-                        <input type="radio" id="gradeA" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        {/* <input type="radio" id="gradeA" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <label for="gradeA">A</label> */}
+
+                        <input type="radio" id="gradeA" name="gradeReceive" value="A" onChange={onNoteValueChange}></input>
                         <label for="gradeA">A</label>
 
-                        <input type="radio" id="gradeB+" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeB+" name="gradeReceive" value="B+" onChange={onNoteValueChange}></input>
                         <label for="gradeB+">B+</label>
 
-                        <input type="radio" id="gradeB" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeB" name="gradeReceive" value="B" onChange={onNoteValueChange}></input>
                         <label for="gradeB">B</label>
 
-                        <input type="radio" id="gradeC+" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeC+" name="gradeReceive" value="C+" onChange={onNoteValueChange}></input>
                         <label for="gradeC+">C+</label>
 
-                        <input type="radio" id="gradeC" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeC" name="gradeReceive" value="C" onChange={onNoteValueChange}></input>
                         <label for="gradeC">C</label>
 
-                        <input type="radio" id="gradeD+" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeD+" name="gradeReceive" value="D+" onChange={onNoteValueChange}></input>
                         <label for="gradeD+">D+</label>
 
-                        <input type="radio" id="gradeD" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeD" name="gradeReceive" value="D" onChange={onNoteValueChange}></input>
                         <label for="gradeD">D</label>
 
-                        <input type="radio" id="gradeF" name="gradeReceive" value={studentReview.gradeReceive} onChange={onNoteValueChange}></input>
+                        <input type="radio" id="gradeF" name="gradeReceive" value="F" onChange={onNoteValueChange}></input>
                         <label for="gradeF">F</label>
 
                         {/* {grade.map(resultGrade => (         // ลองไอข้างบนอ่ะ แต่ Radio รับค่าไม่ได้
@@ -176,101 +180,101 @@ function PageReview() {
                     </div>
 
                     <div className="score-review">
-                        {/* <div className="number-of-task">
-                        Number of task
-                    </div>
-                    <div className="radio-grade">
-                        <input type="radio" id="numTask1" name="numTask" value="numTask1"></input>
-                        <label for="numTask1">1</label>
-                    </div>
-                    <div className="radio-grade">
-                        <input type="radio" id="numTask2" name="numTask" value="numTask2"></input>
-                        <label for="numTask2">2</label>
-                    </div>
-                    <div className="radio-grade">
-                        <input type="radio" id="numTask3" name="numTask" value="numTask3"></input>
-                        <label for="numTask3">3</label>
-                    </div>
-                    <div className="radio-grade">
-                        <input type="radio" id="numTask4" name="numTask" value="numTask4"></input>
-                        <label for="numTask4">4</label>
-                    </div>
-                    <div className="radio-grade">
-                        <input type="radio" id="numTask5" name="numTask" value="numTask5"></input>
-                        <label for="numTask5">5</label>
-                    </div> */}
-
                         <div className="teaching-method">
                             Teaching method
-                    </div>
+                        </div>
                         <div className="radio-grade">
-                            <input type="radio" id="teach-method1" name="scoreTeaching" value={studentReview.scoreTeaching} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="teach-method1" name="scoreTeaching" value="1" onChange={onNoteValueChange}></input>
                             <label for="teach-method1">1</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="teach-method2" name="scoreTeaching" value={studentReview.scoreTeaching} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="teach-method2" name="scoreTeaching" value="2" onChange={onNoteValueChange}></input>
                             <label for="teach-method2">2</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="teach-method3" name="scoreTeaching" value={studentReview.scoreTeaching} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="teach-method3" name="scoreTeaching" value="3" onChange={onNoteValueChange}></input>
                             <label for="teach-method3">3</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="teach-method4" name="scoreTeaching" value={studentReview.scoreTeaching} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="teach-method4" name="scoreTeaching" value="4" onChange={onNoteValueChange}></input>
                             <label for="teach-method4">4</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="teach-method5" name="scoreTeaching" value={studentReview.scoreTeaching} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="teach-method5" name="scoreTeaching" value="5" onChange={onNoteValueChange}></input>
                             <label for="teach-method5">5</label>
                         </div>
 
                         <div className="bringing-knowledge-to-practical-use">
                             Bringing knowledge to practical use
-                    </div>
+                        </div>
                         <div className="radio-grade">
-                            <input type="radio" id="prac-use1" name="scoreKnowledge" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="prac-use1" name="scoreKnowledge" value="1" onChange={onNoteValueChange}></input>
                             <label for="prac-use1">1</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="prac-use2" name="scoreKnowledge" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="prac-use2" name="scoreKnowledge" value="2" onChange={onNoteValueChange}></input>
                             <label for="prac-use2">2</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="prac-use3" name="scoreKnowledge" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="prac-use3" name="scoreKnowledge" value="3" onChange={onNoteValueChange}></input>
                             <label for="prac-use3">3</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="prac-use4" name="scoreKnowledge" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="prac-use4" name="scoreKnowledge" value="4" onChange={onNoteValueChange}></input>
                             <label for="prac-use4">4</label>
                         </div>
                         <div className="radio-grade">
-                            <input type="radio" id="prac-use5" name="scoreKnowledge" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="prac-use5" name="scoreKnowledge" value="5" onChange={onNoteValueChange}></input>
                             <label for="prac-use5">5</label>
                         </div>
 
-                        <div className="rate-this-subject">
+                        <div className="bringing-knowledge-to-practical-use">
+                            Participation in class
+                        </div>
+                        <div className="radio-grade">
+                            <input type="radio" id="par-use1" name="scoreParticipation" value="1" onChange={onNoteValueChange}></input>
+                            <label for="par-use1">1</label>
+                        </div>
+                        <div className="radio-grade">
+                            <input type="radio" id="par-use2" name="scoreParticipation" value="2" onChange={onNoteValueChange}></input>
+                            <label for="par-use2">2</label>
+                        </div>
+                        <div className="radio-grade">
+                            <input type="radio" id="par-use3" name="scoreParticipation" value="3" onChange={onNoteValueChange}></input>
+                            <label for="par-use3">3</label>
+                        </div>
+                        <div className="radio-grade">
+                            <input type="radio" id="par-use4" name="scoreParticipation" value="4" onChange={onNoteValueChange}></input>
+                            <label for="par-use4">4</label>
+                        </div>
+                        <div className="radio-grade">
+                            <input type="radio" id="par-use5" name="scoreParticipation" value="5" onChange={onNoteValueChange}></input>
+                            <label for="par-use5">5</label>
+                        </div>
+
+                        {/* <div className="rate-this-subject">
                             <b>RATE THIS SUBJECT</b>
                         </div>
                         <div className="radio-rate">
-                            <input type="radio" id="rate-subject1" name="rateSubject" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="rate-subject1" name="rateSubject" value="1" onChange={onNoteValueChange}></input>
                             <label for="rate-subject1">1</label>
                         </div>
                         <div className="radio-rate">
-                            <input type="radio" id="rate-subject2" name="rateSubject" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="rate-subject2" name="rateSubject" value="2" onChange={onNoteValueChange}></input>
                             <label for="rate-subject2">2</label>
                         </div>
                         <div className="radio-rate">
-                            <input type="radio" id="rate-subject3" name="rateSubject" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="rate-subject3" name="rateSubject" value="3" onChange={onNoteValueChange}></input>
                             <label for="rate-subject3">3</label>
                         </div>
                         <div className="radio-rate">
-                            <input type="radio" id="rate-subject4" name="rateSubject" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="rate-subject4" name="rateSubject" value="4" onChange={onNoteValueChange}></input>
                             <label for="rate-subject4">4</label>
                         </div>
                         <div className="radio-rate">
-                            <input type="radio" id="rate-subject5" name="rateSubject" value={studentReview.scoreKnowledge} onChange={onNoteValueChange}></input>
+                            <input type="radio" id="rate-subject5" name="rateSubject" value="5" onChange={onNoteValueChange}></input>
                             <label for="rate-subject5">5</label>
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>
