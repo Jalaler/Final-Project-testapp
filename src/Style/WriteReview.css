@@ -1,9 +1,14 @@
 .write-review {
     margin-left: 20%;
     margin-top: 12%;
+    display: grid;
+    grid-template-columns: 12% auto;
+}
+.subjectname-review {
+    padding-top: 8px;
 }
 .topic-review {
-    margin-top: 4%;
+    padding-top: 32px;
 }
 
 
@@ -83,7 +88,7 @@
 }
 .section-teacher {
     display: grid;
-    grid-template-columns: 13% auto;
+    grid-template-columns: 16% auto;
     row-gap: 30px;
     margin-top: 6%;
 }

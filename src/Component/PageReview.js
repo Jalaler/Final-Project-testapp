@@ -10,50 +10,56 @@ import axios from 'axios';
 
 function PageReview() {
 
+
     function getValue() {
 
-        const sectionNo = document.getElementById('sectionNo1').value;
+        const section = document.getElementById('sectionNo1').value;
         const teacherName = document.getElementById('teacherName1').value;
-        const reviewContent = document.getElementById('reviewContent1').value;
-        const scoreTeachingInput = document.getElementsByName('scoreTeaching')
-        const gradeReceiveInput = document.getElementsByName('gradeReceive')
+        const review_detail = document.getElementById('reviewContent1').value;
+        const scoreTeachingInput = document.getElementsByName('scoreTeaching');
+        const gradeReceiveInput = document.getElementsByName('gradeReceive');
         const scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
         const scoreParticipationInput = document.getElementsByName('scoreParticipation');
 
-        let gradeReceive;
+        const academic_year = document.getElementById('academic_year').value;
+        const semester = document.getElementById('semester').value;
+        const student_id = document.getElementById('student_id').value;
+        const subject_id = document.getElementById('subject_id').value;
+
+        let grade_received;
         for (let index = 0; index < gradeReceiveInput.length; index++) {
             if (gradeReceiveInput[index].checked) {
-                gradeReceive = gradeReceiveInput[index].value;
+                grade_received = gradeReceiveInput[index].value;
                 break;
             }
         }
 
-        let scoreTeaching;
+        let teacher_rating;
         for (let index = 0; index < scoreTeachingInput.length; index++) {
             if (scoreTeachingInput[index].checked) {
-                scoreTeaching = scoreTeachingInput[index].value;
+                teacher_rating = scoreTeachingInput[index].value;
                 break;
             }
         }
 
-        let scoreKnowledge;
+        let usefulness_rating;
         for (let index = 0; index < scoreKnowledgeInput.length; index++) {
             if (scoreKnowledgeInput[index].checked) {
-                scoreKnowledge = scoreKnowledgeInput[index].value;
+                usefulness_rating = scoreKnowledgeInput[index].value;
                 break;
             }
         }
 
-        let scoreParticipation;
+        let paticipation_rating;
         for (let index = 0; index < scoreParticipationInput.length; index++) {
             if (scoreParticipationInput[index].checked) {
-                scoreParticipation = scoreParticipationInput[index].value;
+                paticipation_rating = scoreParticipationInput[index].value;
                 break;
             }
         }
 
-        String = gradeReceive + ", " + sectionNo + ", " + teacherName + ", " + reviewContent + ", " +
-            scoreTeaching + ", " + scoreKnowledge + ", " + scoreParticipation;
+        String = subject_id + ", " + student_id + ", " + grade_received + ", " + section + ", " + teacherName + ", " + academic_year + ", " +
+                 semester + ", " + review_detail + ", " + teacher_rating + ", " + usefulness_rating + ", " + paticipation_rating;
         console.log(String);
 
     }
@@ -86,27 +92,27 @@ function PageReview() {
     function onReviewSubmit(event) {
         event.preventDefault();
 
-        const review = {
-            grade_received: this.getValue.gradeReceive,
-            section: this.getValue.sectionNo,
-            //teacher_id: this.state.teacherName,
-            review_detail: this.getValue.reviewContent,
-            teacher_rating: this.getValue.scoreTeaching,
-            usefulness_rating: this.getValue.scoreKnowledge,
-            paticipation_rating: this.getValue.scoreParticipation
-            //subject_rating: this.state.rateSubject
-        }
+        // const review = {
+        //     grade_received: this.state.gradeReceive,
+        //     section: this.getValue.sectionNo,
+        //     //teacher_id: this.state.teacherName,
+        //     review_detail: this.getValue.reviewContent,
+        //     teacher_rating: this.getValue.scoreTeaching,
+        //     usefulness_rating: this.getValue.scoreKnowledge,
+        //     paticipation_rating: this.getValue.scoreParticipation
+        //     //subject_rating: this.state.rateSubject
+        // }
 
         console.log(getValue);
 
-        axios.post('http://localhost:5000/create', review)
+        axios.post('http://20.188.106.32:5000/reviews/create', getValue)
             .then(res => console.log.res.data);
 
         setAllStudentReview((prevAllStudentReview) => {
-            return [...prevAllStudentReview, review];
+            return [...prevAllStudentReview, getValue];
         });
 
-        window.location = '/';
+        //window.location = '/';
     }
 
 
@@ -130,6 +136,7 @@ function PageReview() {
     // const [displayGrade, setGrade] = useState('');
 
 
+
     return (
 
         <div className="PageReview">
@@ -143,16 +150,19 @@ function PageReview() {
                 <SearchBar />
             </div>
 
-            <div id="" className="write-review">
-                <div className="subjectname-review">
-                    <b>Subject: </b> {/*ตามด้วย Subject name*/}
-                </div>
-                <div className="topic-review">
-                    <b>Review this subject!</b>
-                </div>
-            </div>
-
             <form onSubmit={onReviewSubmit}>
+
+                <div id="" className="write-review">
+                    <div className="subjectname-review">
+                        <b>Subject:</b>
+                    </div>
+                    <div className="input-section">
+                        <input type="text" className="box-input-section" value="SSC123" id="subject_id" name="subject_id_n" disabled></input>
+                    </div>
+                    <div className="topic-review">
+                        <b>Review this subject!</b>
+                    </div>
+                </div>
 
                 <div className="write-review-2">
                     <div className="grade">
@@ -164,28 +174,28 @@ function PageReview() {
                         <label for="gradeA">A</label> */}
 
                         <input type="radio" id="gradeA" name="gradeReceive" value="A" ></input>
-                        <label for="gradeA">A</label>
+                        <label htmlFor="gradeA">A</label>
 
                         <input type="radio" id="gradeB+" name="gradeReceive" value="B+" ></input>
-                        <label for="gradeB+">B+</label>
+                        <label htmlFor="gradeB+">B+</label>
 
                         <input type="radio" id="gradeB" name="gradeReceive" value="B" ></input>
-                        <label for="gradeB">B</label>
+                        <label htmlFor="gradeB">B</label>
 
                         <input type="radio" id="gradeC+" name="gradeReceive" value="C+" ></input>
-                        <label for="gradeC+">C+</label>
+                        <label htmlFor="gradeC+">C+</label>
 
                         <input type="radio" id="gradeC" name="gradeReceive" value="C" ></input>
-                        <label for="gradeC">C</label>
+                        <label htmlFor="gradeC">C</label>
 
                         <input type="radio" id="gradeD+" name="gradeReceive" value="D+" ></input>
-                        <label for="gradeD+">D+</label>
+                        <label htmlFor="gradeD+">D+</label>
 
                         <input type="radio" id="gradeD" name="gradeReceive" value="D" ></input>
-                        <label for="gradeD">D</label>
+                        <label htmlFor="gradeD">D</label>
 
                         <input type="radio" id="gradeF" name="gradeReceive" value="F" ></input>
-                        <label for="gradeF">F</label>
+                        <label htmlFor="gradeF">F</label>
 
                         {/* {grade.map(resultGrade => (         // ลองไอข้างบนอ่ะ แต่ Radio รับค่าไม่ได้
                     <input type="radio" value={resultGrade} name="gradeReceive" checked={displayGrade===resultGrade} onChange={(e) => setGrade(e.target.value)}></input>
@@ -196,17 +206,34 @@ function PageReview() {
                     <div className="section-teacher">
                         <div className="text-section">
                             Section
-                    </div>
+                        </div>
                         <div className="input-section">
-                            <input type="text" className="box-input-section" placeholder="section no."
-                                id="sectionNo1" name="sectionNo" ></input>
+                            <input type="text" className="box-input-section" placeholder="section no." id="sectionNo1" name="sectionNo"></input>
                         </div>
                         <div className="text-teacher">
                             Teacher
-                    </div>
+                        </div>
                         <div className="input-section">
-                            <input type="text" className="box-input-teacher" placeholder="teacher name"
-                                id="teacherName1" name="teacherName" ></input>
+                            <input type="text" className="box-input-teacher" placeholder="teacher name" id="teacherName1" name="teacherName"></input>
+                        </div>
+
+                        <div className="text-section">
+                            Academic year
+                        </div>
+                        <div className="input-section">
+                            <input type="text" className="box-input-section" value="2020" id="academic_year" name="academic_year_n" disabled></input>
+                        </div>
+                        <div className="text-teacher">
+                            Semester
+                        </div>
+                        <div className="input-section">
+                            <input type="text" className="box-input-section" value="2" id="semester" name="semester_n" disabled></input>
+                        </div>
+                        <div className="text-teacher">
+                            ID
+                        </div>
+                        <div className="input-section">
+                            <input type="text" className="box-input-teacher" value="61130567890" id="student_id" name="student_id_n" disabled></input>
                         </div>
                     </div>
 
@@ -233,23 +260,23 @@ function PageReview() {
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="teach-method1" name="scoreTeaching" value="1" ></input>
-                            <label for="teach-method1">1</label>
+                            <label htmlFor="teach-method1">1</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="teach-method2" name="scoreTeaching" value="2" ></input>
-                            <label for="teach-method2">2</label>
+                            <label htmlFor="teach-method2">2</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="teach-method3" name="scoreTeaching" value="3" ></input>
-                            <label for="teach-method3">3</label>
+                            <label htmlFor="teach-method3">3</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="teach-method4" name="scoreTeaching" value="4" ></input>
-                            <label for="teach-method4">4</label>
+                            <label htmlFor="teach-method4">4</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="teach-method5" name="scoreTeaching" value="5" ></input>
-                            <label for="teach-method5">5</label>
+                            <label htmlFor="teach-method5">5</label>
                         </div>
 
                         <div className="bringing-knowledge-to-practical-use">
@@ -257,23 +284,23 @@ function PageReview() {
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="prac-use1" name="scoreKnowledge" value="1" ></input>
-                            <label for="prac-use1">1</label>
+                            <label htmlFor="prac-use1">1</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="prac-use2" name="scoreKnowledge" value="2" ></input>
-                            <label for="prac-use2">2</label>
+                            <label htmlFor="prac-use2">2</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="prac-use3" name="scoreKnowledge" value="3" ></input>
-                            <label for="prac-use3">3</label>
+                            <label htmlFor="prac-use3">3</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="prac-use4" name="scoreKnowledge" value="4" ></input>
-                            <label for="prac-use4">4</label>
+                            <label htmlFor="prac-use4">4</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="prac-use5" name="scoreKnowledge" value="5" ></input>
-                            <label for="prac-use5">5</label>
+                            <label htmlFor="prac-use5">5</label>
                         </div>
 
                         <div className="bringing-knowledge-to-practical-use">
@@ -281,23 +308,23 @@ function PageReview() {
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="par-use1" name="scoreParticipation" value="1" ></input>
-                            <label for="par-use1">1</label>
+                            <label htmlFor="par-use1">1</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="par-use2" name="scoreParticipation" value="2" ></input>
-                            <label for="par-use2">2</label>
+                            <label htmlFor="par-use2">2</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="par-use3" name="scoreParticipation" value="3" ></input>
-                            <label for="par-use3">3</label>
+                            <label htmlFor="par-use3">3</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="par-use4" name="scoreParticipation" value="4" ></input>
-                            <label for="par-use4">4</label>
+                            <label htmlFor="par-use4">4</label>
                         </div>
                         <div className="radio-grade">
                             <input type="radio" id="par-use5" name="scoreParticipation" value="5" ></input>
-                            <label for="par-use5">5</label>
+                            <label htmlFor="par-use5">5</label>
                         </div>
 
                         {/* <div className="rate-this-subject">
