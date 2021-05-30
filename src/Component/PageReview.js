@@ -14,7 +14,7 @@ function PageReview() {
     function getValue() {
 
         const section = document.getElementById('sectionNo1').value;
-        const teacherName = document.getElementById('teacherName1').value;
+        // const teacherName = document.getElementById('teacherName1').value;
         const review_detail = document.getElementById('reviewContent1').value;
         const scoreTeachingInput = document.getElementsByName('scoreTeaching');
         const gradeReceiveInput = document.getElementsByName('gradeReceive');
@@ -50,18 +50,28 @@ function PageReview() {
             }
         }
 
-        let paticipation_rating;
+        let participation_rating;
         for (let index = 0; index < scoreParticipationInput.length; index++) {
             if (scoreParticipationInput[index].checked) {
-                paticipation_rating = scoreParticipationInput[index].value;
+                participation_rating = scoreParticipationInput[index].value;
                 break;
             }
         }
 
-        String = subject_id + ", " + student_id + ", " + grade_received + ", " + section + ", " + teacherName + ", " + academic_year + ", " +
-                 semester + ", " + review_detail + ", " + teacher_rating + ", " + usefulness_rating + ", " + paticipation_rating;
-        console.log(String);
+        const review = {
+            grade_received: grade_received,
+            teacher_rating: teacher_rating,
+            usefulness_rating: usefulness_rating, 
+            participation_rating: participation_rating, 
+            academic_year: academic_year,
+            semester: semester,
+            student_id: student_id, 
+            subject_id: subject_id,
+            section: section,
+            review_detail: review_detail
+        }
 
+        return review;
     }
 
     // States
@@ -103,16 +113,15 @@ function PageReview() {
         //     //subject_rating: this.state.rateSubject
         // }
 
-        console.log(getValue);
-
-        axios.post('http://20.188.106.32:5000/reviews/create', getValue)
-            .then(res => console.log.res.data);
+        axios.post('http://localhost:5000/reviews/create', getValue())
+            .then(res => console.log.res.data)
+            .catch(err => console.log(err.message));
 
         setAllStudentReview((prevAllStudentReview) => {
             return [...prevAllStudentReview, getValue];
         });
 
-        //window.location = '/';
+        window.location = '/';
     }
 
 
