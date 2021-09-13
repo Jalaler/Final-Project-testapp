@@ -3,12 +3,12 @@ import ReturntotopButton from "./ReturntotopButton";
 import FooterReview from "./FooterReview";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
-import { useState } from 'react';
+import { useState , useEffect, React } from 'react';
 import axios from 'axios';
 
 import SelectRadio from '../src/styles/SelectRadio.css';
 
-function ReviewPage() {
+function EditPage() {
 
     function getValue() {
 
@@ -101,7 +101,7 @@ function ReviewPage() {
     function onReviewSubmit(event) {
         event.preventDefault();
 
-        axios.post('http://localhost:5000/api/reviews', getValue())
+        axios.put('http://localhost:5000/api/reviews/613f2551158d6620c02b66e0', getValue())
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
@@ -111,6 +111,18 @@ function ReviewPage() {
 
         window.location = '/';
     }
+
+    const [edit, setEdit] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/reviews/613f2551158d6620c02b66e0')
+            .then((response) => {
+                setEdit(response.data);
+                console.log(response.data);
+            });
+           
+            
+    }, []);
 
 
 
@@ -235,31 +247,31 @@ function ReviewPage() {
                             Section:
                         </div>
                         <div class="flex">
-                            <input type="text" name="sectionNo" id="section_No" placeholder="Section No." class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="text" name="sectionNo" id="section_No" placeholder="Section No." value={edit.section} onChange={(event) => { setEdit({ section: event.target.value.trim() }) }} class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Teacher:
                         </div>
                         <div class="flex">
-                            <input type="text" name="teacherName" id="teacher_Name" placeholder="Teacher name" class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                            <input type="text" name="teacherName" id="teacher_Name" placeholder="Teacher name" value={edit.review_teacher} onChange={(event) => { setEdit({ review_teacher: event.target.value.trim() }) }} class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Academic year:
                         </div>
                         <div class="flex">
-                            <input type="number" name="academicyear" id="academic_year" value="2021" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="academicyear" id="academic_year" value={edit.academic_year} onChange={(event) => { setEdit({ academic_year: event.target.value.trim() }) }} placeholder=""  class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Semester:
                         </div>
                         <div class="flex">
-                            <input type="number" name="semester" id="Semester" value="1" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="semester" id="Semester" value={edit.semester} onChange={(event) => { setEdit({ semester: event.target.value.trim() }) }}  placeholder="" class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             ID:
                         </div>
                         <div class="flex">
-                            <input type="text" name="studentId" id="student_Id" value="6124839e65cfb652d8df2b67" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                            <input type="text" name="studentId" id="student_Id" value={edit.reviewer} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                     </div>
                 </div>
@@ -272,7 +284,7 @@ function ReviewPage() {
                 <div class="flex flex-wrap mb-2 justify-center mt-6">
                     <div class="relative w-3/5 appearance-none label-floating mx-80">
                         <textarea class="pt-3 pb-32 px-6 autoexpand tracking-wide mb-3 leading-relaxed appearance-none block w-full bg-yellow-400 bg-opacity-5 border-yellow-500 border rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300"
-                            id="message" name="reviewContent" type="text" placeholder="Message..."></textarea>
+                            id="message" name="reviewContent" type="text" value={edit.review_detail} onChange={(event) => { setEdit({ review_detail: event.target.value.trim() }) }} placeholder="Message..." ></textarea>
                         <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
                         </label>
                     </div>
@@ -378,4 +390,4 @@ function ReviewPage() {
 
 }
 
-export default ReviewPage;
+export default EditPage;

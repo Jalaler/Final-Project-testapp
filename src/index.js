@@ -11,6 +11,7 @@ import SubjectPage from './SubjectPage';
 import ReviewPage from './ReviewPage';
 import HistoryPage from './HistoryPage';
 import SubjectDetailPage from './SubjectDetailPage';
+import EditPage from './EditPage';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -31,6 +32,9 @@ ReactDOM.render(
                 </Route>
                 <Route path="/subjectdetail">
                     <SubjectDetailPage />
+                </Route>
+                <Route path="/edit">
+                    <EditPage />
                 </Route>
             </Switch>
         </BrowserRouter>
