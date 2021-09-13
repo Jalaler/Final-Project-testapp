@@ -8,14 +8,11 @@ import SubjectPage from './SubjectPage.js';
 import ReviewPage from './ReviewPage';
 import HistoryPage from './HistoryPage';
 
-
 function App() {
     return (
-
         <div className="App">
             
          </div>
-
     );
 }
 

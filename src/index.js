@@ -17,21 +17,11 @@ ReactDOM.render(
 
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact>
-                    <HomePage />
-                </Route>
-                <Route path="/subject">
-                    <SubjectPage />
-                </Route>
-                <Route path="/review">
-                    <ReviewPage />
-                </Route>
-                <Route path="/history">
-                    <HistoryPage />
-                </Route>
-                <Route path="/subjectdetail">
-                    <SubjectDetailPage />
-                </Route>
+                <Route exact path="/" component={HomePage}>{/* <HomePage /> */}</Route>
+                <Route path="/subject" component={SubjectPage}>{/* <SubjectPage /> */}</Route>
+                <Route path="/review" component={ReviewPage}>{/* <ReviewPage /> */}</Route>
+                <Route path="/history" component={HistoryPage}>{/* <HistoryPage /> */}</Route>
+                <Route path="/subjectdetail" component={SubjectDetailPage}>{/* <SubjectDetailPage /> */}</Route>
             </Switch>
         </BrowserRouter>
 

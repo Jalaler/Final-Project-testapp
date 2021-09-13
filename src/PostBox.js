@@ -32,13 +32,28 @@ function PostBox() {
                                         </svg>
                                     </div>
                                 </header>
-                                <div class="pl-44 pr-24 pb-8">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-                                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                                    software like Aldus PageMaker including versions of Lorem Ipsum.
+                                <div class="pl-44 pr-24 pb-8" style={{overflowWrap: "break-word"}}>
+                                    {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                    when an unknown printer took a galley of type and scrambled it to make a type
+                                    specimen book. It has survived not only five centuries, but also the leapinto
+                                    electronic typesetting, remaining essentially unchanged. It was popularised in the
+                                    1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                                    and more recently with desktop publishingsoftware like Aldus PageMaker including versions of Lorem Ipsum.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                    when an unknown printer took a galley of type and scrambled it to make a type
+                                    specimen book. It has survived not only five centuries, but also the leapinto
+                                    electronic typesetting, remaining essentially unchanged. It was popularised in the
+                                    1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                                    and more recently with desktop publishingsoftware like Aldus PageMaker including versions of Lorem Ipsum. */}
+
+                                    {/* 15 464 8745 4642 43 8578 6 123 48 79 4521 32 418 7654 32 13 5786 5 4321 5 748 75 1 231 57 68 21 35 74
+                                    15 464 8745 4642 43 8578 6 123 48 79 4521 32 418 7654 32 13 5786 5 4321 5 748 75 1 231 57 68 21 35 74
+                                    15 464 8745 4642 43 8578 6 123 48 79 4521 32 418 7654 32 13 5786 5 4321 5 748 75 1 231 57 68 21 35 74
+                                    15 464 8745 4642 43 8578 6 123 48 79 4521 32 418 7654 32 13 5786 5 4321 5 748 75 1 231 57 68 21 35 74 */}
+
+                                    1111111111111111111122222222222222222333333333333333444444444444444555555555555555
                                 </div>
                                 <div class="tab-content">
                                     <div class="pl-36 pr-8 pb-6 text-grey-darkest">

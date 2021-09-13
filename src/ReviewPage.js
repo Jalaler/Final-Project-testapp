@@ -8,18 +8,17 @@ import axios from 'axios';
 
 import SelectRadio from '../src/styles/SelectRadio.css';
 
+import ModalV2 from '../src/styles/ModalV2.css';
+
 function ReviewPage() {
 
     function getValue() {
 
         const section = document.getElementById('sectionNo1').value;
-        // const teacherName = document.getElementById('teacherName1').value;
-        // const review_detail = document.getElementById('reviewContent1').value;
         const scoreTeachingInput = document.getElementsByName('scoreTeaching');
         const gradeReceiveInput = document.getElementsByName('gradeReceive');
         const scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
         const scoreParticipationInput = document.getElementsByName('scoreParticipation');
-
         const academic_year = document.getElementById('academic_year').value;
         const semester = document.getElementById('semester').value;
         const student_id = document.getElementById('student_id').value;
@@ -91,6 +90,53 @@ function ReviewPage() {
 
 
 
+    // MODAL version 1
+
+    // function openModal(key) {
+    //     document.getElementById(key).showModal();
+    //     document.body.setAttribute('style', 'overflow: hidden;');
+    //     document.getElementById(key).children[0].scrollTop = 0;
+    //     document.getElementById(key).children[0].classList.remove('opacity-0');
+    //     document.getElementById(key).children[0].classList.add('opacity-100')
+    // }
+
+    // function modalClose(key) {
+    //     document.getElementById(key).children[0].classList.remove('opacity-100');
+    //     document.getElementById(key).children[0].classList.add('opacity-0');
+    //     setTimeout(function () {
+    //         document.getElementById(key).close();
+    //         document.body.removeAttribute('style');
+    //     }, 100);
+    // }
+
+
+
+    // MODAL version 2
+
+    // all_modals = ['main-modal', 'another-modal']
+    // all_modals.forEach((modal) => {
+    //     const modalSelected = document.querySelector('.' + modal);
+    //     modalSelected.classList.remove('fadeIn');
+    //     modalSelected.classList.add('fadeOut');
+    //     modalSelected.style.display = 'none';
+    // })
+    // const modalClose = (modal) => {
+    //     const modalToClose = document.querySelector('.' + modal);
+    //     modalToClose.classList.remove('fadeIn');
+    //     modalToClose.classList.add('fadeOut');
+    //     setTimeout(() => {
+    //         modalToClose.style.display = 'none';
+    //     }, 500);
+    // }
+    // const openModal = (modal) => {
+    //     const modalToOpen = document.querySelector('.' + modal);
+    //     modalToOpen.classList.remove('fadeOut');
+    //     modalToOpen.classList.add('fadeIn');
+    //     modalToOpen.style.display = 'flex';
+    // }
+
+
+
     return (
         <div className="ReviewPage">
             <Navbar />
@@ -156,49 +202,6 @@ function ReviewPage() {
                         </div>
                     </div>
                 </div>
-
-                {/* <div class="grid grid-cols-2 grid-rows-5 gap-1">
-                    <div class="flex justify-center mr-96">
-                        <div class="flex items-center text-lg font-semibold">
-                            Section
-                        </div>
-                        <div class="flex space-y-4 mr-20">
-                            <input type="text" name="sectionNo" placeholder="Section No." class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            Teacher
-                        </div>
-                        <div class="flex mr-20">
-                            <input type="text" name="teacherName" placeholder="Teacher name" class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            Academic year
-                        </div>
-                        <div class="flex mr-48">
-                            <input type="text" name="teacherName" value="2021" placeholder="" disabled class="mx-16 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-96">
-                        <div class="flex items-center text-lg font-semibold">
-                            Semester
-                        </div>
-                        <div class="flex mr-20">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-28 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            ID
-                        </div>
-                        <div class="flex mr-10">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-40 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
-                        </div>
-                    </div>
-                </div> */}
 
                 <div class="flex justify-center mr-96">
                     <div class="grid grid-cols-2 grid-rows-5 gap-1 gap-y-2 gap-x-10 mr-16">
@@ -338,9 +341,232 @@ function ReviewPage() {
             <div className="submit-review" onClick={getValue}>
                 <FooterReview />
             </div>
+
+
+
+            {/* MODAL version 1 */}
+
+            {/* <div id="mymodalcentered" class="bg-transparent z-0 relative w-screen h-screen">
+                <div class="p-7 flex justify-center items-center fixed left-0 top-0 w-full h-full bg-gray-900 bg-opacity-50 z-50 transition-opacity duration-300 opacity-0">
+                    <div class="bg-white flex rounded-lg w-1/2 relative">
+                        <div class="flex flex-col items-start">
+                            <div class="p-7 flex items-center w-full">
+                                <div class="text-gray-900 font-bold text-lg">Modal Centered</div>
+                                <svg onclick={modalClose('mymodalcentered')} class="ml-auto fill-current text-gray-700 w-5 h-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                                    <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
+                                </svg>
+                            </div>
+                            <div class="px-7 overflow-x-hidden overflow-y-auto" style="max-height: 40vh;">
+                                <p>First Line</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Last Line</p>
+                            </div>
+                            <div class="p-7 flex justify-end items-center w-full">
+                                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3">
+                                    Ok
+                                </button>
+                                <button type="button" onclick={modalClose('mymodalcentered')} class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mymodaltop" class="bg-transparent z-0 relative w-screen h-screen">
+                <div class="p-7 flex justify-center items-start overflow-x-hidden overflow-y-auto fixed left-0 top-0 w-full h-full bg-gray-900 bg-opacity-50 z-50 transition-opacity duration-300 opacity-0">
+                    <div class="bg-white flex rounded-lg w-1/2 relative">
+                        <div class="flex flex-col items-start">
+                            <div class="p-7 flex items-center w-full">
+                                <div class="text-gray-900 font-bold text-lg">Modal Top</div>
+                                <svg onclick={modalClose('mymodaltop')} class="ml-auto fill-current text-gray-700 w-5 h-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                                    <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
+                                </svg>
+                            </div>
+                            <div class="px-7">
+                                <p>First Line</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Last Line</p>
+                            </div>
+                            <div class="p-7 flex justify-end items-center w-full">
+                                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3">
+                                    Ok
+                                </button>
+                                <button type="button" onclick={modalClose('mymodaltop')} class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center items-start h-full absolute w-full mt-7">
+                <button type="button" onclick={openModal('mymodalcentered')} class="px-4 py-2 bg-blue-500 text-white rounded mr-3">Open Modal Centered</button>
+                <button type="button" onclick={openModal('mymodaltop')} class="px-4 py-2 bg-blue-500 text-white rounded">Open Modal Top</button>
+            </div> */}
+
+
+
+            {/* MODAL version 2 */}
+
+            {/* <div>
+                <button onclick="openModal('main-modal')" class='bg-blue-500 text-white p-2 rounded text-2xl font-bold'>Open Modal</button>
+            </div>
+            <div>
+                <button onclick="openModal('another-modal')" class='mt-5 bg-blue-500 text-white p-2 rounded text-2xl font-bold'>Open Another Modal</button>
+            </div>
+
+            <div class="main-modal fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+                <div class="border border-blue-500 shadow-lg modal-container bg-white w-4/12 md:max-w-11/12 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
+                    <div class="modal-content py-4 text-left px-6">
+                        <!--Title-->
+                        <div class="flex justify-between items-center pb-3">
+                            <p class="text-2xl font-bold text-gray-500">Add Caretaker</p>
+                            <div class="modal-close cursor-pointer z-50" onclick="modalClose('main-modal')">
+                                <svg class="fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 18 18">
+                                    <path
+                                        d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <!--Body-->
+                        <div class="my-5 mr-5 ml-5 flex justify-center">
+                            <form action="{{url_for('default.add_caretaker', apartment_id = apartment.id)}}" method="POST" id="add_caretaker_form" class="w-full">
+                                <div class="">
+                                    <div class="">
+                                        <label for="names" class="text-md text-gray-600">Full Names</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" id="names" autocomplete="off" name="names" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. John Doe" />
+                                    </div>
+                                    <div class="">
+                                        <label for="phone" class="text-md text-gray-600">Phone Number</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" id="phone" autocomplete="off" name="phone" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. 0729400426" />
+                                    </div>
+                                    <div class="">
+                                        <label for="id_number" class="text-md text-gray-600">ID Number</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="number" id="id_number" autocomplete="off" name="id_number" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Caretaker's ID number" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--Footer-->
+                        <div class="flex justify-end pt-2 space-x-14">
+                            <button
+                                class="px-4 bg-gray-200 p-3 rounded text-black hover:bg-gray-300 font-semibold" onclick="modalClose('main-modal')">Cancel</button>
+                            <button
+                                class="px-4 bg-blue-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400" onclick="validate_form(document.getElementById('add_caretaker_form'))">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="another-modal fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+                <div class="border border-blue-500 shadow-lg modal-container bg-white w-4/12 md:max-w-11/12 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
+                    <div class="modal-content py-4 text-left px-6">
+                        <!--Title-->
+                        <div class="flex justify-between items-center pb-3">
+                            <p class="text-2xl font-bold text-gray-500">Edit Caretaker</p>
+                            <div class="modal-close cursor-pointer z-50" onclick="modalClose('another-modal')">
+                                <svg class="fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 18 18">
+                                    <path
+                                        d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <!--Body-->
+                        <div class="my-5 mr-5 ml-5 flex justify-center">
+                            <form action="{{url_for('default.add_caretaker', apartment_id = apartment.id)}}" method="POST" id="add_caretaker_form" class="w-full">
+                                <div class="">
+                                    <div class="">
+                                        <label for="names" class="text-md text-gray-600">Full Names</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" id="names" autocomplete="off" name="names" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. John Doe" />
+                                    </div>
+                                    <div class="">
+                                        <label for="phone" class="text-md text-gray-600">Phone Number</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" id="phone" autocomplete="off" name="phone" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. 0729400426" />
+                                    </div>
+                                    <div class="">
+                                        <label for="id_number" class="text-md text-gray-600">ID Number</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="number" id="id_number" autocomplete="off" name="id_number" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Caretaker's ID number" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--Footer-->
+                        <div class="flex justify-end pt-2 space-x-14">
+                            <button
+                                class="px-4 bg-gray-200 p-3 rounded text-black hover:bg-gray-300 font-semibold" onclick="modalClose('another-modal')">Cancel</button>
+                            <button
+                                class="px-4 bg-blue-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400" onclick="validate_form(document.getElementById('add_caretaker_form'))">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
+
+
+
         </div>
     );
-
 }
 
 export default ReviewPage;
