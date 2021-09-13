@@ -1,5 +1,6 @@
 .scrollToTopBtn {
     box-shadow: 1px 1px 24px #FBBF24;
+    /* background-color: black; */
     border: none;
     border-radius: 100%;
     color: #F59E0B;
@@ -8,46 +9,44 @@
     line-height: 48px;
     width: 48px;
     height: 48px;
-
-      /* place it at the bottom right corner */
+    
+    /* place it at the bottom right corner */
     position: fixed;
     bottom: 60px;
     right: 60px;
-      /* keep it at the top of everything else */
+    /* keep it at the top of everything else */
     z-index: 100;
-      /* hide with opacity */
+    /* hide with opacity */
     opacity: 0;
-      /* also add a translate effect */
+    /* also add a translate effect */
     transform: translateY(100px);
-      /* and a transition */
+    /* and a transition */
     transition: all .5s ease
   }
+
   .scrollToTopBtn:hover{
     color: white;
     background-color: #FBBF24;
   }
+      
   .showBtn {
     opacity: 1;
     transform: translateY(0)
   }
 
-
-
-  #myBtn {
-    display: none; /* Hidden by default */
-    position: fixed; /* Fixed/sticky position */
-    bottom: 20px; /* Place the button at the bottom of the page */
-    right: 30px; /* Place the button 30px from the right */
-    z-index: 99; /* Make sure it does not overlap */
-    border: none; /* Remove borders */
-    outline: none; /* Remove outline */
-    background-color: red; /* Set a background color */
-    color: white; /* Text color */
-    cursor: pointer; /* Add a mouse pointer on hover */
-    padding: 15px; /* Some padding */
-    border-radius: 10px; /* Rounded corners */
-    font-size: 18px; /* Increase font size */
+  /* #myBtn {
+    display: none;  Hidden by default 
+    position: fixed;  Fixed/sticky position 
+    bottom: 20px;  Place the button at the bottom of the page 
+    right: 30px;  Place the button 30px from the right 
+    z-index: 99;  Make sure it does not overlap 
+    border: none;  Remove borders 
+    outline: none;  Remove outline 
+    background-color: red;  Set a background color 
+    color: white;  Text color 
+    cursor: pointer;  Add a mouse pointer on hover 
+    padding: 15px;  Some padding 
+    border-radius: 10px;  Rounded corners 
+    font-size: 18px;  Increase font size 
   }
-  #myBtn:hover {
-    background-color: #555; /* Add a dark-grey background on hover */
-  }
+  #myBtn:hover { */

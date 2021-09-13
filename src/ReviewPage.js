@@ -8,8 +8,6 @@ import axios from 'axios';
 
 import SelectRadio from '../src/styles/SelectRadio.css';
 
-import ModalV2 from '../src/styles/ModalV2.css';
-
 function ReviewPage() {
 
     function getValue() {
@@ -115,53 +113,6 @@ function ReviewPage() {
 
 
 
-    // MODAL version 1
-
-    // function openModal(key) {
-    //     document.getElementById(key).showModal();
-    //     document.body.setAttribute('style', 'overflow: hidden;');
-    //     document.getElementById(key).children[0].scrollTop = 0;
-    //     document.getElementById(key).children[0].classList.remove('opacity-0');
-    //     document.getElementById(key).children[0].classList.add('opacity-100')
-    // }
-
-    // function modalClose(key) {
-    //     document.getElementById(key).children[0].classList.remove('opacity-100');
-    //     document.getElementById(key).children[0].classList.add('opacity-0');
-    //     setTimeout(function () {
-    //         document.getElementById(key).close();
-    //         document.body.removeAttribute('style');
-    //     }, 100);
-    // }
-
-
-
-    // MODAL version 2
-
-    // all_modals = ['main-modal', 'another-modal']
-    // all_modals.forEach((modal) => {
-    //     const modalSelected = document.querySelector('.' + modal);
-    //     modalSelected.classList.remove('fadeIn');
-    //     modalSelected.classList.add('fadeOut');
-    //     modalSelected.style.display = 'none';
-    // })
-    // const modalClose = (modal) => {
-    //     const modalToClose = document.querySelector('.' + modal);
-    //     modalToClose.classList.remove('fadeIn');
-    //     modalToClose.classList.add('fadeOut');
-    //     setTimeout(() => {
-    //         modalToClose.style.display = 'none';
-    //     }, 500);
-    // }
-    // const openModal = (modal) => {
-    //     const modalToOpen = document.querySelector('.' + modal);
-    //     modalToOpen.classList.remove('fadeOut');
-    //     modalToOpen.classList.add('fadeIn');
-    //     modalToOpen.style.display = 'flex';
-    // }
-
-
-
     return (
         <div className="ReviewPage">
             <Navbar />
@@ -182,7 +133,7 @@ function ReviewPage() {
                 </div>
             </div>
 
-            <form onSubmit={onReviewSubmit}  >
+            <form onSubmit={onReviewSubmit}>
 
                 <div class="mt-16 flex justify-center">
                     <span class="flex font-bold text-lg items-center mr-96">
@@ -227,6 +178,49 @@ function ReviewPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* <div class="grid grid-cols-2 grid-rows-5 gap-1">
+                    <div class="flex justify-center mr-96">
+                        <div class="flex items-center text-lg font-semibold">
+                            Section
+                        </div>
+                        <div class="flex space-y-4 mr-20">
+                            <input type="text" name="sectionNo" placeholder="Section No." class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                        </div>
+                    </div>
+                    <div class="flex mt-4 justify-center mr-80">
+                        <div class="flex items-center text-lg font-semibold">
+                            Teacher
+                        </div>
+                        <div class="flex mr-20">
+                            <input type="text" name="teacherName" placeholder="Teacher name" class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                        </div>
+                    </div>
+                    <div class="flex mt-4 justify-center mr-80">
+                        <div class="flex items-center text-lg font-semibold">
+                            Academic year
+                        </div>
+                        <div class="flex mr-48">
+                            <input type="text" name="teacherName" value="2021" placeholder="" disabled class="mx-16 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                        </div>
+                    </div>
+                    <div class="flex mt-4 justify-center mr-96">
+                        <div class="flex items-center text-lg font-semibold">
+                            Semester
+                        </div>
+                        <div class="flex mr-20">
+                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-28 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                        </div>
+                    </div>
+                    <div class="flex mt-4 justify-center mr-80">
+                        <div class="flex items-center text-lg font-semibold">
+                            ID
+                        </div>
+                        <div class="flex mr-10">
+                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-40 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                        </div>
+                    </div>
+                </div> */}
 
                 <div class="flex justify-center mr-96">
                     <div class="grid grid-cols-2 grid-rows-5 gap-1 gap-y-2 gap-x-10 mr-16">
@@ -377,6 +371,7 @@ function ReviewPage() {
 
             </form>
 
+
             {/* <div className="submit-review" onClick={getValue}>
                 <FooterReview />
             </div> */}
@@ -396,26 +391,6 @@ function ReviewPage() {
                             </div>
                             <div class="px-7 overflow-x-hidden overflow-y-auto" style="max-height: 40vh;">
                                 <p>First Line</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -452,14 +427,6 @@ function ReviewPage() {
                             </div>
                             <div class="px-7">
                                 <p>First Line</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -602,9 +569,9 @@ function ReviewPage() {
             </div> */}
 
 
-
         </div>
     );
+
 }
 
 export default ReviewPage;

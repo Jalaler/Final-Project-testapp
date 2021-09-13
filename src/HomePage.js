@@ -15,7 +15,7 @@ function HomePage() {
             <TopicHome />
             <PostBox />
             <Footer />
-            <LoginModal />
+            {/* <LoginModal /> */}
         </div>
     );
 }

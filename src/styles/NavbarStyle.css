@@ -1,4 +1,4 @@
-ul {
+-ul {
   list-style: none;
   display: flex;
   justify-content: space-around;
@@ -21,11 +21,24 @@ ul li a:hover{
 }
 
 
-
-
 /* ul li a:active{
   color: #374151;
   font-weight: bold;
   border-bottom: 4px solid #F59E0B;
   transition-duration: 300ms;
 } */
+
+/* Style the buttons */
+/* .btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+  } */
+  
+  /* Style the active class (and buttons on mouse-over) */
+  /* .active, .btn:hover {
+    background-color: #666;
+    color: white;
+  } */
