@@ -14,20 +14,23 @@ function ReviewPage() {
 
     function getValue() {
 
-        const section = document.getElementById('sectionNo1').value;
+        const section = document.getElementById('section_No').value;
+        const teacherName = document.getElementById('teacher_Name').value;
+        const review_detail = document.getElementById('message').value;
         const scoreTeachingInput = document.getElementsByName('scoreTeaching');
         const gradeReceiveInput = document.getElementsByName('gradeReceive');
         const scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
         const scoreParticipationInput = document.getElementsByName('scoreParticipation');
         const academic_year = document.getElementById('academic_year').value;
-        const semester = document.getElementById('semester').value;
-        const student_id = document.getElementById('student_id').value;
+        const semester = document.getElementById('Semester').value;
+        const student_id = document.getElementById('student_Id').value;
         const subject_id = document.getElementById('subject_id').value;
 
         let grade_received;
         for (let index = 0; index < gradeReceiveInput.length; index++) {
             if (gradeReceiveInput[index].checked) {
                 grade_received = gradeReceiveInput[index].value;
+
                 break;
             }
         }
@@ -35,7 +38,7 @@ function ReviewPage() {
         let teacher_rating;
         for (let index = 0; index < scoreTeachingInput.length; index++) {
             if (scoreTeachingInput[index].checked) {
-                teacher_rating = scoreTeachingInput[index].value;
+                teacher_rating = index + 1;
                 break;
             }
         }
@@ -43,7 +46,7 @@ function ReviewPage() {
         let usefulness_rating;
         for (let index = 0; index < scoreKnowledgeInput.length; index++) {
             if (scoreKnowledgeInput[index].checked) {
-                usefulness_rating = scoreKnowledgeInput[index].value;
+                usefulness_rating = index + 1;
                 break;
             }
         }
@@ -51,25 +54,47 @@ function ReviewPage() {
         let participation_rating;
         for (let index = 0; index < scoreParticipationInput.length; index++) {
             if (scoreParticipationInput[index].checked) {
-                participation_rating = scoreParticipationInput[index].value;
+                participation_rating = index + 1;
                 break;
             }
         }
 
-        const review = {
-            grade_received: grade_received,
-            teacher_rating: teacher_rating,
-            usefulness_rating: usefulness_rating,
-            participation_rating: participation_rating,
-            academic_year: academic_year,
-            semester: semester,
-            student_id: student_id,
-            subject_id: subject_id,
-            section: section,
-            // review_detail: review_detail
-        }
 
-        return review;
+
+        if (teacherName.value != null) {
+            const review = {
+                grade_received: grade_received,
+                teacher_rating: teacher_rating,
+                usefulness_rating: usefulness_rating,
+                participation_rating: participation_rating,
+                academic_year: academic_year,
+                semester: semester,
+                reviewer: student_id,
+                reviewedSubject: subject_id,
+                review_teacher: teacherName,
+                active: true,
+                review_detail: review_detail,
+                section: section
+            }
+            return review;
+
+        }
+        else {
+            const review = {
+                grade_received: grade_received,
+                teacher_rating: teacher_rating,
+                usefulness_rating: usefulness_rating,
+                participation_rating: participation_rating,
+                academic_year: academic_year,
+                semester: semester,
+                reviewer: student_id,
+                reviewedSubject: subject_id,
+                active: true,
+                review_detail: review_detail,
+                section: section
+            }
+            return review;
+        }
     }
 
     const [allStudentReview, setAllStudentReview] = useState([]);
@@ -77,7 +102,7 @@ function ReviewPage() {
     function onReviewSubmit(event) {
         event.preventDefault();
 
-        axios.post('http://localhost:5000/reviews/create', getValue())
+        axios.post('http://localhost:5000/api/reviews', getValue())
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
@@ -157,7 +182,7 @@ function ReviewPage() {
                 </div>
             </div>
 
-            <form onSubmit={onReviewSubmit}>
+            <form onSubmit={onReviewSubmit}  >
 
                 <div class="mt-16 flex justify-center">
                     <span class="flex font-bold text-lg items-center mr-96">
@@ -169,7 +194,7 @@ function ReviewPage() {
                 </div>
 
                 <div class="flex justify-center mr-56">
-                    <div class="flex items-center text-lg font-semibold">
+                    <div class="flex items-center text-lg font-semibold" >
                         Grade:
                     </div>
                     <div class=" max-w-screen-xl mt-10 mb-10 mx-10 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
@@ -206,34 +231,40 @@ function ReviewPage() {
                 <div class="flex justify-center mr-96">
                     <div class="grid grid-cols-2 grid-rows-5 gap-1 gap-y-2 gap-x-10 mr-16">
                         <div class="flex items-center text-lg font-semibold">
+                            Subject:
+                        </div>
+                        <div class="flex">
+                            <input type="text" name="subjectid" id="subject_id" value="6072fd58257d8c39fcf0d913" disabled placeholder="Section No." class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                        </div>
+                        <div class="flex items-center text-lg font-semibold">
                             Section:
                         </div>
                         <div class="flex">
-                            <input type="text" name="sectionNo" placeholder="Section No." class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="text" name="sectionNo" id="section_No" placeholder="Section No." class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Teacher:
                         </div>
                         <div class="flex">
-                            <input type="text" name="teacherName" placeholder="Teacher name" class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                            <input type="text" name="teacherName" id="teacher_Name" placeholder="Teacher name" class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Academic year:
                         </div>
                         <div class="flex">
-                            <input type="text" name="teacherName" value="2021" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="academicyear" id="academic_year" value="2021" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Semester:
                         </div>
                         <div class="flex">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="semester" id="Semester" value="1" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             ID:
                         </div>
                         <div class="flex">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                            <input type="text" name="studentId" id="student_Id" value="6124839e65cfb652d8df2b67" placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                     </div>
                 </div>
@@ -336,12 +367,19 @@ function ReviewPage() {
                     </div>
                 </div>
 
+                <div class="pt-14">
+                    <div class="flex items-center justify-center">
+                        <button type="submit" className="submit-button" class="cursor-pointer py-3 px-12 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300" onClick={getValue} >POST</button>
+                    </div>
+                    <div class="bg-gradient-to-t from-yellow-200 h-14 mt-14">
+                    </div>
+                </div>
+
             </form>
 
-            <div className="submit-review" onClick={getValue}>
+            {/* <div className="submit-review" onClick={getValue}>
                 <FooterReview />
-            </div>
-
+            </div> */}
 
 
             {/* MODAL version 1 */}

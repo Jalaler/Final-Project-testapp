@@ -11,17 +11,37 @@ import SubjectPage from './SubjectPage';
 import ReviewPage from './ReviewPage';
 import HistoryPage from './HistoryPage';
 import SubjectDetailPage from './SubjectDetailPage';
+import EditPage from './EditPage';
 
 ReactDOM.render(
     <React.StrictMode>
 
         <BrowserRouter>
             <Switch>
-                <Route exact path="/" component={HomePage}>{/* <HomePage /> */}</Route>
-                <Route path="/subject" component={SubjectPage}>{/* <SubjectPage /> */}</Route>
-                <Route path="/review" component={ReviewPage}>{/* <ReviewPage /> */}</Route>
-                <Route path="/history" component={HistoryPage}>{/* <HistoryPage /> */}</Route>
-                <Route path="/subjectdetail" component={SubjectDetailPage}>{/* <SubjectDetailPage /> */}</Route>
+                {/* <Route exact path="/" component={HomePage}> <HomePage /> </Route>
+                <Route path="/subject" component={SubjectPage}> <SubjectPage /> </Route>
+                <Route path="/review" component={ReviewPage}> <ReviewPage /> </Route>
+                <Route path="/history" component={HistoryPage}> <HistoryPage /> </Route>
+                <Route path="/subjectdetail" component={SubjectDetailPage}> <SubjectDetailPage /> </Route> */}
+                
+                <Route path="/" exact>
+                    <HomePage />
+                </Route>
+                <Route path="/subject">
+                    <SubjectPage />
+                </Route>
+                <Route path="/review">
+                    <ReviewPage />
+                </Route>
+                <Route path="/history">
+                    <HistoryPage />
+                </Route>
+                <Route path="/subjectdetail">
+                    <SubjectDetailPage />
+                </Route>
+                <Route path="/edit">
+                    <EditPage />
+                </Route>
             </Switch>
         </BrowserRouter>
 

@@ -26,7 +26,7 @@ function HistoryPage() {
             </div>
             <div class="pt-40">
                 <div class="flex justify-center pl-96">
-                    <a href="#" class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+                    <a href="/edit" class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
                 </div>
                 <PostBox />
             </div>
