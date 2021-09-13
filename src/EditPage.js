@@ -124,8 +124,6 @@ function EditPage() {
             
     }, []);
 
-
-
     return (
         <div className="ReviewPage">
             <Navbar />
