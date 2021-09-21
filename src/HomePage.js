@@ -2,8 +2,7 @@ import Navbar from './Navbar.js';
 import Banner from './Banner.js';
 import Footer from './Footer';
 import TopicHome from './TopicHome';
-// import IMAGES from './IMAGES.js';
-import ReturntotopButton from './ReturntotopButton.js';
+import Scroll from './ReturntotopButton.js';
 import PostBox from './PostBox.js';
 import axios from 'axios'
 import React, { useState, useEffect } from 'react';
@@ -32,7 +31,6 @@ function HomePage() {
         <div className="HomePage">
             <Navbar />
             <Banner />
-            {/* <ReturntotopButton /> */}
             <TopicHome />
             {reviewList()}
 

@@ -3,22 +3,42 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import EditPage from "./EditPage";
 import { Link } from "react-router-dom";
+import LikeCheckbox from '../src/styles/LikeCheckbox.css';
 
 
 function PostBox(props) {
 
 
 
+    function LikePost() {
+        const like_btn = document.querySelector('.like_btn');
+        const like_count = document.querySelector('#like_count');
+        if (like_btn.checked) {
+            like_count.value++;
+        } else {
+            like_count.value--;
+        }
+    }
+    function DislikePost() {
+        const dislike_btn = document.querySelector('.dislike_btn');
+        const dislike_count = document.querySelector('#dislike_count');
+        if (dislike_btn.checked) {
+            dislike_count.value++;
+        } else {
+            dislike_count.value--;
+        }
+    }
+
+
     return (
         <div>
-            <main class="w-3/5 p-8 mx-auto bg-white" key={props.data._id} >
+            <div class="flex justify-center pl-96 mt-10 hidden">
+                <a href={'/edit/' + props._id} key={props.data._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+            </div>
+            
+            <main class="w-3/5 pt-4 pb-8 px-8 mx-auto bg-white"  >
                 <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                     <div class="tabs">
-                        <div class="flex justify-center pl-96">
-                            <a href={'/edit/' + props._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
-
-
-                        </div>
                         <div class="border-b tab">
                             <div class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
                                 <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-12" type="checkbox" id="chck1" />
@@ -101,34 +121,32 @@ function PostBox(props) {
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
-
-                                    <div class="flex items-center absolute right-0 pr-10">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+                                    <div class="flex items-center absolute right-0 pr-4">
+                                        <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-blue-50 transition duration-100">
+                                            <input type="checkbox" onClick={LikePost} class="like_btn like_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="like_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                                 <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                                             </svg>
-                                            <p class="pl-2">
-                                                {props.data.like_rating}
-                                            </p>
-                                        </div>
-                                        <div class="flex items-center pl-8">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                            <input type="number" id="like_count" value={props.data.like_rating} class="like_input z-10 pl-2 w-10"></input>
+                                        </label>
+                                        <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-red-50 transition duration-100">
+                                            <input type="checkbox" onClick={DislikePost} class="dislike_btn dislike_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="dislike_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                                 <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
                                             </svg>
-                                            <p class="pl-2">
-                                                {props.data.dislike_rating}
-                                            </p>
-                                        </div>
+                                            <input type="number" id="dislike_count" value={props.data.dislike_rating} class="like_input z-10 pl-2 w-10"></input>
+                                        </label>
                                     </div>
                                 </header>
                             </div>
                         </div>
-
                     </div>
                 </section>
             </main>
+            
         </div>
     );
+
 }
 
 export default PostBox;
