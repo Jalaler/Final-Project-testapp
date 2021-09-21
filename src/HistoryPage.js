@@ -2,11 +2,13 @@ import Footer from "./Footer";
 import IMAGES from "./IMAGES";
 import Navbar from "./Navbar";
 import PostBox from "./PostBox";
+import Scroll from './ReturntotopButton.js';
 
 function HistoryPage() {
     return (
         <div className="HistoryPage">
             <Navbar />
+            <Scroll showBelow={250} />
             <div class="absolute z-40 w-20 pt-44">
                 <img src={IMAGES.BigAnt} class="pt-2 ml-60" />
             </div>
@@ -25,9 +27,6 @@ function HistoryPage() {
                 </div>
             </div>
             <div class="pt-40">
-                <div class="flex justify-center pl-96">
-                    <a href="/edit" class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
-                </div>
                 <PostBox />
             </div>
             <Footer />

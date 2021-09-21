@@ -5,7 +5,7 @@ function TopicHome() {
                 Latest Post
             </div>
             <div class="flex items-center">
-                <a href="#" class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
+                <a href="/Review" class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
             </div>
         </div>
     );
