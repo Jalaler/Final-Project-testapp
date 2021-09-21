@@ -3,23 +3,29 @@ import Navbar from "./Navbar";
 import PostBox from "./PostBox";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
-import { React, useState, useEffect } from 'react';
+
 import axios from 'axios';
-import { useParams } from "react-router";
+import React, { useState, useEffect } from 'react';
 
 function SubjectDetailPage() {
-    const {abbr} = useParams();
-    const [list, setList] = useState([]);
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/subjects/'+ abbr)
-            .then((response) => {
-                setList(response.data);
-                console.log(response.data);
-            });
-          
-    }, []);
 
-    if (!list) return null;
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/reviews/')
+        .then(res => {
+            if(res.data.length > 0){
+                setData(res.data)
+            }
+        })
+        .catch(err => console.log(err))
+    });
+
+    const reviewList = () => {
+        return data.map( currentPost => {
+            return <PostBox data={currentPost}/>
+        })
+    }
+
 
     return (
         <div>
@@ -126,7 +132,10 @@ function SubjectDetailPage() {
                     <a href="#" class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
                 </div>
             </div>
-            <PostBox url={"http://localhost:5000/api/subjects/"+ abbr +"/posts"} />
+
+            {reviewList()}
+
+
             <Footer />
         </div>
     );
