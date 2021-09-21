@@ -18,12 +18,6 @@ ReactDOM.render(
 
         <BrowserRouter>
             <Switch>
-                {/* <Route exact path="/" component={HomePage}> <HomePage /> </Route>
-                <Route path="/subject" component={SubjectPage}> <SubjectPage /> </Route>
-                <Route path="/review" component={ReviewPage}> <ReviewPage /> </Route>
-                <Route path="/history" component={HistoryPage}> <HistoryPage /> </Route>
-                <Route path="/subjectdetail" component={SubjectDetailPage}> <SubjectDetailPage /> </Route> */}
-                
                 <Route path="/" exact>
                     <HomePage />
                 </Route>

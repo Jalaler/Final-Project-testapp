@@ -1,25 +1,30 @@
 import Navbar from "./Navbar";
-import ReturntotopButton from "./ReturntotopButton";
+import Scroll from './ReturntotopButton.js';
 import FooterReview from "./FooterReview";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
-import { useState , useEffect, React } from 'react';
+// import { useState, useEffect, React } from 'react';
 import axios from 'axios';
-
 import SelectRadio from '../src/styles/SelectRadio.css';
+
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 function EditPage() {
 
     function getValue() {
 
         const section = document.getElementById('section_No').value;
-        const teacherName = document.getElementById('teacher_Name').value;
         const review_detail = document.getElementById('message').value;
         const scoreTeachingInput = document.getElementsByName('scoreTeaching');
         const gradeReceiveInput = document.getElementsByName('gradeReceive');
         const scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
         const scoreParticipationInput = document.getElementsByName('scoreParticipation');
-
         const academic_year = document.getElementById('academic_year').value;
         const semester = document.getElementById('Semester').value;
         const student_id = document.getElementById('student_Id').value;
@@ -29,7 +34,6 @@ function EditPage() {
         for (let index = 0; index < gradeReceiveInput.length; index++) {
             if (gradeReceiveInput[index].checked) {
                 grade_received = gradeReceiveInput[index].value;
-
                 break;
             }
         }
@@ -58,42 +62,6 @@ function EditPage() {
             }
         }
 
-
-
-        if (teacherName.value != null) {
-            const review = {
-                grade_received: grade_received,
-                teacher_rating: teacher_rating,
-                usefulness_rating: usefulness_rating,
-                participation_rating: participation_rating,
-                academic_year: academic_year,
-                semester: semester,
-                reviewer: student_id,
-                reviewedSubject: subject_id,
-                review_teacher: teacherName,
-                active: true,
-                review_detail: review_detail,
-                section: section
-            }
-            return review;
-
-        }
-        else {
-            const review = {
-                grade_received: grade_received,
-                teacher_rating: teacher_rating,
-                usefulness_rating: usefulness_rating,
-                participation_rating: participation_rating,
-                academic_year: academic_year,
-                semester: semester,
-                reviewer: student_id,
-                reviewedSubject: subject_id,
-                active: true,
-                review_detail: review_detail,
-                section: section
-            }
-            return review;
-        }
     }
 
     const [allStudentReview, setAllStudentReview] = useState([]);
@@ -101,16 +69,32 @@ function EditPage() {
     function onReviewSubmit(event) {
         event.preventDefault();
 
-        axios.put('http://localhost:5000/api/reviews/613f2551158d6620c02b66e0', getValue())
+        const newReview = getValue();
+
+        if (newReview.grade_received != null &&
+            newReview.teacher_rating != null &&
+            newReview.usefulness_rating != null &&
+            newReview.participation_rating != null) {
+
+        axios.put('http://localhost:5000/api/reviews/613f2551158d6620c02b66e0', newReview)
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
         setAllStudentReview((prevAllStudentReview) => {
             return [...prevAllStudentReview, getValue];
         });
+        
+        setTimeout(function () {
+            window.location = '/';
+        }, 2000);
 
-        window.location = '/';
+        setOpen(true);
+
+        } else {
+            return false;
+        }
     }
+
 
     const [edit, setEdit] = useState([]);
 
@@ -120,9 +104,28 @@ function EditPage() {
                 setEdit(response.data);
                 console.log(response.data);
             });
-           
-            
     }, []);
+
+
+    const useStyles = makeStyles((theme) => ({
+        modal: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        paper: {
+            backgroundColor: theme.palette.background.paper,
+            border: '2px solid #000',
+            boxShadow: theme.shadows[5],
+            padding: theme.spacing(2, 4, 3),
+        },
+    }));
+
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
 
 
 
@@ -130,30 +133,32 @@ function EditPage() {
         <div className="ReviewPage">
             <Navbar />
             <SearchBanner />
-            {/* <ReturntotopButton /> */}
+            <Scroll showBelow={250} />
 
-            <div class="flex justify-center pt-40 pr-96">
-                <div class="flex items-center mr-20">
-                    <div>
-                        <div class="font-bold text-xl bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-4 flex items-center justify-center">
-                            GEN&nbsp;201
-                        </div>
+            <div class="flex pt-40 pl-60">
+                <div class="flex items-center pl-10">
+                    <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
+                        <input class="text-black font-bold text-xl w-20" type="text" value="GEN&nbsp;555" disabled />
                     </div>
-                    <div class="rounded-l-full w-full pl-8 text-black">
-                        <p class="text-lg font-bold">Art and Science of Cooking and Eating</p>
-                        <p class="text-md text-gray-black">(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)</p>
+                    <div class="rounded-l-full pl-8 text-black">
+                        <p>
+                            <input class="text-lg font-bold w-96 bg-white" type="text" value="Art and Science of Cooking and Eating" disabled />
+                        </p>
+                        <p>
+                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value="(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)" disabled />
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <form onSubmit={onReviewSubmit}  >
+            <form onSubmit={onReviewSubmit}>
 
                 <div class="mt-16 flex justify-center">
                     <span class="flex font-bold text-lg items-center mr-96">
                         Write review of this course
                     </span>
                     <div class="flex items-center justify-center ml-60">
-                        <a href="#" class="py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Clear</a>
+                        <a href="/Review" class="py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Clear</a>
                     </div>
                 </div>
 
@@ -161,86 +166,67 @@ function EditPage() {
                     <div class="flex items-center text-lg font-semibold" >
                         Grade:
                     </div>
-                    <div class=" max-w-screen-xl mt-10 mb-10 mx-10 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
-                        <div class="flex w-full relative">
-                            <input type="radio" id="gradeA" value="A" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeA" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">A</label>
-
-                            <input type="radio" id="gradeBplus" value="B+" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeBplus" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">B+</label>
-
-                            <input type="radio" id="gradeB" value="B" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeB" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">B</label>
-
-                            <input type="radio" id="gradeCplus" value="C+" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeCplus" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">C+</label>
-
-                            <input type="radio" id="gradeC" value="C" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeC" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">C</label>
-
-                            <input type="radio" id="gradeDplus" value="D+" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeDplus" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">D+</label>
-
-                            <input type="radio" id="gradeD" value="D" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeD" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">D</label>
-
-                            <input type="radio" id="gradeF" value="F" name="gradeReceive" class="appearance-none" />
-                            <label for="gradeF" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">F</label>
-
-                            <div class="w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full p-0 h-full bg-yellow-100 border-2 border-yellow-400 absolute transform transition-transform tabAnim"></div>
+                    <div class="max-w-screen-xl mt-10 mb-10 ml-16 mr-3 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5" required >
+                        <div class="flex w-full relative space-x-1">
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeA" value="A" required />
+                                <label for="gradeA" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    A
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeBplus" hidden="hidden" value="B+" />
+                                <label for="gradeBplus" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    B+
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeB" hidden="hidden" value="B" />
+                                <label for="gradeB" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    B
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeCplus" hidden="hidden" value="C+" />
+                                <label for="gradeCplus" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    C+
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeC" hidden="hidden" value="C" />
+                                <label for="gradeC" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    C
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeDplus" hidden="hidden" value="D+" />
+                                <label for="gradeDplus" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    D+
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeD" hidden="hidden" value="D" />
+                                <label for="gradeD" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    D
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="gradeReceive" type="radio" id="gradeF" hidden="hidden" value="F" />
+                                <label for="gradeF" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    F
+                                </label>
+                            </div>
                         </div>
                     </div>
+                    <div class="flex items-center font-bold text-xl text-red-500 pb-5">*</div>
                 </div>
 
-                {/* <div class="grid grid-cols-2 grid-rows-5 gap-1">
-                    <div class="flex justify-center mr-96">
-                        <div class="flex items-center text-lg font-semibold">
-                            Section
-                        </div>
-                        <div class="flex space-y-4 mr-20">
-                            <input type="text" name="sectionNo" placeholder="Section No." class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            Teacher
-                        </div>
-                        <div class="flex mr-20">
-                            <input type="text" name="teacherName" placeholder="Teacher name" class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            Academic year
-                        </div>
-                        <div class="flex mr-48">
-                            <input type="text" name="teacherName" value="2021" placeholder="" disabled class="mx-16 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-96">
-                        <div class="flex items-center text-lg font-semibold">
-                            Semester
-                        </div>
-                        <div class="flex mr-20">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-28 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            ID
-                        </div>
-                        <div class="flex mr-10">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-40 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
-                        </div>
-                    </div>
-                </div> */}
-
-                <div class="flex justify-center mr-96">
-                    <div class="grid grid-cols-2 grid-rows-5 gap-1 gap-y-2 gap-x-10 mr-16">
-                        <div class="flex items-center text-lg font-semibold">
+                <div class="flex justify-center mr-80">
+                    <div class="grid grid-cols-2 grid-rows-4 gap-1 gap-y-2 gap-x-0 mr-40">
+                        <div class="flex items-center text-lg font-semibold hidden">
                             Subject:
                         </div>
-                        <div class="flex">
+                        <div class="flex hidden">
                             <input type="text" name="subjectid" id="subject_id" value="6072fd58257d8c39fcf0d913" disabled placeholder="Section No." class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
@@ -248,35 +234,32 @@ function EditPage() {
                         </div>
                         <div class="flex">
                             <input type="text" name="sectionNo" id="section_No" placeholder="Section No." value={edit.section} onChange={(event) => { setEdit({ section: event.target.value.trim() }) }} class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                        <div class="flex items-center text-lg font-semibold">
-                            Teacher:
-                        </div>
-                        <div class="flex">
-                            <input type="text" name="teacherName" id="teacher_Name" placeholder="Teacher name" value={edit.review_teacher} onChange={(event) => { setEdit({ review_teacher: event.target.value.trim() }) }} class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                            <div class="flex items-end pl-2 text-sm text-gray-400">
+                                (Optional)
+                            </div>
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Academic year:
                         </div>
                         <div class="flex">
-                            <input type="number" name="academicyear" id="academic_year" value={edit.academic_year} onChange={(event) => { setEdit({ academic_year: event.target.value.trim() }) }} placeholder=""  class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="academicyear" id="academic_year" value={edit.academic_year} onChange={(event) => { setEdit({ academic_year: event.target.value.trim() }) }} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Semester:
                         </div>
                         <div class="flex">
-                            <input type="number" name="semester" id="Semester" value={edit.semester} onChange={(event) => { setEdit({ semester: event.target.value.trim() }) }}  placeholder="" class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="semester" id="Semester" value={edit.semester} onChange={(event) => { setEdit({ semester: event.target.value.trim() }) }} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
-                        <div class="flex items-center text-lg font-semibold">
+                        <div class="flex items-center text-lg font-semibold hidden">
                             ID:
                         </div>
-                        <div class="flex">
+                        <div class="flex hidden">
                             <input type="text" name="studentId" id="student_Id" value={edit.reviewer} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                     </div>
                 </div>
 
-                <div class="flex justify-center mr-96 mt-10">
+                <div class="flex justify-center mr-96 mt-0">
                     <div class="mr-72 text-lg font-semibold">
                         Feeling about this course
                     </div>
@@ -300,83 +283,175 @@ function EditPage() {
                     <div class="flex items-center text-lg font-semibold mr-40">
                         Teaching:
                     </div>
-                    <div class="max-w-screen-xl mt-10 mb-10 mx-11 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
-                        <div class="flex w-full relative">
-                            <input type="radio" id="teachmethod1" value="1" name="scoreTeaching" class="appearance-none" />
-                            <label for="teachmethod1" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">1</label>
-
-                            <input type="radio" id="teachmethod2" value="2" name="scoreTeaching" class="appearance-none" />
-                            <label for="teachmethod2" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">2</label>
-
-                            <input type="radio" id="teachmethod3" value="3" name="scoreTeaching" class="appearance-none" />
-                            <label for="teachmethod3" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">3</label>
-
-                            <input type="radio" id="teachmethod4" value="4" name="scoreTeaching" class="appearance-none" />
-                            <label for="teachmethod4" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">4</label>
-
-                            <input type="radio" id="teachmethod5" value="5" name="scoreTeaching" class="appearance-none" />
-                            <label for="teachmethod5" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">5</label>
-
-                            <div class="w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full p-0 h-full bg-yellow-100 border-2 border-yellow-400 absolute transform transition-transform tabAnim"></div>
+                    <div class="max-w-screen-xl mt-10 mb-10 ml-16 mr-3 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
+                        <div class="flex w-full relative space-x-1">
+                            <div class="inline-block radio">
+                                <input name="scoreTeaching" type="radio" id="teachmethod1" value="1" required />
+                                <label for="teachmethod1" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    1
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreTeaching" type="radio" id="teachmethod2" hidden="hidden" value="2" />
+                                <label for="teachmethod2" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    2
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreTeaching" type="radio" id="teachmethod3" hidden="hidden" value="3" />
+                                <label for="teachmethod3" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    3
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreTeaching" type="radio" id="teachmethod4" hidden="hidden" value="4" />
+                                <label for="teachmethod4" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    4
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreTeaching" type="radio" id="teachmethod5" hidden="hidden" value="5" />
+                                <label for="teachmethod5" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    5
+                                </label>
+                            </div>
                         </div>
                     </div>
+                    <div class="flex items-center font-bold text-xl text-red-500 pb-5">*</div>
                 </div>
 
                 <div class="flex justify-center mr-60">
                     <div class="flex items-center text-lg font-semibold mr-3">
                         Bringing knowledge to use:
                     </div>
-                    <div class="max-w-screen-xl mx-11 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
-                        <div class="flex w-full relative">
-                            <input type="radio" id="knowledgemethod1" value="1" name="scoreKnowledge" class="appearance-none" />
-                            <label for="knowledgemethod1" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">1</label>
-
-                            <input type="radio" id="knowledgemethod2" value="2" name="scoreKnowledge" class="appearance-none" />
-                            <label for="knowledgemethod2" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">2</label>
-
-                            <input type="radio" id="knowledgemethod3" value="3" name="scoreKnowledge" class="appearance-none" />
-                            <label for="knowledgemethod3" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">3</label>
-
-                            <input type="radio" id="knowledgemethod4" value="4" name="scoreKnowledge" class="appearance-none" />
-                            <label for="knowledgemethod4" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">4</label>
-
-                            <input type="radio" id="knowledgemethod5" value="5" name="scoreKnowledge" class="appearance-none" />
-                            <label for="knowledgemethod5" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">5</label>
-
-                            <div class="w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full p-0 h-full bg-yellow-100 border-2 border-yellow-400 absolute transform transition-transform tabAnim"></div>
+                    <div class="max-w-screen-xl ml-16 mr-3 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
+                        <div class="flex w-full relative space-x-1">
+                            <div class="inline-block radio">
+                                <input name="scoreKnowledge" type="radio" id="knowledgemethod1" value="1" required />
+                                <label for="knowledgemethod1" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    1
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreKnowledge" type="radio" id="knowledgemethod2" hidden="hidden" value="2" />
+                                <label for="knowledgemethod2" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    2
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreKnowledge" type="radio" id="knowledgemethod3" hidden="hidden" value="3" />
+                                <label for="knowledgemethod3" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    3
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreKnowledge" type="radio" id="knowledgemethod4" hidden="hidden" value="4" />
+                                <label for="knowledgemethod4" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    4
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreKnowledge" type="radio" id="knowledgemethod5" hidden="hidden" value="5" />
+                                <label for="knowledgemethod5" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    5
+                                </label>
+                            </div>
                         </div>
                     </div>
+                    <div class="flex items-center font-bold text-xl text-red-500 mb-5">*</div>
                 </div>
 
                 <div class="flex justify-center mr-60">
                     <div class="flex items-center text-lg font-semibold mr-16">
                         Participation in class:
                     </div>
-                    <div class="max-w-screen-xl mt-10 mb-10 mx-11 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
-                        <div class="flex w-full relative">
-                            <input type="radio" id="participate1" value="1" name="scoreParticipation" class="appearance-none" />
-                            <label for="participate1" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">1</label>
-
-                            <input type="radio" id="participate2" value="2" name="scoreParticipation" class="appearance-none" />
-                            <label for="participate2" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">2</label>
-
-                            <input type="radio" id="participate3" value="3" name="scoreParticipation" class="appearance-none" />
-                            <label for="participate3" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">3</label>
-
-                            <input type="radio" id="participate4" value="4" name="scoreParticipation" class="appearance-none" />
-                            <label for="participate4" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">4</label>
-
-                            <input type="radio" id="participate5" value="5" name="scoreParticipation" class="appearance-none" />
-                            <label for="participate5" class="cursor-pointer w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2">5</label>
-
-                            <div class="w-16 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full p-0 h-full bg-yellow-100 border-2 border-yellow-400 absolute transform transition-transform tabAnim"></div>
+                    <div class="max-w-screen-xl mt-10 mb-10 ml-16 mr-3 flex flex-col items-center border rounded-full border-yellow-500 bg-yellow-400 bg-opacity-5">
+                        <div class="flex w-full relative space-x-1">
+                            <div class="inline-block radio">
+                                <input name="scoreParticipation" type="radio" id="participate1" value="1" required />
+                                <label for="participate1" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    1
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreParticipation" type="radio" id="participate2" hidden="hidden" value="2" />
+                                <label for="participate2" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    2
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreParticipation" type="radio" id="participate3" hidden="hidden" value="3" />
+                                <label for="participate3" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    3
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreParticipation" type="radio" id="participate4" hidden="hidden" value="4" />
+                                <label for="participate4" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    4
+                                </label>
+                            </div>
+                            <div class="inline-block radio">
+                                <input name="scoreParticipation" type="radio" id="participate5" hidden="hidden" value="5" />
+                                <label for="participate5" class="cursor-pointer px-0 py-0 rounded-full flex justify-center items-center text-3xl lg:text-xl font-semibold w-10 h-10 lg:w-12 lg:h-12">
+                                    5
+                                </label>
+                            </div>
                         </div>
                     </div>
+                    <div class="flex items-center font-bold text-xl text-red-500 pb-5">*</div>
+                </div>
+
+                <div class="text-center mr-96 mt-8 mb-8 text-red-500 font-semibold text-md">
+                    <p class="mr-80 mb-2 font-bold text-lg">
+                        <div class="mr-10">
+                            Read before Post:
+                        </div>
+                    </p>
+                    <p class="mr-32">
+                        All of these information is true and no vulgar words.
+                    </p>
                 </div>
 
                 <div class="pt-14">
-                    <div class="flex items-center justify-center">
-                        <button type="submit" className="submit-button" class="cursor-pointer py-3 px-12 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300" onClick={getValue} >POST</button>
+                    <div>
+                        <div class="flex items-center justify-center">
+                            <button type="submit" className="submit-button" class="cursor-pointer py-3 px-12 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300" >POST</button>
+                        </div>
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 300,
+                            }}
+                        >
+                            <Fade in={open}>
+                                <div class="w-2/5 rounded-lg shadow-lg">
+                                    <div class="bg-green-50 py-20 flex justify-center rounded-lg">
+                                        <svg
+                                            class="stroke-2 stroke-current text-green-600 h-8 w-8 mr-2 flex-shrink-0"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        >
+                                            <path d="M0 0h24v24H0z" stroke="none" />
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M9 12l2 2 4-4" />
+                                        </svg>
+                                        <div class="text-green-700">
+                                            <div class="font-bold text-xl">Your review has been posted!</div>
+                                            <div>You can view your posts on the main page and history page.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Modal>
                     </div>
                     <div class="bg-gradient-to-t from-yellow-200 h-14 mt-14">
                     </div>
@@ -384,10 +459,8 @@ function EditPage() {
 
             </form>
 
-
         </div>
     );
-
 }
 
 export default EditPage;

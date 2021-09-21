@@ -3,22 +3,26 @@ import PostBox from "./PostBox";
 function SubjectNameTop() {
     return (
         <div>
-
             <div class="flex justify-center">
                 <div class="flex pt-40 space-x-72 grid grid-cols-2 grid-rows-1">
-                    <div>
-                        <div class="flex items-center">
+                    <div class="flex pl-60">
+                        <div class="flex items-center pl-6">
                             <div>
-                                <div class="font-bold text-xl bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-4 flex items-center justify-center">
-                                    GEN&nbsp;201
+                                <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
+                                    <input class="text-black font-bold text-xl w-20" type="text" value="GEN&nbsp;555" disabled />
                                 </div>
                             </div>
-                            <div class="rounded-l-full w-full pl-8 text-black">
-                                <p class="text-lg font-bold">Art and Science of Cooking and Eating</p>
-                                <p class="text-md text-gray-black">(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)</p>
+                            <div class="rounded-l-full pl-8 text-black">
+                                <p>
+                                    <input class="text-lg font-bold w-96 bg-white" type="text" value="Art and Science of Cooking and Eating" disabled />
+                                </p>
+                                <p>
+                                    <input class="text-md text-gray-500 w-96 bg-white" type="text" value="(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)" disabled />
+                                </p>
                             </div>
                         </div>
                     </div>
+
                     <div class="flex items-center">
                         <div class="font-semibold">
                             Score: &nbsp;
@@ -41,7 +45,6 @@ function SubjectNameTop() {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

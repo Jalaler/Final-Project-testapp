@@ -1,40 +1,61 @@
-// import IMAGES from "./IMAGES";
-import ReturnToTopBtn from "../src/styles/ReturnToTopBtn.css";
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import IconButton from "@material-ui/core/IconButton";
 
-function ReturntotopButton() {
+const useStyles = makeStyles((theme) => ({
+    toTop: {
+        zIndex: 2,
+        position: 'fixed',
+        bottom: '2vh',
+        backgroundColor: '#F3F4F6',
+        color: '#6B7280',
+        "&:hover, &.Mui-focusVisible": {
+            transition: '0.3s',
+            color: '#F9FAFB',
+            backgroundColor: '#FBBF24'
+        },
+        right: '5%',
+        bottom: '8%',
+    }
+}))
 
-    // var scrollToTopBtn = document.querySelector(".scrollToTopBtn")
-    // var rootElement = document.documentElement
-    // function handleScroll() {
-    //     // Do something on scroll
-    //     var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight
-    //     if ((rootElement.scrollTop / scrollTotal) > 0.80) {
-    //         // Show button
-    //         scrollToTopBtn.classList.add("showBtn")
-    //     } else {
-    //         // Hide button
-    //         scrollToTopBtn.classList.remove("showBtn")
-    //     }
-    // }
-    // function scrollToTop() {
-    //     // Scroll to top logic
-    //     rootElement.scrollTo({
-    //         top: 0,
-    //         behavior: "smooth"
-    //     })
-    // }
-    // scrollToTopBtn.addEventListener("click", scrollToTop)
-    // document.addEventListener("scroll", handleScroll)
+const Scroll = ({
+    showBelow
+}) => {
 
+    const classes = useStyles();
+
+    const [show, setShow] = useState(showBelow ? false : true)
+
+    const handleScroll = () => {
+        if (window.pageYOffset > showBelow) {
+            if (!show) setShow(true)
+        } else {
+            if (show) setShow(false)
+        }
+    }
+
+    const handleClick = () => {
+        window[`scrollTo`]({ top: 0, behavior: `smooth` })
+    }
+
+    useEffect(() => {
+        if (showBelow) {
+            window.addEventListener(`scroll`, handleScroll)
+            return () => window.removeEventListener(`scroll`, handleScroll)
+        }
+    })
 
     return (
-        <button class="scrollToTopBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" class="" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-            </svg>
-        </ button>
-    );
-
+        <div>
+            {show &&
+                <IconButton onClick={handleClick} className={classes.toTop} >
+                    <ExpandLessIcon />
+                </IconButton>
+            }
+        </div>
+    )
 }
 
-export default ReturntotopButton;
+export default Scroll;
