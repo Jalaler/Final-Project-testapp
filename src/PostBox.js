@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 
 function PostBox(props) {
+
+
+
     return (
         <div>
             <main class="w-3/5 p-8 mx-auto bg-white" key={props.data._id} >
@@ -13,6 +16,7 @@ function PostBox(props) {
                     <div class="tabs">
                         <div class="flex justify-center pl-96">
                             <a href={'/edit/' + props._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+
 
                         </div>
                         <div class="border-b tab">
@@ -37,6 +41,7 @@ function PostBox(props) {
                                             <polyline points="6 9 12 15 18 9">
                                             </polyline>
                                         </svg>
+
                                     </div>
                                 </header>
                                 <div class="pl-44 pr-24 pb-8">
@@ -63,15 +68,18 @@ function PostBox(props) {
                                                 <div class="flex space-x-1">
                                                     {props.data.usefulness_rating}
                                                 </div>
+
                                                 <div class="pb-3 font-semibold">Partipation:</div>
                                                 <div class="flex space-x-1">
                                                     {props.data.participation_rating}
+
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
+                                 
                             </div>
                         </div>
 
