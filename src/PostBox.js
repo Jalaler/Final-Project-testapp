@@ -8,8 +8,6 @@ import LikeCheckbox from '../src/styles/LikeCheckbox.css';
 
 function PostBox(props) {
 
-
-
     function LikePost() {
         const like_btn = document.querySelector('.like_btn');
         const like_count = document.querySelector('#like_count');
@@ -29,13 +27,11 @@ function PostBox(props) {
         }
     }
 
-
     return (
         <div>
-            <div class="flex justify-center pl-96 mt-10 hidden">
-                <a href={'/edit/' + props._id} key={props.data._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+            <div class="flex justify-center pl-96 mt-10 ">
+                <a href={'/edit/' + props.data._id} key={props.data._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
             </div>
-            
             <main class="w-3/5 pt-4 pb-8 px-8 mx-auto bg-white"  >
                 <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                     <div class="tabs">

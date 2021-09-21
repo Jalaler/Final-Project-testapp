@@ -113,7 +113,6 @@ function EditPage(props) {
     }
 
     
-    
     useEffect(() => {
         axios.get('http://localhost:5000/api/reviews/' + postId )
             .then((response) => {
@@ -121,7 +120,6 @@ function EditPage(props) {
                 console.log(response.data);
             });
     }, []);
-
 
     const useStyles = makeStyles((theme) => ({
         modal: {
@@ -138,7 +136,7 @@ function EditPage(props) {
     }));
 
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleClose = () => {
         setOpen(false);
     };
