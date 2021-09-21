@@ -3,7 +3,7 @@ import Scroll from './ReturntotopButton.js';
 import FooterReview from "./FooterReview";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
-// import { useState, useEffect, React } from 'react';
+import { useState, useEffect, React } from 'react';
 import axios from 'axios';
 import sentParam from "./PostBox";
 import { makeStyles } from '@material-ui/core/styles';

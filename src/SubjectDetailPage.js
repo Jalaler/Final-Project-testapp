@@ -7,18 +7,28 @@ import Scroll from './ReturntotopButton.js';
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 
 function SubjectDetailPage() {
 
     const [data, setData] = useState([]);
+    const [sub, setSub] = useState({});
+    const {abbr} =useParams()
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reviews/')
+        axios.get('http://localhost:5000/api/subjects/'+abbr+'/posts')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
             }
         })
         .catch(err => console.log(err))
+
+        axios.get('http://localhost:5000/api/subjects/'+abbr)
+        .then(res => {
+            
+                setSub(res.data)
+            
+        })
     });
 
     const reviewList = () => {
@@ -39,15 +49,15 @@ function SubjectDetailPage() {
                         <div class="flex items-center pl-6">
                             <div>
                                 <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
-                                    <input class="text-black font-bold text-xl w-20" type="text" value={list.subject_abbr} disabled />
+                                    <input class="text-black font-bold text-xl w-20" type="text" value={sub.subject_abbr} disabled />
                                 </div>
                             </div>
                             <div class="rounded-l-full pl-8 text-black">
                                 <p>
-                                    <input class="text-lg font-bold w-96 bg-white" type="text" value={list.subject_name} disabled />
+                                    <input class="text-lg font-bold w-96 bg-white" type="text" value={sub.subject_name} disabled />
                                 </p>
                                 <p>
-                                    <input class="text-md text-gray-500 w-96 bg-white" type="text" value={(list.subject_name)} disabled />
+                                    <input class="text-md text-gray-500 w-96 bg-white" type="text" value={(sub.subject_name)} disabled />
                                 </p>
                             </div>
                         </div>
