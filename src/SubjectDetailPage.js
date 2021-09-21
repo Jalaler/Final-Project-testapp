@@ -3,8 +3,28 @@ import Navbar from "./Navbar";
 import PostBox from "./PostBox";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 function SubjectDetailPage() {
+
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/reviews/')
+        .then(res => {
+            if(res.data.length > 0){
+                setData(res.data)
+            }
+        })
+        .catch(err => console.log(err))
+    });
+
+    const reviewList = () => {
+        return data.map( currentPost => {
+            return <PostBox data={currentPost}/>
+        })
+    }
+
     return (
         <div>
             <Navbar />
@@ -74,7 +94,7 @@ function SubjectDetailPage() {
                     <a href="#" class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
                 </div>
             </div>
-            <PostBox />
+            {reviewList()}
             <Footer />
         </div>
     );
