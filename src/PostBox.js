@@ -5,44 +5,49 @@ import EditPage from "./EditPage";
 import { Link } from "react-router-dom";
 
 
-function PostBox() {
+function PostBox(props) {
     const [list, setList] = useState([]);
+
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reviews')
+        axios.get(props.url)
             .then((response) => {
                 setList(response.data);
                 console.log(response.data);
             });
-          
-
     }, []);
+
+   
 
     if (!list) return null;
 
-    
+
 
 
     return (
         <div>
             {list.map(lists => (
 
+
                 <main class="w-3/5 p-8 mx-auto bg-white" key={lists._id} >
                     <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                         <div class="tabs">
                             <div class="flex justify-center pl-96">
                                 <a href={'/edit/' + lists._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
-                    
+
                             </div>
                             <div class="border-b tab">
-                                <div class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
-                                    <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-12" type="checkbox" id="chck1" />
-                                    <header class="flex justify-between items-center pt-8 pb-7 pl-8 pr-8 cursor-pointer select-none tab-label" for="chck1">
+                            
+                                <div  class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
+                                    
+                                    <input  class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-12" type="checkbox" id="chck1" />
+                                    
+                                        <header class="flex justify-between items-center pt-8 pb-7 pl-8 pr-8 cursor-pointer select-none tab-label" for="chck1">
                                         <div class="flex font-semibold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-2 flex items-center justify-center">
-                                            GEN&nbsp;101
+                                           {lists.reviewedSubject.subject_abbr}
                                         </div>
                                         <div class="rounded-l-full w-full pl-6 text-black">
-                                            <p class="text-lg font-semibold">Physical Education</p>
-                                            <p class="text-md text-gray-400">(พลศึกษา)</p>
+                                            <p class="text-lg font-semibold">{lists.reviewedSubject.subject_name}</p>
+                                            <p class="text-md text-gray-400">({lists.reviewedSubject.subject_name})</p>
                                         </div>
                                         <div class="font-bold pr-9">
                                             <span class="text-lg bg-white text-yellow-600 px-4 py-2 shadow-lg border-2 border-yellow-400 rounded-full">
@@ -56,7 +61,9 @@ function PostBox() {
                                                 </polyline>
                                             </svg>
                                         </div>
+
                                     </header>
+                                    
                                     <div class="pl-44 pr-24 pb-8">
                                         {`${lists.review_detail}`}
                                     </div>
@@ -75,7 +82,7 @@ function PostBox() {
                                                 <div class="grid grid-cols-2 grid-rows-3 gap-1">
                                                     <div class="pb-3 font-semibold">Teaching:</div>
                                                     <div class="flex space-x-1">
-                                                       {lists.teacher_rating}
+                                                        {lists.teacher_rating}
                                                     </div>
                                                     <div class="pb-3 font-semibold">Bring knowlegde to use:</div>
                                                     <div class="flex space-x-1">
@@ -91,6 +98,7 @@ function PostBox() {
                                         </div>
                                     </div>
                                 </div>
+                                 
                             </div>
 
                             <div class="border-t border-yellow-400 border-opacity-50 bg-yellow-300 bg-opacity-5">

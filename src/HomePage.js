@@ -13,7 +13,7 @@ function HomePage() {
             <Banner />
             {/* <ReturntotopButton /> */}
             <TopicHome />
-            <PostBox />
+            <PostBox url="http://localhost:5000/api/reviews" />
             <Footer />
         </div>
     );

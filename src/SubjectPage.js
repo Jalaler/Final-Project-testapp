@@ -17,7 +17,7 @@ function SubjectPage() {
                 Subject
             </div>
             <SubjectListType1 />
-            <SubjectListType2 />
+            {/* <SubjectListType2 /> */}
             <FooterEmpty />
         </div>
     );

@@ -21,7 +21,7 @@ function SubjectListType1() {
             { list.map( lists => (
                 <div class="flex justify-center">
                     <div class="pt-4 w-1/2">
-                        <a href="subjectdetail" class="bg-yellow-300 bg-opacity-5 border-2 border-yellow-300 flex items-center rounded-full shadow-lg hover:bg-yellow-200 hover:bg-opacity-20 cursor-pointer">
+                        <a href={"subjectdetail/"+lists.subject_abbr} class="bg-yellow-300 bg-opacity-5 border-2 border-yellow-300 flex items-center rounded-full shadow-lg hover:bg-yellow-200 hover:bg-opacity-20 cursor-pointer">
                             <div class="py-2 px-4">
                                 <div class="font-bold text-xl bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-4 flex items-center justify-center">
                                     {lists.subject_abbr}
