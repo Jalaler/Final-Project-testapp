@@ -33,7 +33,7 @@ ReactDOM.render(
                 <Route path="/subjectdetail">
                     <SubjectDetailPage />
                 </Route>
-                <Route path="/edit">
+                <Route path="/edit/:postId">
                     <EditPage />
                 </Route>
             </Switch>

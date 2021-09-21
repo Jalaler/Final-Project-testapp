@@ -12,18 +12,17 @@ function ReviewPage() {
 
     function getValue() {
 
-        const section = document.getElementById('section_No').value;
-        const teacherName = document.getElementById('teacher_Name').value;
-        const review_detail = document.getElementById('message').value;
-        const scoreTeachingInput = document.getElementsByName('scoreTeaching');
-        const gradeReceiveInput = document.getElementsByName('gradeReceive');
-        const scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
-        const scoreParticipationInput = document.getElementsByName('scoreParticipation');
+        let section = document.getElementById('section_No').value;
+        let review_detail = document.getElementById('message').value;
+        let scoreTeachingInput = document.getElementsByName('scoreTeaching');
+        let gradeReceiveInput = document.getElementsByName('gradeReceive');
+        let scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
+        let scoreParticipationInput = document.getElementsByName('scoreParticipation');
+        let academic_year = document.getElementById('academic_year').value;
+        let semester = document.getElementById('Semester').value;
+        let student_id = document.getElementById('student_Id').value;
+        let subject_id = document.getElementById('subject_id').value;
 
-        const academic_year = document.getElementById('academic_year').value;
-        const semester = document.getElementById('Semester').value;
-        const student_id = document.getElementById('student_Id').value;
-        const subject_id = document.getElementById('subject_id').value;
 
         let grade_received;
         for (let index = 0; index < gradeReceiveInput.length; index++) {
@@ -58,42 +57,21 @@ function ReviewPage() {
             }
         }
 
-
-
-        if (teacherName.value != null) {
-            const review = {
-                grade_received: grade_received,
-                teacher_rating: teacher_rating,
-                usefulness_rating: usefulness_rating,
-                participation_rating: participation_rating,
-                academic_year: academic_year,
-                semester: semester,
-                reviewer: student_id,
-                reviewedSubject: subject_id,
-                review_teacher: teacherName,
-                active: true,
-                review_detail: review_detail,
-                section: section
-            }
-            return review;
-
+        const review = {
+            grade_received: grade_received,
+            teacher_rating: teacher_rating,
+            usefulness_rating: usefulness_rating,
+            participation_rating: participation_rating,
+            academic_year: academic_year,
+            semester: semester,
+            reviewer: student_id,
+            reviewedSubject: subject_id,
+            active: true,
+            review_detail: review_detail,
+            section: section
         }
-        else {
-            const review = {
-                grade_received: grade_received,
-                teacher_rating: teacher_rating,
-                usefulness_rating: usefulness_rating,
-                participation_rating: participation_rating,
-                academic_year: academic_year,
-                semester: semester,
-                reviewer: student_id,
-                reviewedSubject: subject_id,
-                active: true,
-                review_detail: review_detail,
-                section: section
-            }
-            return review;
-        }
+        return review;
+
     }
 
     const [allStudentReview, setAllStudentReview] = useState([]);
@@ -180,49 +158,6 @@ function ReviewPage() {
                     </div>
                 </div>
 
-                {/* <div class="grid grid-cols-2 grid-rows-5 gap-1">
-                    <div class="flex justify-center mr-96">
-                        <div class="flex items-center text-lg font-semibold">
-                            Section
-                        </div>
-                        <div class="flex space-y-4 mr-20">
-                            <input type="text" name="sectionNo" placeholder="Section No." class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            Teacher
-                        </div>
-                        <div class="flex mr-20">
-                            <input type="text" name="teacherName" placeholder="Teacher name" class="mx-28 bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            Academic year
-                        </div>
-                        <div class="flex mr-48">
-                            <input type="text" name="teacherName" value="2021" placeholder="" disabled class="mx-16 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-96">
-                        <div class="flex items-center text-lg font-semibold">
-                            Semester
-                        </div>
-                        <div class="flex mr-20">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-28 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                    </div>
-                    <div class="flex mt-4 justify-center mr-80">
-                        <div class="flex items-center text-lg font-semibold">
-                            ID
-                        </div>
-                        <div class="flex mr-10">
-                            <input type="text" name="teacherName" value="1" placeholder="" disabled class="mx-40 bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
-                        </div>
-                    </div>
-                </div> */}
-
                 <div class="flex justify-center mr-96">
                     <div class="grid grid-cols-2 grid-rows-5 gap-1 gap-y-2 gap-x-10 mr-16">
                         <div class="flex items-center text-lg font-semibold">
@@ -236,12 +171,6 @@ function ReviewPage() {
                         </div>
                         <div class="flex">
                             <input type="text" name="sectionNo" id="section_No" placeholder="Section No." class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
-                        </div>
-                        <div class="flex items-center text-lg font-semibold">
-                            Teacher:
-                        </div>
-                        <div class="flex">
-                            <input type="text" name="teacherName" id="teacher_Name" placeholder="Teacher name" class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Academic year:

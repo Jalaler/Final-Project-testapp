@@ -1,29 +1,38 @@
 import PostBoxDesign from "../src/styles/PostBoxDesign.css";
-import { React , useState , useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
+import EditPage from "./EditPage";
+import { Link } from "react-router-dom";
+
 
 function PostBox() {
     const [list, setList] = useState([]);
-
     useEffect(() => {
         axios.get('http://localhost:5000/api/reviews')
             .then((response) => {
                 setList(response.data);
                 console.log(response.data);
             });
-
+          
 
     }, []);
+
     if (!list) return null;
+
+    
+
 
     return (
         <div>
-            { list.map(lists => (
+            {list.map(lists => (
 
-                <main class="w-3/5 p-8 mx-auto bg-white" key={lists._id} >  
+                <main class="w-3/5 p-8 mx-auto bg-white" key={lists._id} >
                     <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                         <div class="tabs">
-
+                            <div class="flex justify-center pl-96">
+                                <a href={'/edit/' + lists._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+                    
+                            </div>
                             <div class="border-b tab">
                                 <div class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
                                     <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-12" type="checkbox" id="chck1" />
@@ -37,7 +46,7 @@ function PostBox() {
                                         </div>
                                         <div class="font-bold pr-9">
                                             <span class="text-lg bg-white text-yellow-600 px-4 py-2 shadow-lg border-2 border-yellow-400 rounded-full">
-                                                {lists. grade_received}
+                                                {lists.grade_received}
                                             </span>
                                         </div>
                                         <div class="rounded-full border border-grey w-10 h-7 flex items-center justify-center test">
@@ -62,64 +71,19 @@ function PostBox() {
                                                     <div class="pb-8 pr-4 font-semibold">Teacher:</div>
                                                     <div>Johny</div>
                                                 </div>
-                                                {/* <div class="flex">
-                                                <div class="pb-3 pr-4 font-semibold">Teaching:</div>
-                                                <div>1/5</div>
-                                            </div>
-                                            <div class="flex">
-                                                <div class="pb-3 pr-4 font-semibold">Bring knowlegde to use:</div>
-                                                <div>1/5</div>
-                                            </div>
-                                            <div class="flex">
-                                                <div class="pb-3 pr-4 font-semibold">Partipation:</div>
-                                                <div>1/5</div>
-                                            </div> */}
-
-                                                {/* <div class="grid grid-cols-2 grid-rows-3 gap-1">
-                                                <div class="pb-3 font-semibold">Teaching:</div>
-                                                <div>1/5</div>
-                                                <div class="pb-3 font-semibold">Bring knowlegde to use:</div>
-                                                <div>1/5</div>
-                                                <div class="pb-3 font-semibold">Partipation:</div>
-                                                <div>1/5</div>
-                                            </div> */}
 
                                                 <div class="grid grid-cols-2 grid-rows-3 gap-1">
                                                     <div class="pb-3 font-semibold">Teaching:</div>
                                                     <div class="flex space-x-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
+                                                       {lists.teacher_rating}
                                                     </div>
                                                     <div class="pb-3 font-semibold">Bring knowlegde to use:</div>
                                                     <div class="flex space-x-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
+                                                        {lists.usefulness_rating}
                                                     </div>
                                                     <div class="pb-3 font-semibold">Partipation:</div>
                                                     <div class="flex space-x-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                                        </svg>
+                                                        {lists.participation_rating}
                                                     </div>
                                                 </div>
 
@@ -173,7 +137,7 @@ function PostBox() {
                         </div>
                     </section>
                 </main>
-             )) }
+            ))}
         </div>
 
     );
