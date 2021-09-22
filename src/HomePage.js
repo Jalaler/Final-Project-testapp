@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 function HomePage() {
 
     const [data, setData] = useState([]);
+    const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
         axios.get('http://localhost:5000/api/reviews/')
         .then(res => {
@@ -19,7 +20,12 @@ function HomePage() {
             }
         })
         .catch(err => console.log(err))
-    } ,[]);
+        axios.get('http://localhost:5000/api/users/current', { withCredentials: true })
+        .then(res => {
+            setCurrentUser(res.data)
+        })
+        .catch(err => console.log(err))
+    }, []);
 
     const reviewList = () => {
         return data.map( currentPost => {
@@ -33,7 +39,6 @@ function HomePage() {
             <Banner />
             <TopicHome />
             {reviewList()}
-
             <Footer />
         </div>
     );
