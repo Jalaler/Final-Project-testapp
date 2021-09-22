@@ -1,7 +1,10 @@
 import IMAGES from "./IMAGES";
 import Searchbar from "./Searchbar";
 
+
 function SearchBanner() {
+    
+
     return (
         <div>
             <div class="absolute z-40 w-20 pt-72 ml-56">
@@ -20,7 +23,7 @@ function SearchBanner() {
                 <div class="pt-36 text-center font-bold text-4xl">
                     Search Subject
                 </div>
-                <Searchbar />
+                <Searchbar  />
             </div>
 
         </div>
