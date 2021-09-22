@@ -14,6 +14,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Input } from '@material-ui/core';
+import {useEffect } from 'react';
+import { useParams } from "react-router";
+
 
 function ReviewPage() {
 
@@ -62,6 +65,7 @@ function ReviewPage() {
                 break;
             }
         }
+        let reviewedSubject = sub._id;
 
         const review = {
             grade_received: grade_received,
@@ -70,17 +74,19 @@ function ReviewPage() {
             participation_rating: participation_rating,
             academic_year: academic_year,
             semester: semester,
-            reviewer: student_id,
-            reviewedSubject: subject_id,
+            reviewer: "6124839e65cfb652d8df2b67",
+            reviewedSubject:reviewedSubject ,
             active: true,
             review_detail: review_detail,
-            section: section
+            section: section,
+            force: true
         }
         return review;
 
     }
-
+    const [sub, setSub] = useState({});
     const [allStudentReview, setAllStudentReview] = useState([]);
+    const {abbr} =useParams();
 
     function onReviewSubmit(event) {
         event.preventDefault();
@@ -131,6 +137,15 @@ function ReviewPage() {
         setOpen(false);
     };
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/subjects/'+abbr)
+        .then(res => {
+                setSub(res.data)
+            
+        })
+    }, []);
+
+
 
 
     return (
@@ -142,14 +157,14 @@ function ReviewPage() {
             <div class="flex pt-40 pl-60">
                 <div class="flex items-center pl-10">
                     <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
-                        <input class="text-black font-bold text-xl w-20" type="text" value="GEN&nbsp;555" disabled />
+                        <input class="text-black font-bold text-xl w-20" type="text" value={sub.subject_abbr} disabled />
                     </div>
                     <div class="rounded-l-full pl-8 text-black">
                         <p>
-                            <input class="text-lg font-bold w-96 bg-white" type="text" value="Art and Science of Cooking and Eating" disabled />
+                            <input class="text-lg font-bold w-96 bg-white" type="text" value={sub.subject_name} disabled />
                         </p>
                         <p>
-                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value="(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)" disabled />
+                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value={(sub.subject_name)} disabled />
                         </p>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ function HomePage() {
             }
         })
         .catch(err => console.log(err))
-    });
+    } ,[]);
 
     const reviewList = () => {
         return data.map( currentPost => {
