@@ -13,6 +13,7 @@ import Fade from '@material-ui/core/Fade';
 import SelectRadio from '../src/styles/SelectRadio.css';
 import { useParams } from "react-router";
 import { list } from "purgecss/node_modules/postcss";
+import backendURL from "./URL";
 
 function EditPage(props) {
 
@@ -84,7 +85,7 @@ function EditPage(props) {
     const [data, setData] = useState({});
     const [sub, setSub] = useState({});
     const { postId } = useParams()
-    const backendURL = 'http://20.190.72.211:5000';
+   
 
     const [allStudentReview, setAllStudentReview] = useState([]);
 

@@ -4,19 +4,19 @@ import PostBox from "./PostBox";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
 import Scroll from './ReturntotopButton.js';
+import backendURL from "./URL";
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 
 function SubjectDetailPage() {
-    const backendURL = 'http://20.190.72.211:5000';
-
+ 
     const [data, setData] = useState([]);
     const [sub, setSub] = useState({});
     const {abbr} =useParams()
     useEffect(() => {
-        axios.get(backendURL+'/api/subjects/'+abbr+'/posts')
+        axios.get(backendURL + '/api/subjects/'+abbr+'/posts')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
@@ -24,7 +24,7 @@ function SubjectDetailPage() {
         })
         .catch(err => console.log(err))
 
-        axios.get(backendURL+'/api/subjects/'+abbr)
+        axios.get(backendURL + '/api/subjects/'+abbr)
         .then(res => {
             
                 setSub(res.data)
