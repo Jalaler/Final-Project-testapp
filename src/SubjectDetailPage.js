@@ -10,12 +10,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 
 function SubjectDetailPage() {
+    const backendURL = 'http://20.190.72.211:5000';
 
     const [data, setData] = useState([]);
     const [sub, setSub] = useState({});
     const {abbr} =useParams()
     useEffect(() => {
-        axios.get('http://localhost:5000/api/subjects/'+abbr+'/posts')
+        axios.get(backendURL+'/api/subjects/'+abbr+'/posts')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
@@ -23,13 +24,13 @@ function SubjectDetailPage() {
         })
         .catch(err => console.log(err))
 
-        axios.get('http://localhost:5000/api/subjects/'+abbr)
+        axios.get(backendURL+'/api/subjects/'+abbr)
         .then(res => {
             
                 setSub(res.data)
             
         })
-    });
+    },[]);
 
     const reviewList = () => {
         return data.map( currentPost => {
@@ -144,7 +145,7 @@ function SubjectDetailPage() {
                     Review of this course
                 </div>
                 <div class="flex items-center">
-                    <a href="/Review" class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
+                    <a href={"/Review/" + sub.subject_abbr} class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
                 </div>
             </div>
 

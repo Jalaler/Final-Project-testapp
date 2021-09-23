@@ -10,17 +10,19 @@ import React, { useState, useEffect } from 'react';
 
 function HomePage() {
 
+    const backendURL = 'http://20.190.72.211:5000';
+
     const [data, setData] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reviews/')
+        axios.get(backendURL +'/api/reviews/')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
             }
         })
         .catch(err => console.log(err))
-        axios.get('http://localhost:5000/api/users/current', { withCredentials: true })
+        axios.get(backendURL +'/api/users/current', { withCredentials: true })
         .then(res => {
             setCurrentUser(res.data)
         })
