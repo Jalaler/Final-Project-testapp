@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
+import backendURL from './URL';
 
 function SubjectListType1() {
     const [list, setList] = useState([]);
-    const backendURL = 'http://20.190.72.211:5000'
     useEffect(() => {
-        axios.get(backendURL + '/api/subjects')
+        axios.get( backendURL +'/api/subjects')
             .then((response) => {
                 setList(response.data);
                 console.log(response.data);

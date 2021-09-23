@@ -4,14 +4,14 @@ import IMAGES from "./IMAGES";
 import Navbar from "./Navbar";
 import PostBox from "./PostBox";
 import React, { useState, useEffect } from 'react';
+import backendURL from "./URL";
 
 function HistoryPage() {
 
     const [data, setData] = useState([]);
-    const backendURL = 'http://20.190.72.211:5000';
 
     useEffect(() => {
-        axios.get(backendURL + '/api/reviews/history/6124839e65cfb652d8df2b67')
+        axios.get(backendURL+'/api/reviews/history/6124839e65cfb652d8df2b67')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)

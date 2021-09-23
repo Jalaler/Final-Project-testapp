@@ -16,6 +16,7 @@ import Fade from '@material-ui/core/Fade';
 import { Input } from '@material-ui/core';
 import {useEffect } from 'react';
 import { useParams } from "react-router";
+import backendURL from "./URL";
 
 
 function ReviewPage() {
@@ -87,7 +88,7 @@ function ReviewPage() {
     const [sub, setSub] = useState({});
     const [allStudentReview, setAllStudentReview] = useState([]);
     const {abbr} =useParams();
-    const backendURL = 'http://20.190.72.211:5000';
+   
 
     function onReviewSubmit(event) {
         event.preventDefault();
@@ -139,7 +140,7 @@ function ReviewPage() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/subjects/'+abbr)
+        axios.get(backendURL + '/api/subjects/'+abbr)
         .then(res => {
                 setSub(res.data)
             
