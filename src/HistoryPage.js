@@ -18,7 +18,7 @@ function HistoryPage() {
             }
         })
         .catch(err => console.log(err))
-    });
+    },[]);
 
     const historyList = () => {
         return data.map( currentPost => {
