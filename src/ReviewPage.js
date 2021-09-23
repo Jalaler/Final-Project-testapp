@@ -87,6 +87,7 @@ function ReviewPage() {
     const [sub, setSub] = useState({});
     const [allStudentReview, setAllStudentReview] = useState([]);
     const {abbr} =useParams();
+    const backendURL = 'http://20.190.72.211:5000';
 
     function onReviewSubmit(event) {
         event.preventDefault();
@@ -98,7 +99,7 @@ function ReviewPage() {
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
             
-        axios.post('http://localhost:5000/api/reviews', newReview)
+        axios.post(backendURL+'/api/reviews', newReview)
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
