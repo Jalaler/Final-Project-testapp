@@ -27,7 +27,7 @@ ReactDOM.render(
                 {/* <Route path="/review">
                     <ReviewPage />
                 </Route> */}
-                <Route path="/review/:abbr">
+                <Route path="/review">
                     <ReviewPage />
                 </Route>
                 <Route path="/history">
