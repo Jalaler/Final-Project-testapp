@@ -85,7 +85,7 @@ function EditPage(props) {
     const [data, setData] = useState({});
     const [sub, setSub] = useState({});
     const { postId } = useParams()
-   
+
 
     const [allStudentReview, setAllStudentReview] = useState([]);
 
@@ -125,9 +125,6 @@ function EditPage(props) {
                 console.log(typeof response.data);
                 console.log(sub);
             });
-            
-
-           
 
     }, []);
 
@@ -161,14 +158,14 @@ function EditPage(props) {
             <div class="flex pt-40 pl-60">
                 <div class="flex items-center pl-10">
                     <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
-                        <input class="text-black font-bold text-xl w-20" type="text" value="" disabled />
+                        <input class="text-black font-bold text-xl w-20" type="text" value={data.reviewedSubject} disabled />
                     </div>
                     <div class="rounded-l-full pl-8 text-black">
                         <p>
-                            <input class="text-lg font-bold w-96 bg-white" type="text" value="" disabled />
+                            <input class="text-lg font-bold w-96 bg-white" type="text" value={data.reviewedSubject} disabled />
                         </p>
                         <p>
-                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value="" disabled />
+                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value={data.reviewedSubject} disabled />
                         </p>
                     </div>
                 </div>

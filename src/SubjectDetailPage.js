@@ -5,7 +5,6 @@ import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
 import Scroll from './ReturntotopButton.js';
 import backendURL from "./URL";
-
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";

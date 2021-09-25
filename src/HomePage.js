@@ -11,7 +11,6 @@ import backendURL from './URL';
 
 function HomePage() {
 
-    
 
     const [data, setData] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
