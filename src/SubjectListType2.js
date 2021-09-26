@@ -1,4 +1,6 @@
 function SubjectListType2() {
+
+    
     return (
         <div>
             <div class="flex justify-center">

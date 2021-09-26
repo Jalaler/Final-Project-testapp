@@ -24,16 +24,19 @@ ReactDOM.render(
                 <Route path="/subject">
                     <SubjectPage />
                 </Route>
-                <Route path="/review">
+                {/* <Route path="/review">
+                    <ReviewPage />
+                </Route> */}
+                <Route path="/review/:abbr">
                     <ReviewPage />
                 </Route>
                 <Route path="/history">
                     <HistoryPage />
                 </Route>
-                <Route path="/subjectdetail">
+                <Route path="/subjectdetail/:abbr">
                     <SubjectDetailPage />
                 </Route>
-                <Route path="/edit">
+                <Route path="/edit/:postId">
                     <EditPage />
                 </Route>
             </Switch>

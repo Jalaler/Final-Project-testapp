@@ -4,8 +4,40 @@ import PostBox from "./PostBox";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
 import Scroll from './ReturntotopButton.js';
+import backendURL from "./URL";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 
 function SubjectDetailPage() {
+ 
+    const [data, setData] = useState([]);
+    const [sub, setSub] = useState({});
+    const {abbr} =useParams()
+    useEffect(() => {
+        axios.get(backendURL + '/api/subjects/'+abbr+'/posts')
+        .then(res => {
+            if(res.data.length > 0){
+                setData(res.data)
+            }
+        })
+        .catch(err => console.log(err))
+
+        axios.get(backendURL + '/api/subjects/'+abbr)
+        .then(res => {
+            
+                setSub(res.data)
+            
+        })
+    },[]);
+
+    const reviewList = () => {
+        return data.map( currentPost => {
+            return <PostBox data={currentPost}/>
+        })
+    }
+
+
     return (
         <div>
             <Navbar />
@@ -17,15 +49,15 @@ function SubjectDetailPage() {
                         <div class="flex items-center pl-6">
                             <div>
                                 <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
-                                    <input class="text-black font-bold text-xl w-20" type="text" value="GEN&nbsp;555" disabled />
+                                    <input class="text-black font-bold text-xl w-20" type="text" value={sub.subject_abbr} disabled />
                                 </div>
                             </div>
                             <div class="rounded-l-full pl-8 text-black">
                                 <p>
-                                    <input class="text-lg font-bold w-96 bg-white" type="text" value="Art and Science of Cooking and Eating" disabled />
+                                    <input class="text-lg font-bold w-96 bg-white" type="text" value={sub.subject_name} disabled />
                                 </p>
                                 <p>
-                                    <input class="text-md text-gray-500 w-96 bg-white" type="text" value="(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)" disabled />
+                                    <input class="text-md text-gray-500 w-96 bg-white" type="text" value={(sub.subject_name)} disabled />
                                 </p>
                             </div>
                         </div>
@@ -62,9 +94,9 @@ function SubjectDetailPage() {
                         <option>Semester 2 Academic Year 2019</option>
                         <option>Semester 1 Academic Year 2019</option>
                     </select>
-                </div>
-            </div>
-            <div class="flex justify-center pt-14">
+                </div> */}
+            {/* </div>
+             <div class="flex justify-center pt-14">
                 <div class="grid grid-cols-2 grid-rows-4 gap-x-40 gap-y-2">
                     <div class="pb-3 font-bold text-lg">Course Score</div>
                     <div>
@@ -106,17 +138,20 @@ function SubjectDetailPage() {
                         </svg>
                     </div>
                 </div>
-            </div> */}
+            </div>  */}
             <div class="flex justify-around mt-14 mb-10">
                 <div class="flex items-center font-bold text-2xl">
                     Review of this course
                 </div>
                 <div class="flex items-center">
-                    <a href="/Review" class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
+                    <a href={"/review/" + abbr} class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
                 </div>
             </div>
-            <PostBox />
-            <Footer />
+
+            {reviewList()}
+
+
+            <Footer URL={abbr}/>
         </div>
     );
 }

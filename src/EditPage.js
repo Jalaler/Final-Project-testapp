@@ -3,32 +3,34 @@ import Scroll from './ReturntotopButton.js';
 import FooterReview from "./FooterReview";
 import SearchBanner from "./SearchBanner";
 import SubjectNameTop from "./SubjectNameTop";
-// import { useState, useEffect, React } from 'react';
+import { useState, useEffect, React } from 'react';
 import axios from 'axios';
-import SelectRadio from '../src/styles/SelectRadio.css';
-
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from "react";
+import sentParam from "./PostBox";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import SelectRadio from '../src/styles/SelectRadio.css';
+import { useParams } from "react-router";
+import { list } from "purgecss/node_modules/postcss";
+import backendURL from "./URL";
 
-function EditPage() {
+function EditPage(props) {
+
 
     function getValue() {
 
-        const section = document.getElementById('section_No').value;
-        const review_detail = document.getElementById('message').value;
-        const scoreTeachingInput = document.getElementsByName('scoreTeaching');
-        const gradeReceiveInput = document.getElementsByName('gradeReceive');
-        const scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
-        const scoreParticipationInput = document.getElementsByName('scoreParticipation');
-        const academic_year = document.getElementById('academic_year').value;
-        const semester = document.getElementById('Semester').value;
-        const student_id = document.getElementById('student_Id').value;
-        const subject_id = document.getElementById('subject_id').value;
+        let section = document.getElementById('section_No').value;
+        let review_detail = document.getElementById('message').value;
+        let scoreTeachingInput = document.getElementsByName('scoreTeaching');
+        let gradeReceiveInput = document.getElementsByName('gradeReceive');
+        let scoreKnowledgeInput = document.getElementsByName('scoreKnowledge');
+        let scoreParticipationInput = document.getElementsByName('scoreParticipation');
+        let academic_year = document.getElementById('academic_year').value;
+        let semester = document.getElementById('Semester').value;
+        let student_id = document.getElementById('student_Id').value;
+        let subject_id = document.getElementById('subject_id').value;
+
 
         let grade_received;
         for (let index = 0; index < gradeReceiveInput.length; index++) {
@@ -62,50 +64,67 @@ function EditPage() {
             }
         }
 
+        const review = {
+            grade_received: grade_received,
+            teacher_rating: teacher_rating,
+            usefulness_rating: usefulness_rating,
+            participation_rating: participation_rating,
+            academic_year: academic_year,
+            semester: semester,
+            reviewer: student_id,
+            reviewedSubject: subject_id,
+            active: true,
+            review_detail: review_detail,
+            section: section,
+            force: true
+        }
+        return review;
+
     }
+
+    const [data, setData] = useState({});
+    const [sub, setSub] = useState({});
+    const { postId } = useParams()
+
 
     const [allStudentReview, setAllStudentReview] = useState([]);
 
     function onReviewSubmit(event) {
         event.preventDefault();
-
         const newReview = getValue();
-
         if (newReview.grade_received != null &&
             newReview.teacher_rating != null &&
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
+            axios.put(backendURL+'/api/reviews/' + postId, getValue())
+                .then(res => console.log.res.data)
+                .catch(err => console.log(err.message));
 
-        axios.put('http://localhost:5000/api/reviews/613f2551158d6620c02b66e0', newReview)
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            setAllStudentReview((prevAllStudentReview) => {
+                return [...prevAllStudentReview, getValue];
+            });
 
-        setAllStudentReview((prevAllStudentReview) => {
-            return [...prevAllStudentReview, getValue];
-        });
-        
-        setTimeout(function () {
-            window.location = '/';
-        }, 2000);
+            setTimeout(function () {
+                window.location = '/';
+            }, 2000);
 
-        setOpen(true);
+            setOpen(true);
 
         } else {
             return false;
         }
+
     }
 
 
-    const [edit, setEdit] = useState([]);
-
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reviews/613f2551158d6620c02b66e0')
+        axios.get(backendURL+'/api/reviews/' + postId)
             .then((response) => {
-                setEdit(response.data);
-                console.log(response.data);
+                setData(response.data);
+                setSub(response.data.reviewedSubject);
             });
-    }, []);
 
+    }, []);
 
     const useStyles = makeStyles((theme) => ({
         modal: {
@@ -122,7 +141,7 @@ function EditPage() {
     }));
 
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleClose = () => {
         setOpen(false);
     };
@@ -137,14 +156,14 @@ function EditPage() {
             <div class="flex pt-40 pl-60">
                 <div class="flex items-center pl-10">
                     <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
-                        <input class="text-black font-bold text-xl w-20" type="text" value="GEN&nbsp;555" disabled />
+                        <input class="text-black font-bold text-xl w-20" type="text" value={sub.subject_abbr} disabled />
                     </div>
                     <div class="rounded-l-full pl-8 text-black">
                         <p>
-                            <input class="text-lg font-bold w-96 bg-white" type="text" value="Art and Science of Cooking and Eating" disabled />
+                            <input class="text-lg font-bold w-96 bg-white" type="text" value={sub.subject_abbr} disabled />
                         </p>
                         <p>
-                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value="(ศาสตร์และศิลย์ของการทำและรับประทานอาหาร)" disabled />
+                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value={sub.subject_name} disabled />
                         </p>
                     </div>
                 </div>
@@ -232,7 +251,7 @@ function EditPage() {
                             Section:
                         </div>
                         <div class="flex">
-                            <input type="text" name="sectionNo" id="section_No" placeholder="Section No." value={edit.section} onChange={(event) => { setEdit({ section: event.target.value.trim() }) }} class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="text" name="sectionNo" id="section_No" placeholder="Section No." value={data.section} onChange={(event) => { setData({ section: event.target.value }) }} class=" bg-yellow-400 bg-opacity-5 border-yellow-500 border focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300 block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                             <div class="flex items-end pl-2 text-sm text-gray-400">
                                 (Optional)
                             </div>
@@ -241,19 +260,19 @@ function EditPage() {
                             Academic year:
                         </div>
                         <div class="flex">
-                            <input type="number" name="academicyear" id="academic_year" value={edit.academic_year} onChange={(event) => { setEdit({ academic_year: event.target.value.trim() }) }} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="academicyear" id="academic_year" value={data.academic_year} onChange={(event) => { setData({ academic_year: event.target.value }) }} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold">
                             Semester:
                         </div>
                         <div class="flex">
-                            <input type="number" name="semester" id="Semester" value={edit.semester} onChange={(event) => { setEdit({ semester: event.target.value.trim() }) }} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
+                            <input type="number" name="semester" id="Semester" value={data.semester} onChange={(event) => { setData({ semester: event.target.value }) }} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-32 outline-none" />
                         </div>
                         <div class="flex items-center text-lg font-semibold hidden">
                             ID:
                         </div>
                         <div class="flex hidden">
-                            <input type="text" name="studentId" id="student_Id" value={edit.reviewer} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
+                            <input type="text" name="studentId" id="student_Id" value={data.reviewer} placeholder="" disabled class=" bg-gray-50 bg-opacity-100 border-gray-300 border block text-sm py-3 px-6 rounded-full w-48 outline-none" />
                         </div>
                     </div>
                 </div>
@@ -266,7 +285,7 @@ function EditPage() {
                 <div class="flex flex-wrap mb-2 justify-center mt-6">
                     <div class="relative w-3/5 appearance-none label-floating mx-80">
                         <textarea class="pt-3 pb-32 px-6 autoexpand tracking-wide mb-3 leading-relaxed appearance-none block w-full bg-yellow-400 bg-opacity-5 border-yellow-500 border rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-300"
-                            id="message" name="reviewContent" type="text" value={edit.review_detail} onChange={(event) => { setEdit({ review_detail: event.target.value.trim() }) }} placeholder="Message..." ></textarea>
+                            id="message" name="reviewContent" type="text" value={data.review_detail} onChange={(event) => { setData({ review_detail: event.target.value }) }} placeholder="Message..." ></textarea>
                         <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
                         </label>
                     </div>
@@ -461,5 +480,6 @@ function EditPage() {
         </div>
     );
 }
+
 
 export default EditPage;

@@ -33,7 +33,7 @@ function Navbar() {
                 <ul class="flex items-center pl-52" id="navbar">
                     <li><NavLink exact activeClassName="active" to='/'>Home</NavLink></li>
                     <li><NavLink activeClassName="active" to='/subject'>Subject</NavLink></li>
-                    <li><NavLink activeClassName="active" to='/review'>Review</NavLink></li>
+                    <li><NavLink activeClassName="active" to='/review/GEN111'>Review</NavLink></li>
                     <li><NavLink activeClassName="active" to='/history'>History</NavLink></li>
                 </ul>
 
