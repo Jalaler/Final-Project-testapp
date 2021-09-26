@@ -64,6 +64,7 @@ function EditPage(props) {
             }
         }
 
+        let reviewedSubject = sub._id;
         const review = {
             grade_received: grade_received,
             teacher_rating: teacher_rating,
@@ -71,8 +72,8 @@ function EditPage(props) {
             participation_rating: participation_rating,
             academic_year: academic_year,
             semester: semester,
-            reviewer: student_id,
-            reviewedSubject: subject_id,
+            reviewer: "6124839e65cfb652d8df2b67",
+            reviewedSubject:reviewedSubject ,
             active: true,
             review_detail: review_detail,
             section: section,
