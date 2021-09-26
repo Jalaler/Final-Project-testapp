@@ -122,8 +122,6 @@ function EditPage(props) {
             .then((response) => {
                 setData(response.data);
                 setSub(response.data.reviewedSubject);
-                console.log(typeof response.data);
-                console.log(sub);
             });
 
     }, []);
@@ -158,14 +156,14 @@ function EditPage(props) {
             <div class="flex pt-40 pl-60">
                 <div class="flex items-center pl-10">
                     <div class="bg-yellow-500 bg-opacity-20 rounded-full px-7 py-4 flex items-center justify-center">
-                        <input class="text-black font-bold text-xl w-20" type="text" value={data.reviewedSubject} disabled />
+                        <input class="text-black font-bold text-xl w-20" type="text" value={sub.subject_abbr} disabled />
                     </div>
                     <div class="rounded-l-full pl-8 text-black">
                         <p>
-                            <input class="text-lg font-bold w-96 bg-white" type="text" value={data.reviewedSubject} disabled />
+                            <input class="text-lg font-bold w-96 bg-white" type="text" value={sub.subject_abbr} disabled />
                         </p>
                         <p>
-                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value={data.reviewedSubject} disabled />
+                            <input class="text-md text-gray-500 w-96 bg-white" type="text" value={sub.subject_name} disabled />
                         </p>
                     </div>
                 </div>

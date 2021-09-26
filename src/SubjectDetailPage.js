@@ -151,7 +151,7 @@ function SubjectDetailPage() {
             {reviewList()}
 
 
-            <Footer />
+            <Footer URL={abbr}/>
         </div>
     );
 }
