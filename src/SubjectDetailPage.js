@@ -144,14 +144,14 @@ function SubjectDetailPage() {
                     Review of this course
                 </div>
                 <div class="flex items-center">
-                    <a href={"/Review/" + sub.subject_abbr} class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
+                    <a href={"/review/" + abbr} class="py-4 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
                 </div>
             </div>
 
             {reviewList()}
 
 
-            <Footer />
+            <Footer URL={abbr}/>
         </div>
     );
 }
