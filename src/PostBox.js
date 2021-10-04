@@ -4,6 +4,7 @@ import axios from 'axios';
 import EditPage from "./EditPage";
 import { Link } from "react-router-dom";
 import LikeCheckbox from '../src/styles/LikeCheckbox.css';
+import backendURL from "./URL";
 
 
 function PostBox(props) {
@@ -27,10 +28,20 @@ function PostBox(props) {
         }
     }
 
+   
+
+     function deletePost(){
+
+        axios.delete(backendURL+'/api/reviews/' + props.data._id)
+                .then(res => console.log.res.data)
+                .catch(err => console.log(err.message));
+    }
+
     return (
         <div>
             <div class="flex justify-center pl-96 mt-10 ">
                 <a href={'/edit/' + props.data._id} key={props.data._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+                <a href={'/'}  onClick={deletePost} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Delete</a>
             </div>
             <main class="w-3/5 pt-4 pb-8 px-8 mx-auto bg-white"  >
                 <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
