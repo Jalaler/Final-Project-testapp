@@ -5,10 +5,6 @@ import EditPage from "./EditPage";
 import { Link } from "react-router-dom";
 import LikeCheckbox from '../src/styles/LikeCheckbox.css';
 import backendURL from "./URL";
-
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
 import Modal from '@material-ui/core/Modal';
 
 function PostBox(props) {
@@ -32,16 +28,19 @@ function PostBox(props) {
         }
     }
 
-   
 
-     function deletePost(){
 
-        axios.delete(backendURL+'/api/reviews/' + props.data._id)
-                .then(res => console.log.res.data)
-                .catch(err => console.log(err.message));
+    function deletePost() {
+
+        axios.delete(backendURL + '/api/reviews/' + props.data._id)
+            .then(res => console.log.res.data)
+            .catch(err => console.log(err.message));
+
+            window.location.reload();
+           
     }
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -74,7 +73,7 @@ function PostBox(props) {
                                     <button onClick={handleClose} class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 transition duration-300">
                                         Cancel
                                     </button>
-                                    <button class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600 transition duration-300">
+                                    <button onClick={deletePost} class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600 transition duration-300">
                                         Delete
                                     </button>
                                 </div>
