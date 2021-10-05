@@ -75,7 +75,7 @@ function ReviewPage() {
             participation_rating: participation_rating,
             academic_year: academic_year,
             semester: semester,
-            reviewer: "6124839e65cfb652d8df2b67",
+            reviewer: "614f25eb98ce283667c26c64",
             reviewedSubject:reviewedSubject ,
             active: true,
             review_detail: review_detail,

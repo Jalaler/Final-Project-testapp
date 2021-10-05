@@ -12,7 +12,7 @@ function HistoryPage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get(backendURL+'/api/reviews/history/6124839e65cfb652d8df2b67')
+        axios.get(backendURL+'/api/reviews/history/614f25eb98ce283667c26c64')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
