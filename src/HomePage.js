@@ -15,7 +15,7 @@ function HomePage() {
     const [data, setData] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
-        axios.get(backendURL+'/api/reviews/')
+        axios.get(backendURL+'/api/reviews')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
