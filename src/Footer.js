@@ -1,8 +1,8 @@
 function Footer(props) {
 
-    if(props.URL == undefined){
-        props.URL = 'GEN111'
-    }
+    // if(props.URL == undefined){
+    //     props.URL = 'GEN111'
+    // }
 
     return (
         <div class="pt-20">

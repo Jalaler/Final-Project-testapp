@@ -4,7 +4,8 @@ import axios from 'axios';
 import EditPage from "./EditPage";
 import { Link } from "react-router-dom";
 import LikeCheckbox from '../src/styles/LikeCheckbox.css';
-
+import backendURL from "./URL";
+import Modal from '@material-ui/core/Modal';
 
 function PostBox(props) {
 
@@ -27,12 +28,61 @@ function PostBox(props) {
         }
     }
 
+
+
+    function deletePost() {
+
+        axios.delete(backendURL + '/api/reviews/' + props.data._id)
+            .then(res => console.log.res.data)
+            .catch(err => console.log(err.message));
+
+            window.location.reload();
+           
+    }
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+
     return (
         <div>
-            <div class="flex justify-center pl-96 mt-10 ">
-                <a href={'/edit/' + props.data._id} key={props.data._id} class="ml-96 py-3 px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Edit</a>
+            <div class="flex justify-center pl-80 mr-5 mt-10">
+                <a href={'/edit/' + props.data._id} key={props.data._id} class="cursor-pointer ml-96 py-3 px-6 font-semibold text-white bg-gray-400 rounded-full shadow-md hover:bg-gray-500 transition duration-300">Edit</a>
+                <button /* href="" key="" */ onClick={handleOpen} class="cursor-pointer ml-2 py-3 px-4 font-semibold text-white bg-red-500 rounded-full shadow-md hover:bg-red-600 transition duration-300">Delete</button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none" id="modal-id">
+                        <div class="w-full max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
+                            <div class="">
+                                <div class="text-center p-5 flex-auto justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex items-center text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                    <h2 class="text-xl font-bold py-4 ">Are you sure?</h2>
+                                    <p class="text-sm text-gray-500 px-8">Do you really want to delete your post? This process cannot be undone</p>
+                                </div>
+                                <div class="p-3  mt-2 text-center space-x-4 md:block">
+                                    <button onClick={handleClose} class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 transition duration-300">
+                                        Cancel
+                                    </button>
+                                    <button onClick={deletePost} class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600 transition duration-300">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
             </div>
-            <main class="w-3/5 pt-4 pb-8 px-8 mx-auto bg-white"  >
+            <main class="w-3/5 pt-3 pb-8 px-8 mx-auto bg-white"  >
                 <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                     <div class="tabs">
                         <div class="border-b tab">
@@ -57,7 +107,6 @@ function PostBox(props) {
                                             <polyline points="6 9 12 15 18 9">
                                             </polyline>
                                         </svg>
-
                                     </div>
                                 </header>
                                 <div class="pl-44 pr-24 pb-8">
@@ -74,7 +123,6 @@ function PostBox(props) {
                                                 <div class="pb-8 pr-4 font-semibold">Teacher:</div>
                                                 <div>(Teacher Name)</div>
                                             </div>
-
                                             <div class="grid grid-cols-2 grid-rows-3 gap-1">
                                                 <div class="pb-3 font-semibold">Teaching:</div>
                                                 <div class="flex space-x-1">
@@ -84,21 +132,16 @@ function PostBox(props) {
                                                 <div class="flex space-x-1">
                                                     {props.data.usefulness_rating}
                                                 </div>
-
                                                 <div class="pb-3 font-semibold">Partipation:</div>
                                                 <div class="flex space-x-1">
                                                     {props.data.participation_rating}
-
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-                                 
                             </div>
                         </div>
-
                         <div class="border-t border-yellow-400 border-opacity-50 bg-yellow-300 bg-opacity-5">
                             <div class="flex border-l-4 border-b-4 border-r-4 border-yellow-400 border-opacity-50 rounded-b-xl border-transparent relative">
                                 <header class="flex items-center p-5 pl-8 pr-8 select-none">
@@ -139,7 +182,6 @@ function PostBox(props) {
                     </div>
                 </section>
             </main>
-            
         </div>
     );
 

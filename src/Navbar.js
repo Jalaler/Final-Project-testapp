@@ -21,7 +21,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function Navbar() {
     return (
-
         <nav class="bg-white sm:shadow-lg md:shadow-lg lg:shadow-lg fixed right-0 left-0 z-50">
             <div class="flex justify-center">
                 <div>

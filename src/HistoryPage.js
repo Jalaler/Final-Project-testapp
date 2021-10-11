@@ -5,13 +5,14 @@ import Navbar from "./Navbar";
 import PostBox from "./PostBox";
 import React, { useState, useEffect } from 'react';
 import backendURL from "./URL";
+import Scroll from './ReturntotopButton.js';
 
 function HistoryPage() {
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get(backendURL+'/api/reviews/history/6124839e65cfb652d8df2b67')
+        axios.get(backendURL+'/api/reviews/history/614f25eb98ce283667c26c64')
         .then(res => {
             if(res.data.length > 0){
                 setData(res.data)
@@ -28,6 +29,7 @@ function HistoryPage() {
         return (
             <div className="HistoryPage">
                 <Navbar />
+                <Scroll showBelow={250} />
                 <div class="absolute z-40 w-20 pt-44">
                     <img src={IMAGES.BigAnt} class="pt-2 ml-60" />
                 </div>
