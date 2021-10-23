@@ -147,9 +147,7 @@ function ReviewPage() {
         })
     }, []);
 
-
-
-
+    
     return (
         <div className="ReviewPage">
             <Navbar />

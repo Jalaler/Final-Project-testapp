@@ -4,7 +4,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import backendURL from "./URL.js";
-
 import HamburgerMenu from "../src/styles/HamburgerMenu.css";
 
 
@@ -37,7 +36,7 @@ export default function TransitionsModal() {
     return (
         <div class="flex">
             <button type="button" onClick={handleOpen}>
-                <div class="flex lg:pr-10">
+                <div class="flex hidden sm:block lg:mr-10">
                     <a href="#" class="py-2 px-6 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Login</a>
                 </div>
             </button>
@@ -54,7 +53,6 @@ export default function TransitionsModal() {
                 }}
             >
                 <Fade in={open}>
-                    {/* <div className={classes.paper}> */}
                     <div class="flex flex-col space-y-10 justify-center items-center">
                         <div class="bg-white w-96 shadow-lg rounded-lg p-10">
                             <div class="">
@@ -74,14 +72,13 @@ export default function TransitionsModal() {
                             </div>
                         </div>
                     </div>
-                    {/* </div> */}
                 </Fade>
             </Modal>
 
             <div class="relative lg:hidden flex inline-flex ml-2">
                 <input type="checkbox" id="sortbox" class="hidden absolute" />
                 <label for="sortbox" class="flex items-center space-x-1 cursor-pointer">
-                    <svg class=" w-8 h-8 text-gray-400 hover:text-green-500 active:text-green-500"
+                    <svg class=" w-8 h-8 text-gray-400 hover:text-green-500"
                         x-show="!showMenu"
                         fill="none"
                         stroke-linecap="round"
@@ -94,14 +91,21 @@ export default function TransitionsModal() {
                     </svg>
                 </label>
                 <div id="sortboxmenu" class="absolute right-1 top-full min-w-max rounded-md shadow-lg opacity-0 bg-white border border-gray-300 transition delay-75 ease-in-out z-50">
-                    <ul class="block text-left text-gray-600">
+                    <ul class="block text-center text-gray-600">
                         <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-0">Home</a></li>
                         <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-1">Subject</a></li>
                         <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-2">Review</a></li>
-                        <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-2">History</a></li>
-                        <li class="py-2">
+                        <li><a href="#" class="block py-3 text-md mx-5" role="menuitem" tabindex="-1" id="menu-item-2">History</a></li>
+                        <li class="pt-2 sm:hidden">
+                            <button type="button" onClick={handleOpen}>
+                                <div class="flex lg:pr-10 text-center">
+                                    <a href="#" class="py-2 px-6 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Login</a>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="pb-4 pt-2">
                             <form method="POST" action="#" role="none">
-                                <button type="submit" class="block border-2 border-gray-200 ml-6 px-3 py-1 rounded-lg text-md text-gray-400" role="menuitem" tabindex="-1" id="menu-item-3">
+                                <button type="submit" class="block border-2 border-gray-200 ml-6 px-3 py-1 rounded-full text-md text-gray-400" role="menuitem" tabindex="-1" id="menu-item-3">
                                     Sign out
                                 </button>
                             </form>

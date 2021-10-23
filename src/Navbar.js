@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function Navbar() {
     return (
         <nav class="bg-white shadow-md sm:shadow-md md:shadow-md lg:shadow-lg fixed right-0 left-0 z-50">
-            <div class="flex justify-around lg:justify-center space-x-40 sm:space-x-40 md:space-x-48 lg:space-x-48">
+            <div class="flex justify-around lg:justify-center space-x-20 sm:space-x-32 md:space-x-40 lg:space-x-44">
                 <div>
                     <a href="/" class="flex items-center py-5">
                         <span class="font-bold text-yellow-500 pl-4 md:pl-0 lg:pl-0 text-xl lg:text-2xl">MOD Checkup</span>
