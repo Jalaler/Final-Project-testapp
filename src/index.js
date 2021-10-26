@@ -30,7 +30,7 @@ ReactDOM.render(
                 <Route path="/review/:abbr">
                     <ReviewPage />
                 </Route>
-                <Route path="/history">
+                <Route path="/history/:studentId">
                     <HistoryPage />
                 </Route>
                 <Route path="/subjectdetail/:abbr">

@@ -3,6 +3,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import LoginButton from './LoginButton.js';
 import ProfileTooltip from '../src/styles/ProfileTooltip.css';
+import axios from 'axios'
+import { useState, useEffect } from 'react';
+import backendURL from './URL';
 
 window.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('#btn');
@@ -20,6 +23,16 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 function Navbar() {
+    const [currentUser, setCurrentUser] = useState({});
+    useEffect(() => {
+            axios.get(backendURL + '/api/users/current', { withCredentials: true })
+            .then(res => {
+                setCurrentUser(res.data)
+              
+            })
+            .catch(err => console.log(err))
+    }, []);
+
     return (
         <nav class="bg-white sm:shadow-lg md:shadow-lg lg:shadow-lg fixed right-0 left-0 z-50">
             <div class="flex justify-center">
@@ -33,7 +46,7 @@ function Navbar() {
                     <li><NavLink exact activeClassName="active" to='/'>Home</NavLink></li>
                     <li><NavLink activeClassName="active" to='/subject'>Subject</NavLink></li>
                     <li><NavLink activeClassName="active" to='/review/GEN111'>Review</NavLink></li>
-                    <li><NavLink activeClassName="active" to='/history'>History</NavLink></li>
+                    <li><NavLink activeClassName="active" to={'/history/'+ currentUser._id}>History</NavLink></li>
                 </ul>
 
                 <LoginButton />

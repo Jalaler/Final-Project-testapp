@@ -18,12 +18,14 @@ function HomePage() {
             .then(res => {
                 if (res.data.length > 0) {
                     setData(res.data)
+                    console.log(res.data)
                 }
             })
             .catch(err => console.log(err))
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
+                console.log(res.data)
             })
             .catch(err => console.log(err))
     }, []);
@@ -40,6 +42,7 @@ function HomePage() {
             <Navbar />
             <Banner />
             <TopicHome />
+            <h1>Hi</h1>
             <Scroll showBelow={250} />
             {reviewList()}
             <Footer />
