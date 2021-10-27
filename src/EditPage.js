@@ -99,7 +99,7 @@ function EditPage(props) {
             newReview.teacher_rating != null &&
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
-            axios.put(backendURL + '/api/reviews/' + postId, getValue())
+            axios.put(backendURL + '/api/reviews/' + postId, getValue(),{ withCredentials: true })
                 .then(res => console.log.res.data)
                 .catch(err => console.log(err.message));
 

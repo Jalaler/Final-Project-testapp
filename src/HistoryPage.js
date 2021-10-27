@@ -16,7 +16,7 @@ function HistoryPage() {
 
     useEffect(() => {
    
-        axios.get(backendURL + '/api/reviews/history/'+studentId)
+        axios.get(backendURL + '/api/reviews/history/'+studentId,{ withCredentials: true })
             .then(res => {
                 if (res.data.length > 0) {
                     setData(res.data)

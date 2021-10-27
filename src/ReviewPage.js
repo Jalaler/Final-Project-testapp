@@ -101,7 +101,7 @@ function ReviewPage() {
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
             
-        axios.post(backendURL+'/api/reviews', newReview)
+        axios.post(backendURL+'/api/reviews', newReview,{ withCredentials: true })
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
