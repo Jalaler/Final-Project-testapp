@@ -34,24 +34,21 @@ function Navbar() {
     }, []);
 
     return (
-        <nav class="bg-white sm:shadow-lg md:shadow-lg lg:shadow-lg fixed right-0 left-0 z-50">
-            <div class="flex justify-center">
+        <nav class="bg-white shadow-md sm:shadow-md md:shadow-md lg:shadow-lg fixed right-0 left-0 z-50">
+            <div class="flex justify-around lg:justify-center space-x-20 sm:space-x-32 md:space-x-40 lg:space-x-44">
                 <div>
                     <a href="/" class="flex items-center py-5">
-                        <span class="sm:font-bold md:font-bold lg:font-bold text-yellow-500 md:text-2xl sm:text-2xl lg:text-2xl">MOD Checkup</span>
+                        <span class="font-bold text-yellow-500 pl-4 md:pl-0 lg:pl-0 text-xl lg:text-2xl">MOD Checkup</span>
                     </a>
                 </div>
-
-                <ul class="flex items-center pl-52" id="navbar">
+                <ul class="hidden lg:flex items-center" id="navbar">
                     <li><NavLink exact activeClassName="active" to='/'>Home</NavLink></li>
                     <li><NavLink activeClassName="active" to='/subject'>Subject</NavLink></li>
                     <li><NavLink activeClassName="active" to='/review/GEN111'>Review</NavLink></li>
                     <li><NavLink activeClassName="active" to={'/history/'+ currentUser._id}>History</NavLink></li>
                 </ul>
-
                 <LoginButton />
-
-                <div class="pl-56 flex hidden">
+                <div class="flex hidden">
                     <button class="" id="btn" aria-describedby="tooltip" data-tooltip-text="ohm.supachai@mail.kmutt.ac.th">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-50" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />

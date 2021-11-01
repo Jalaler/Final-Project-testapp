@@ -155,9 +155,7 @@ function ReviewPage() {
         .catch(err => console.log(err))
     }, []);
 
-
-
-
+    
     return (
         <div className="ReviewPage">
             <Navbar />

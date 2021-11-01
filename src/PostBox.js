@@ -47,9 +47,9 @@ function PostBox(props) {
 
 
     return (
-        <div>
-            <div class="flex justify-center pl-80 mr-5 mt-10">
-                <a href={'/edit/' + props.data._id} key={props.data._id} class="cursor-pointer ml-96 py-3 px-6 font-semibold text-white bg-gray-400 rounded-full shadow-md hover:bg-gray-500 transition duration-300">Edit</a>
+        <div class="grid grid-row-2 sm:mx-auto lg:w-3/5 md:w-9/12 sm:w-10/12 w-full">
+            <div class="flex justify-end mt-10 mr-4 sm:mr-0">
+                <a href={'/edit/' + props.data._id} key={props.data._id} class="cursor-pointer py-3 px-6 font-semibold text-white bg-gray-400 rounded-full shadow-md hover:bg-gray-500 transition duration-300">Edit</a>
                 <button /* href="" key="" */ onClick={handleOpen} class="cursor-pointer ml-2 py-3 px-4 font-semibold text-white bg-red-500 rounded-full shadow-md hover:bg-red-600 transition duration-300">Delete</button>
                 <Modal
                     open={open}
@@ -83,26 +83,26 @@ function PostBox(props) {
                     </div>
                 </Modal>
             </div>
-            <main class="w-3/5 pt-3 pb-8 px-8 mx-auto bg-white"  >
+            <main class="pt-3 pb-8 mx-auto bg-white"  >
                 <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                     <div class="tabs">
                         <div class="border-b tab">
                             <div class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
-                                <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-12" type="checkbox" id="chck1" />
-                                <header class="flex justify-between items-center pt-8 pb-7 pl-8 pr-8 cursor-pointer select-none tab-label" for="chck1">
-                                    <div class="flex font-semibold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-2 flex items-center justify-center">
+                                <input class="w-full absolute z-10 cursor-pointer opacity-0 h-10 top-52 md:h-28 md:top-0" type="checkbox" id="chck1" />
+                                <header class="md:flex justify-between items-center p-6 sm:p-8 cursor-pointer select-none tab-label" for="chck1">
+                                    <div class="flex font-semibold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-2 mb-4 md:mb-0 flex items-center justify-center">
                                         {props.data.reviewedSubject.subject_abbr}
                                     </div>
-                                    <div class="rounded-l-full w-full pl-6 text-black">
+                                    <div class="rounded-l-full w-full px-1 md:pl-6 text-black">
                                         <p class="text-lg font-semibold">{props.data.reviewedSubject.subject_name}</p>
                                         <p class="text-md text-gray-400">({props.data.reviewedSubject.subject_abbr})</p>
                                     </div>
-                                    <div class="font-bold pr-9">
+                                    <div class="flex font-bold pr-9 mt-4 md:mt-0">
                                         <span class="text-lg bg-white text-yellow-600 px-4 py-2 shadow-lg border-2 border-yellow-400 rounded-full">
                                             {props.data.grade_received}
                                         </span>
                                     </div>
-                                    <div class="rounded-full border border-grey w-10 h-7 flex items-center justify-center test">
+                                    <div class="flex rounded-full border border-grey mx-auto mt-4 md:mt-0 w-1/2 md:w-10 h-7 items-center justify-center test">
                                         {/* <!-- icon by feathericons.com --> */}
                                         <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                             <polyline points="6 9 12 15 18 9">
@@ -110,32 +110,28 @@ function PostBox(props) {
                                         </svg>
                                     </div>
                                 </header>
-                                <div class="pl-44 pr-24 pb-8">
+                                <div class="pb-8 px-6 sm:pl-10 sm:pr-10 md:pl-44 md:pr-24">
                                     {`${props.data.review_detail}`}
                                 </div>
                                 <div class="tab-content">
-                                    <div class="pl-36 pr-8 pb-6 text-grey-darkest">
-                                        <div class="pl-8">
+                                    <div class="pl-6 md:pl-40 pr-8 pb-6 text-grey-darkest">
+                                        <div class="">
                                             <div class="flex">
-                                                <div class="pb-3 pr-4 font-semibold">Section:</div>
+                                                <div class="pb-8 pr-4 font-semibold sm:pl-4">Section:</div>
                                                 <div>{props.data.section}</div>
                                             </div>
-                                            <div class="flex">
-                                                <div class="pb-8 pr-4 font-semibold">Teacher:</div>
-                                                <div>(Teacher Name)</div>
-                                            </div>
-                                            <div class="grid grid-cols-2 grid-rows-3 gap-1">
-                                                <div class="pb-3 font-semibold">Teaching:</div>
+                                            <div class="grid grid-cols-3 md:grid-cols-2 grid-rows-3 gap-1 sm:pl-4">
+                                                <div class="pb-1 font-semibold col-span-2 md:col-span-1">Teaching:</div>
                                                 <div class="flex space-x-1">
-                                                    {props.data.teacher_rating}
+                                                    {props.data.teacher_rating}/5
                                                 </div>
-                                                <div class="pb-3 font-semibold">Bring knowlegde to use:</div>
+                                                <div class="pb-1 font-semibold col-span-2 md:col-span-1">Bring knowlegde to use:</div>
                                                 <div class="flex space-x-1">
-                                                    {props.data.usefulness_rating}
+                                                    {props.data.usefulness_rating}/5
                                                 </div>
-                                                <div class="pb-3 font-semibold">Partipation:</div>
+                                                <div class="pb-1 font-semibold col-span-2 md:col-span-1">Partipation:</div>
                                                 <div class="flex space-x-1">
-                                                    {props.data.participation_rating}
+                                                    {props.data.participation_rating}/5
                                                 </div>
                                             </div>
                                         </div>
@@ -143,8 +139,8 @@ function PostBox(props) {
                                 </div>
                             </div>
                         </div>
-                        <div class="border-t border-yellow-400 border-opacity-50 bg-yellow-300 bg-opacity-5">
-                            <div class="flex border-l-4 border-b-4 border-r-4 border-yellow-400 border-opacity-50 rounded-b-xl border-transparent relative">
+                        <div class="border-t-2 border-b-4 border-l-4 border-r-4 border-yellow-400 border-opacity-50 rounded-b-xl bg-yellow-300 bg-opacity-5">
+                            <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
                                 <header class="flex items-center p-5 pl-8 pr-8 select-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -178,6 +174,38 @@ function PostBox(props) {
                                         </label>
                                     </div>
                                 </header>
+                            </div>
+                            <div class="pt-6 pl-6 sm:pl-10 md:pl-14 pb-6 font-bold border-t-2 border-yellow-400 border-opacity-50 border-transparent relative">
+                                Comments
+                            </div>
+                            <div class="relative">
+                                <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
+                                    <div class="flex flex-row justify-center p-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                        </svg>
+                                        <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">@Rabbit Man</h3>
+                                    </div>
+                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"><span class="text-yellow-600 font-semibold">@Crocodile</span> Hello. Yes, the entire exterior, including the walls. </p>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
+                                    <div class="flex flex-row justify-center p-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                        </svg>
+                                        <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">@Crocodile</h3>
+                                    </div>
+                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"><span class="text-yellow-600 font-semibold">@Rabbit Man</span> Yes, the entire exterior, including the walls. </p>
+                                </div>
+                            </div>
+                            <div class="flex justify-center items-center mt-8 mx-6 md:mx-20">
+                                <textarea class="pt-2 pb-2 px-4 w-full h-20 border-2 border-gray-300 rounded-xl focus:border-yellow-300 focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-200" id="comment" type="text" placeholder="Comment..."></textarea>
+                                <label for="comment" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Comment...</label>
+                            </div>
+                            <div class="flex justify-end pr-6 md:pr-20 pt-2 pb-7">
+                                <button class="cursor-pointer py-2 px-4 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Comment</button>
                             </div>
                         </div>
                     </div>

@@ -19,9 +19,9 @@ function Searchbar() {
     }
     return (
         <div class="flex justify-center">
-            <div class="pt-10 w-1/3">
+            <div class="pt-10 w-3/4 sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3">
                 <div class="bg-white flex items-center rounded-full shadow-lg">
-                    <input id="seach" class="rounded-l-full w-full py-4 pl-8 text-gray-600 leading-tight focus:outline-none placeholder-gray-600 focus:placeholder-gray-400" type="search" placeholder="Search for a course code or name"
+                    <input id="seach" class="rounded-l-full w-full py-4 pl-8 text-gray-600 leading-tight focus:outline-none placeholder-gray-600 focus:placeholder-gray-400" type="search" placeholder="Search course code or name"
                         
                     ></input>
                     <div class="p-2">
