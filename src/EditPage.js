@@ -65,6 +65,7 @@ function EditPage(props) {
         }
 
         let reviewedSubject = sub._id;
+        let reviewer = currentUser._id;
         const review = {
             grade_received: grade_received,
             teacher_rating: teacher_rating,
@@ -73,7 +74,7 @@ function EditPage(props) {
             academic_year: academic_year,
             semester: semester,
             reviewer: "614f25eb98ce283667c26c64",
-            reviewedSubject:reviewedSubject ,
+            reviewedSubject: reviewedSubject,
             active: true,
             review_detail: review_detail,
             section: section,
@@ -86,6 +87,7 @@ function EditPage(props) {
     const [data, setData] = useState({});
     const [sub, setSub] = useState({});
     const { postId } = useParams()
+    const [currentUser, setCurrentUser] = useState({});
 
 
     const [allStudentReview, setAllStudentReview] = useState([]);
@@ -97,7 +99,7 @@ function EditPage(props) {
             newReview.teacher_rating != null &&
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
-            axios.put(backendURL+'/api/reviews/' + postId, getValue())
+            axios.put(backendURL + '/api/reviews/' + postId, getValue(),{ withCredentials: true })
                 .then(res => console.log.res.data)
                 .catch(err => console.log(err.message));
 
@@ -119,11 +121,18 @@ function EditPage(props) {
 
 
     useEffect(() => {
-        axios.get(backendURL+'/api/reviews/' + postId)
+        axios.get(backendURL + '/api/reviews/' + postId)
             .then((response) => {
                 setData(response.data);
                 setSub(response.data.reviewedSubject);
             });
+
+        axios.get(backendURL + '/api/users/current', { withCredentials: true })
+            .then(res => {
+                setCurrentUser(res.data)
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
 
     }, []);
 

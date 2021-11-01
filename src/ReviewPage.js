@@ -66,6 +66,7 @@ function ReviewPage() {
                 break;
             }
         }
+        let reviewer = currentUser._id;
         let reviewedSubject = sub._id;
 
         const review = {
@@ -75,7 +76,7 @@ function ReviewPage() {
             participation_rating: participation_rating,
             academic_year: academic_year,
             semester: semester,
-            reviewer: "614f25eb98ce283667c26c64",
+            reviewer: reviewer,
             reviewedSubject:reviewedSubject ,
             active: true,
             review_detail: review_detail,
@@ -100,7 +101,7 @@ function ReviewPage() {
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
             
-        axios.post(backendURL+'/api/reviews', newReview)
+        axios.post(backendURL+'/api/reviews', newReview,{ withCredentials: true })
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
@@ -138,6 +139,7 @@ function ReviewPage() {
     const handleClose = () => {
         setOpen(false);
     };
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
         axios.get(backendURL + '/api/subjects/'+abbr)
@@ -145,6 +147,12 @@ function ReviewPage() {
                 setSub(res.data)
             
         })
+        axios.get(backendURL + '/api/users/current', { withCredentials: true })
+        .then(res => {
+            setCurrentUser(res.data)
+            console.log(res.data)
+        })
+        .catch(err => console.log(err))
     }, []);
 
 
