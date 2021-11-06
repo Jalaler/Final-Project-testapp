@@ -1,32 +1,38 @@
 import IMAGES from "./IMAGES";
 import Searchbar from "./Searchbar";
 
+import BackgroundBanner from "../src/styles/BackgroundBanner.css";
+
 
 function SearchBanner() {
     
-
     return (
+
         <div>
-            <div class="absolute z-40 w-20 pt-72 ml-56">
-                <img src={IMAGES.SmallAnt} class="pt-3" />
+            <div class="absolute z-40 mt-72 hidden md:block md:w-16 lg:w-20 md:ml-40 lg:ml-56">
+                <img src={IMAGES.SmallAnt} class="md:mt-7 lg:mt-3" />
             </div>
-            <div class="absolute z-40 w-20 pt-72 ml-32">
-                <img src={IMAGES.SmallAnt2} class="pt-4" />
+            <div class="absolute z-40 mt-72 hidden md:block md:w-16 lg:w-20 md:ml-20 lg:ml-32">
+                <img src={IMAGES.SmallAnt2} class="md:mt-7 lg:mt-4" />
             </div>
-            <div class="absolute z-40 w-48 pt-56 right-0 mr-16">
+            <div class="absolute z-40 right-0 hidden md:block md:w-44 lg:w-48 md:mt-60 lg:mt-56 md:mr-12 lg:mr-16">
                 <img src={IMAGES.Orange3} class="" />
             </div>
-            <div class="bg-no-repeat bg-top bg-cover h-full w-full z-0">
-                <img src={IMAGES.BannerBackground2} class="opacity-100 absolute mt-14" />
+            <div class="relative bg-no-repeat bg-top bg-auto z-0 hidden md:block">
+                <img src={IMAGES.BannerBackground2} id="searchbannerbg" class="opacity-100 absolute w-full mt-14" />
+            </div>
+            <div class="relative bg-no-repeat bg-top bg-auto z-0 md:hidden">
+                <div id="searchbannerbg2" class="bg-yellow-500 opacity-10 absolute w-full">
+                </div>
             </div>
             <div class="z-40 relative">
-                <div class="pt-36 text-center font-bold text-4xl">
+                <div class="pt-36 text-center font-bold text-3xl sm:text-3xl lg:text-4xl">
                     Search Subject
                 </div>
                 <Searchbar  />
             </div>
-
         </div>
+        
     );
 }
 

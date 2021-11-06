@@ -6,12 +6,12 @@ import SubjectListType1 from "./SubjectListType1";
 import SubjectListType2 from "./SubjectListType2";
 
 function SubjectPage() {
-    return(
+    return (
         <div className="SubjectPage">
             <Navbar />
             <SearchBanner />
             <Scroll showBelow={250} />
-            <div class="pt-40 px-80 pb-8 font-bold text-3xl">
+            <div class="font-bold text-2xl lg:text-3xl pt-36 md:pt-40 pb-4 md:pb-8 flex justify-start md:justify-center w-1/2 ml-10 sm:ml-20 md:ml-0">
                 Subject
             </div>
             <SubjectListType1 />
