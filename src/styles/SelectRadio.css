@@ -2,6 +2,11 @@
   color: rgb(0, 0, 0);
   width: 60px;
 }
+@media (max-width: 638px){
+  .radio input ~ label {
+    width: 38px;
+  }
+}
 .radio input:hover ~ label {
   background-color: #FEF3C7;
 }
