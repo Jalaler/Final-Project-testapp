@@ -157,17 +157,14 @@ function ReviewPage() {
             <div class="flex flex-wrap pt-36 md:pt-40 justify-evenly">
                 <div class="md:flex items-center w-5/6 md:w-2/3 lg:w-3/5">
                     <div class="bg-yellow-500 bg-opacity-20 rounded-full pl-7 pr-5 lg:px-7 py-3 lg:py-4 flex items-center justify-center">
-                        {/* <input class="text-black font-bold text-xl w-20" type="text" value={sub.subject_abbr} disabled /> */}
-                        <input class="text-black font-bold text-lg lg:text-xl w-20 lg:w-20" type="text" value="GEN333" disabled />
+                        <input class="text-black font-bold text-lg lg:text-xl w-20 lg:w-20" type="text" value={sub.subject_abbr} disabled />
                     </div>
                     <div class="rounded-l-full pt-4 md:pt-0 pl-0 md:pl-8 text-black w-full">
                         <p>
-                            {/* <input class="text-lg font-bold w-96 bg-white" type="text" value={sub.subject_name} disabled /> */}
-                            <input class="text-md md:text-lg font-bold w-full bg-white" type="text" value="Art Art atr at rtdtg adfs Art Art atr at rtdtg adfs" disabled />
+                            <input class="text-md md:text-lg font-bold w-full bg-white" type="text" value={sub.subject_name} disabled />
                         </p>
                         <p>
-                            {/* <input class="text-md text-gray-500 w-96 bg-white" type="text" value={(sub.subject_name)} disabled /> */}
-                            <input class="text-md text-gray-500 w-full bg-white" type="text" value="เจนวาดรูป" disabled />
+                            <input class="text-md text-gray-500 w-full bg-white" type="text" value={(sub.subject_name)} disabled />
                         </p>
                     </div>
                 </div>
