@@ -176,7 +176,7 @@ function PostBox(props) {
                                         </svg>
                                         <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">@Rabbit Man</h3>
                                     </div>
-                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"><span class="text-yellow-600 font-semibold">@Crocodile</span> Hello. Yes, the entire exterior, including the walls. </p>
+                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"> Hello. Yes, the entire exterior, including the walls. </p>
                                 </div>
                             </div>
                             <div class="relative">
@@ -187,7 +187,7 @@ function PostBox(props) {
                                         </svg>
                                         <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">@Crocodile</h3>
                                     </div>
-                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"><span class="text-yellow-600 font-semibold">@Rabbit Man</span> Yes, the entire exterior, including the walls. </p>
+                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"> Yes, the entire exterior, including the walls. </p>
                                 </div>
                             </div>
                             <div class="flex justify-center items-center mt-8 mx-6 md:mx-20">
