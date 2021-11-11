@@ -13,6 +13,7 @@ function HomePage() {
 
     const [data, setData] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
+    
     useEffect(() => {
         axios.get(backendURL + '/api/reviews/')
             .then(res => {
@@ -22,6 +23,9 @@ function HomePage() {
                 }
             })
             .catch(err => console.log(err))
+            
+    
+
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
@@ -32,7 +36,7 @@ function HomePage() {
 
     const reviewList = () => {
         return data.map(currentPost => {
-            return <PostBox data={currentPost} />
+            return <PostBox data={currentPost} currentUser={currentUser}  />
         })
     }
     
