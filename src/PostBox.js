@@ -45,25 +45,25 @@ function PostBox(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [allComments , setAllComments] = useState([]);
+    const [allComments, setAllComments] = useState([]);
     // const  setComments = useState([])
-    
+
     useEffect(() => {
 
-        axios.get(backendURL + '/api/comments/post/' + props.data._id,{ withCredentials: true })
-            .then(res => {
-                if (res.data.length >= 0) {
-                 setAllComments(res.data)
-                console.log(res.data)
-                }
-            })
-          .catch(err => console.log(err))
+        // axios.get(backendURL + '/api/comments/post/' + props.data._id, { withCredentials: true })
+        //     .then(res => {
+        //         if (res.data.length > 0) {
+        //             setAllComments(res.data)
+        //             console.log(res.data)
+        //         }
+        //     })
+        //     .catch(err => console.log(err))
 
-   
+
     }, []);
     const [allStudentComment, setAllStudentComment] = useState([]);
     function commentsPost() {
-        let comment_detail = document.getElementById('comment').value;
+        let comment_detail = document.getElementsByName('testcomment').values;
         console.log(comment_detail);
         let basePost = props.data._id;
         let commenter = props.currentUser._id;
@@ -74,17 +74,17 @@ function PostBox(props) {
             commenter: commenter,
             active: true
         }
-        
-        axios.post(backendURL+'/api/comments', comment,{ withCredentials: true })
+
+        axios.post(backendURL + '/api/comments', comment, { withCredentials: true })
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
-            setAllStudentComment((prevAllStudentComment) => {
+        setAllStudentComment((prevAllStudentComment) => {
             return [...prevAllStudentComment, comment];
         });
-        
 
-         window.location.reload();
+
+        window.location.reload();
     }
 
 
@@ -181,7 +181,9 @@ function PostBox(props) {
                                 </div>
                             </div>
                         </div>
+
                         <div class="border-t-2 border-b-4 border-l-4 border-r-4 border-yellow-400 border-opacity-50 rounded-b-xl bg-yellow-300 bg-opacity-5">
+
                             <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
                                 <header class="flex items-center p-5 pl-8 pr-8 select-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
@@ -217,33 +219,37 @@ function PostBox(props) {
                                     </div>
                                 </header>
                             </div>
+
                             <div class="pt-6 pl-6 sm:pl-10 md:pl-14 pb-6 font-bold border-t-2 border-yellow-400 border-opacity-50 border-transparent relative">
                                 Comments
                             </div>
                             {allComments.map(com => (
-                                <div class="relative" > 
+                                <div class="relative" >
                                     <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
                                         <div class="flex flex-row justify-center p-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                                             </svg>
-                                            <h3   class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">{com.commenter.displayName}</h3>
+                                            <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">{com.commenter.displayName}</h3>
                                         </div>
                                         <p class="text-gray-600 text-md text-left pt-2 pl-1"> {com.comment_detail} </p>
                                     </div>
                                 </div>
-                             ))} 
-                           
+                            ))}
                             <div class="flex justify-center items-center mt-8 mx-6 md:mx-20">
-                                <textarea class="pt-2 pb-2 px-4 w-full h-20 border-2 border-gray-300 rounded-xl focus:border-yellow-300 focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-200" id="comment" type="text" placeholder="Comment..."></textarea>
-                                <label for="comment" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Comment...</label>
+                                <textarea class="pt-2 pb-2 px-4 w-full h-20 border-2 border-gray-300 rounded-xl focus:border-yellow-300 focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-200" id='comment' type="text" name="testcomment" placeholder="Comment..."></textarea>
+                                <label for='comment' class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Comment...</label>
                             </div>
+
                             <div class="flex justify-end pr-6 md:pr-20 pt-2 pb-7">
                                 <button class="cursor-pointer py-2 px-4 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300" onClick={commentsPost}>Comment</button>
                             </div>
 
+
                         </div>
+
                     </div>
+
                 </section>
             </main>
         </div>
