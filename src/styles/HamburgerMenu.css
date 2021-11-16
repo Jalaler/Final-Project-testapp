@@ -1,3 +1,7 @@
     #sortbox:checked ~ #sortboxmenu {
         opacity: 1;
     }
+
+    #sortbox:not(:checked) ~ #sortboxmenu {
+        pointer-events: none;
+    }

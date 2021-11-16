@@ -224,17 +224,17 @@ function PostBox(props) {
                                 Comments
                             </div>
                             {allComments.map(com => (
-                                <div class="relative" >
-                                    <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
-                                        <div class="flex flex-row justify-center p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                            </svg>
-                                            <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">{com.commenter.displayName}</h3>
-                                        </div>
-                                        <p class="text-gray-600 text-md text-left pt-2 pl-1"> {com.comment_detail} </p>
+                            <div class="relative">
+                                <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
+                                    <div class="flex flex-row justify-center p-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                        </svg>
+                                        <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">{com.commenter.displayName}</h3>
                                     </div>
+                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"> {com.comment_detail} </p>
                                 </div>
+                            </div>
                             ))}
                             <div class="flex justify-center items-center mt-8 mx-6 md:mx-20">
                                 <textarea class="pt-2 pb-2 px-4 w-full h-20 border-2 border-gray-300 rounded-xl focus:border-yellow-300 focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-200" id='comment' type="text" name="testcomment" placeholder="Comment..."></textarea>

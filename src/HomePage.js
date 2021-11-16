@@ -66,7 +66,6 @@ function HomePage() {
             <Navbar />
             <Banner />
             <TopicHome />
-            <h1>Hi</h1>
             <Scroll showBelow={250} />
             {reviewList()}
             <Footer />

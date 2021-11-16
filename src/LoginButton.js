@@ -92,10 +92,10 @@ export default function TransitionsModal() {
                 </label>
                 <div id="sortboxmenu" class="absolute right-1 top-full min-w-max rounded-md shadow-lg opacity-0 bg-white border border-gray-300 transition delay-75 ease-in-out z-50">
                     <ul class="block text-center text-gray-600">
-                        <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-0">Home</a></li>
-                        <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-1">Subject</a></li>
-                        <li><a href="#" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-2">Review</a></li>
-                        <li><a href="#" class="block py-3 text-md mx-5" role="menuitem" tabindex="-1" id="menu-item-2">History</a></li>
+                        <li><a href="/" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-0">Home</a></li>
+                        <li><a href="/subject" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-1">Subject</a></li>
+                        <li><a href="/review/GEN111" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-2">Review</a></li>
+                        <li><a href="/history" class="block py-3 text-md mx-5" role="menuitem" tabindex="-1" id="menu-item-2">History</a></li>
                         <li class="pt-2 sm:hidden">
                             <button type="button" onClick={handleOpen}>
                                 <div class="flex lg:pr-10 text-center">
