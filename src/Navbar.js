@@ -54,7 +54,7 @@ function Navbar() {
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
                         </svg>
                     </button>
-                    <div class="text-md mt-20 right-40 bg-gray-700 text-white py-2 px-4 absolute rounded-3xl bg-opacity-50 shadow-lg hidden" id="tooltip" role="tooltip">
+                    <div class="text-md mt-20 right-2 sm:right-8 md:right-16 lg:right-8 xl:right-auto bg-gray-700 text-white py-2 px-4 absolute rounded-3xl bg-opacity-50 shadow-lg hidden" id="tooltip" role="tooltip">
                     </div>
                     <div class="flex items-center pl-4">
                         <a href="#" class="py-1 px-4 font-semibold text-yellow-500 bg-white border-2 border-yellow-300 rounded-full shadow-md hover:bg-yellow-50 transition duration-300">Logout</a>

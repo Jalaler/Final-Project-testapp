@@ -12,6 +12,8 @@ import ReviewPage from './ReviewPage';
 import HistoryPage from './HistoryPage';
 import SubjectDetailPage from './SubjectDetailPage';
 import EditPage from './EditPage';
+import SelectRolePage from './SelectRolePage';
+import ErrorPage from './ErrorPage';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -38,6 +40,12 @@ ReactDOM.render(
                 </Route>
                 <Route path="/edit/:postId">
                     <EditPage />
+                </Route>
+                <Route path="/selectrole">
+                    <SelectRolePage />
+                </Route>
+                <Route path="/404">
+                    <ErrorPage />
                 </Route>
             </Switch>
         </BrowserRouter>
