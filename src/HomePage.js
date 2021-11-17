@@ -18,7 +18,7 @@ function HomePage() {
     const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
 
     const loadData = () =>{
-        let url = backendURL + '/api/reviews/page/0/size/10' ;
+        let url = backendURL + '/api/reviews/page/1/size/10' ;
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setData(res.data)
