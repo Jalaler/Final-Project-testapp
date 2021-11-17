@@ -8,6 +8,8 @@ const IMAGES = {
     BigAnt: '/images/BigAnt.png',
     SmallAnt: '/images/SmallAnt.png',
     SmallAnt2: '/images/SmallAnt2.png',
+    Student: '/images/Student1.png',
+    Teacher: '/images/Teacher.png'
 };
 
 export default IMAGES;
