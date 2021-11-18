@@ -14,6 +14,7 @@ import SubjectDetailPage from './SubjectDetailPage';
 import EditPage from './EditPage';
 import SelectRolePage from './SelectRolePage';
 import ErrorPage from './ErrorPage';
+import CommentPage from './CommentPage';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -46,6 +47,9 @@ ReactDOM.render(
                 </Route>
                 <Route path="/404">
                     <ErrorPage />
+                </Route>
+                <Route path="/comment">
+                    <CommentPage />
                 </Route>
             </Switch>
         </BrowserRouter>

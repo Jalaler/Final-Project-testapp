@@ -33,8 +33,8 @@ function HomePage() {
             return <PostBox data={currentPost} />
         })
     }
-    
-    
+
+
     return (
         <div className="HomePage">
             <Navbar />
