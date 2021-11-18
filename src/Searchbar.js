@@ -4,16 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Searchbar(props) {
-    // const [sub, setSub] = useState([]);
-    // useEffect(() => {
-       
-    //     axios.get('http://localhost:5000/api/subjects')
-    //     .then(res => {
-    //             setSub(res.data);
-    //             console.log(res.data);       
-    //     })
-    // },[]);
-
+  
     
     function click(){
         const abbr = document.getElementById('seach').value;

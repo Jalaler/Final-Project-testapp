@@ -16,7 +16,7 @@ function HomePage() {
     const [allComments, setAllComments] = useState([]);
     const [page, setPage] = useState(2);
     const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
-    const [urlForSeach,setUrlForSeach] = useState('/subject');
+    const [urlForSeach,setUrlForSeach] = useState('/subjectsearch');
 
     const loadData = () =>{
         let url = backendURL + '/api/reviews/page/1/size/10' ;
