@@ -10,12 +10,11 @@ import backendURL from "./URL";
 import { useParams } from "react-router";
 import { easing } from "@material-ui/core";
 
-function SubjectPage() {
-
+function SubjectPageForSearch(){
     const [subject, setSubject] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
     const [urlForSeach,setUrlForSeach] = useState('/subjectsearch');
-    const {search} = useParams();
+    const {abbr} = useParams();
     useEffect(() => {
         
         getSubject();
@@ -29,15 +28,14 @@ function SubjectPage() {
 
     }, []);
 
-    function getSubject(){
-        
-            axios.get(backendURL + '/api/subjects')
+    function getSubject(){   
+             
+                 axios.get(backendURL + '/api/subjects/search/' + abbr)
                 .then((response) => {
                     setSubject(response.data);
                     console.log(response.data);
                 });
-                         
-
+    
     }
 
     if (!subject) return null;
@@ -65,6 +63,6 @@ function SubjectPage() {
             </footer>
         </div>
     );
-}
 
-export default SubjectPage;
+}
+export default SubjectPageForSearch;

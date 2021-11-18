@@ -89,7 +89,7 @@ function ReviewPage() {
     const [sub, setSub] = useState({});
     const [allStudentReview, setAllStudentReview] = useState([]);
     const {abbr} =useParams();
-   
+    const [urlForSeach,setUrlForSeach] = useState('/review');
 
     function onReviewSubmit(event) {
         event.preventDefault();
@@ -159,7 +159,7 @@ function ReviewPage() {
     return (
         <div className="ReviewPage">
             <Navbar />
-            <SearchBanner />
+            <SearchBanner urlForSeach={urlForSeach} />
             <Scroll showBelow={250} />
 
             <div class="flex flex-wrap pt-36 md:pt-40 justify-evenly">

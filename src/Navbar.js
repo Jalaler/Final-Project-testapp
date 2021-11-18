@@ -11,15 +11,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('#btn');
     const tooltip = document.querySelector('#tooltip');
 
-    tooltip.innerHTML = btn.dataset.tooltipText
+    // tooltip.innerHTML = btn.dataset.tooltipText
 
-    btn.addEventListener('mouseenter', () => {
-        tooltip.classList.remove('hidden');
-    })
+    // btn.addEventListener('mouseenter', () => {
+    //     tooltip.classList.remove('hidden');
+    // })
 
-    btn.addEventListener('mouseleave', () => {
-        tooltip.classList.add('hidden');
-    })
+    // btn.addEventListener('mouseleave', () => {
+    //     tooltip.classList.add('hidden');
+    // })
 })
 
 function Navbar() {

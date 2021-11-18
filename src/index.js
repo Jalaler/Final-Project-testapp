@@ -14,6 +14,7 @@ import SubjectDetailPage from './SubjectDetailPage';
 import EditPage from './EditPage';
 import SelectRolePage from './SelectRolePage';
 import ErrorPage from './ErrorPage';
+import SubjectPageForSearch from './SubjectPageForSearch';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -23,12 +24,13 @@ ReactDOM.render(
                 <Route path="/" exact>
                     <HomePage />
                 </Route>
+                
                 <Route path="/subject">
                     <SubjectPage />
                 </Route>
-                {/* <Route path="/review">
-                    <ReviewPage />
-                </Route> */}
+                <Route path="/subjectsearch/:abbr">
+                    <SubjectPageForSearch />
+                </Route>
                 <Route path="/review/:abbr">
                     <ReviewPage />
                 </Route>

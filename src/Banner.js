@@ -2,7 +2,7 @@ import IMAGES from './IMAGES.js';
 import Searchbar from './Searchbar.js';
 import BackgroundBanner from '../src/styles/BackgroundBanner.css';
 
-function Banner() {
+function Banner(props) {
     return (
         <div>
             <img src={IMAGES.Orange1} class="absolute z-40 hidden md:block md:w-36 lg:w-44 pt-10" />
@@ -45,7 +45,7 @@ function Banner() {
                         King Mongkut's University of Technology Thonburi
                     </p>
                 </div>
-                <Searchbar />
+                <Searchbar urlForSeach={props.urlForSeach} />
                 <div class="flex ml-2 relative invisible sm:visible">
                     <div class="transform rotate-90">
                         <div class="transform rotate-180 font-semibold text-gray-400">
