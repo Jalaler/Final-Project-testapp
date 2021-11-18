@@ -1,8 +1,9 @@
 import { getElementError } from '@testing-library/dom';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function Searchbar() {
+function Searchbar(props) {
     // const [sub, setSub] = useState([]);
     // useEffect(() => {
        
@@ -12,11 +13,14 @@ function Searchbar() {
     //             console.log(res.data);       
     //     })
     // },[]);
+
+    
     function click(){
         const abbr = document.getElementById('seach').value;
         console.log();
-        window.location= '/subjectdetail/' + abbr ;
+        window.location = props.urlForSeach +'/' +abbr ;
     }
+ 
     return (
         <div class="flex justify-center">
             <div class="pt-10 w-3/4 sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3">
@@ -34,5 +38,6 @@ function Searchbar() {
         </div>
     );
 }
+
 
 export default Searchbar;

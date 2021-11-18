@@ -1,10 +1,13 @@
 import IMAGES from "./IMAGES";
 import Searchbar from "./Searchbar";
+import { useState } from "react";
 
 import BackgroundBanner from "../src/styles/BackgroundBanner.css";
 
 
-function SearchBanner() {
+function SearchBanner(props) {
+    
+    //  const [urlForSeach,setUrlForSeach] = useState('/subject');
     
     return (
 
@@ -29,7 +32,7 @@ function SearchBanner() {
                 <div class="pt-36 text-center font-bold text-3xl sm:text-3xl lg:text-4xl">
                     Search Subject
                 </div>
-                <Searchbar  />
+                <Searchbar urlForSeach={props.urlForSeach} />
             </div>
         </div>
         

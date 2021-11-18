@@ -23,7 +23,7 @@ ReactDOM.render(
                 <Route path="/" exact>
                     <HomePage />
                 </Route>
-                <Route path="/subject">
+                <Route path={"/subject"||"/subject/:search"}>
                     <SubjectPage />
                 </Route>
                 {/* <Route path="/review">

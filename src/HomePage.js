@@ -16,6 +16,7 @@ function HomePage() {
     const [allComments, setAllComments] = useState([]);
     const [page, setPage] = useState(2);
     const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
+    const [urlForSeach,setUrlForSeach] = useState('/subject');
 
     const loadData = () =>{
         let url = backendURL + '/api/reviews/page/1/size/10' ;
@@ -64,8 +65,8 @@ function HomePage() {
     return (
         <div className="HomePage">
             <Navbar />
-            <Banner />
-            <TopicHome />
+            <Banner urlForSeach={urlForSeach} />
+            <TopicHome  />
             <Scroll showBelow={250} />
             {reviewList()}
             <Footer />
