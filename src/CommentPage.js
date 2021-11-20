@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import FooterEmpty from './FooterEmpty';
 import Scroll from './ReturntotopButton.js';
 
-function CommentPage() {
+function CommentPage(props) {
 
     function LikePost() {
         const like_btn = document.querySelector('.like_btn');
@@ -33,6 +33,7 @@ function CommentPage() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    
     return (
 
         <div class="flex flex-col h-screen">
@@ -53,7 +54,7 @@ function CommentPage() {
             <div class="flex-grow">
                 <div class="grid grid-row-2 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-1/2">
                     <div class="flex justify-end mt-6 mr-4 sm:mr-0">
-                        <a /* href={'/edit/' + props.data._id} key={props.data._id} */ class="cursor-pointer py-3 px-6 font-semibold text-white bg-gray-400 rounded-full shadow-md hover:bg-gray-500 transition duration-300">Edit</a>
+                        <a href={'/edit/' + props.data._id} key={props.data._id} class="cursor-pointer py-3 px-6 font-semibold text-white bg-gray-400 rounded-full shadow-md hover:bg-gray-500 transition duration-300">Edit</a>
                         <button /* href="" key="" */ onClick={handleOpen} class="cursor-pointer ml-2 py-3 px-4 font-semibold text-white bg-red-500 rounded-full shadow-md hover:bg-red-600 transition duration-300">Delete</button>
                         <Modal
                             open={open}
@@ -95,19 +96,15 @@ function CommentPage() {
                                         <input class="w-full absolute z-10 cursor-pointer opacity-0 h-10 top-52 md:h-28 md:top-0" type="checkbox" id="chck1" />
                                         <header class="md:flex justify-between items-center p-6 sm:p-8 cursor-pointer select-none tab-label" for="chck1">
                                             <div class="flex font-semibold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-2 mb-4 md:mb-0 flex items-center justify-center">
-                                                {/* {props.data.reviewedSubject.subject_abbr} */}
-                                                GEN111
+                                                {props.data.reviewedSubject.subject_abbr}
                                             </div>
                                             <div class="rounded-l-full w-full px-1 md:pl-6 text-black">
-                                                {/* <p class="text-lg font-semibold">{props.data.reviewedSubject.subject_name}</p>
-                                            <p class="text-md text-gray-400">({props.data.reviewedSubject.subject_abbr})</p> */}
-                                                <p class="text-lg font-semibold">GEN ad d asdj asdk jaskdj askd askdj aklsjd</p>
-                                                <p class="text-md text-gray-400">(GEN ad d asdj asdk jaskdj askd askdj aklsjd)</p>
+                                                <p class="text-lg font-semibold">{props.data.reviewedSubject.subject_name}</p>
+                                                <p class="text-md text-gray-400">({props.data.reviewedSubject.subject_abbr})</p>
                                             </div>
                                             <div class="flex font-bold pr-9 mt-4 md:mt-0">
                                                 <span class="text-lg bg-white text-yellow-600 px-4 py-2 shadow-lg border-2 border-yellow-400 rounded-full">
-                                                    {/* {props.data.grade_received} */}
-                                                    B+
+                                                    {props.data.grade_received}
                                                 </span>
                                             </div>
                                             <div class="flex rounded-full border border-grey mx-auto mt-4 md:mt-0 w-1/2 md:w-10 h-7 items-center justify-center test">
@@ -119,32 +116,27 @@ function CommentPage() {
                                             </div>
                                         </header>
                                         <div class="pb-8 px-6 sm:pl-10 sm:pr-10 md:pl-44 md:pr-24">
-                                            {/* {`${props.data.review_detail}`} */}
-                                            asdf ad fjasdjafjaljskdf asldjf alsdjf asf asldfh asdf as hasjdfh asjdfh alsdfh asjdfh asdf hasjdf hasjd fhasjd hasjdfh asjdhf asj
+                                            {`${props.data.review_detail}`}
                                         </div>
                                         <div class="tab-content">
                                             <div class="pl-6 md:pl-40 pr-8 pb-6 text-grey-darkest">
                                                 <div class="">
                                                     <div class="flex">
                                                         <div class="pb-8 pr-4 font-semibold sm:pl-4">Section:</div>
-                                                        {/* <div>{props.data.section}</div> */}
-                                                        <div>15</div>
+                                                        <div>{props.data.section}</div>
                                                     </div>
                                                     <div class="grid grid-cols-3 md:grid-cols-2 grid-rows-3 gap-1 sm:pl-4">
                                                         <div class="pb-1 font-semibold col-span-2 md:col-span-1">Teaching:</div>
                                                         <div class="flex space-x-1">
-                                                            {/* {props.data.teacher_rating}/5 */}
-                                                            5/5
+                                                            {props.data.teacher_rating}/5
                                                         </div>
                                                         <div class="pb-1 font-semibold col-span-2 md:col-span-1">Bring knowledge to use:</div>
                                                         <div class="flex space-x-1">
-                                                            {/* {props.data.usefulness_rating}/5 */}
-                                                            4/5
+                                                            {props.data.usefulness_rating}/5
                                                         </div>
                                                         <div class="pb-1 font-semibold col-span-2 md:col-span-1">Partipation:</div>
                                                         <div class="flex space-x-1">
-                                                            {/* {props.data.participation_rating}/5 */}
-                                                            3/5
+                                                            {props.data.participation_rating}/5
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,14 +156,14 @@ function CommentPage() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="like_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                                         <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                                                     </svg>
-                                                    <input type="number" id="like_count" /* value={props.data.like_rating} */ value="5" class="like_input z-10 pl-2 w-10"></input>
+                                                    <input type="number" id="like_count" value={props.data.like_rating} class="like_input z-10 pl-2 w-10"></input>
                                                 </label>
                                                 <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-red-50 transition duration-100">
                                                     <input type="checkbox" onClick={DislikePost} class="dislike_btn dislike_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="dislike_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                                         <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
                                                     </svg>
-                                                    <input type="number" id="dislike_count" /* value={props.data.dislike_rating} */ value="1" class="like_input z-10 pl-2 w-10"></input>
+                                                    <input type="number" id="dislike_count" value={props.data.dislike_rating} class="like_input z-10 pl-2 w-10"></input>
                                                 </label>
                                             </div>
                                         </header>

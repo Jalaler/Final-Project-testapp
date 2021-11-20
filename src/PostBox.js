@@ -4,7 +4,6 @@ import axios from 'axios';
 import EditPage from "./EditPage";
 import { Link } from "react-router-dom";
 import LikeCheckbox from '../src/styles/LikeCheckbox.css';
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
