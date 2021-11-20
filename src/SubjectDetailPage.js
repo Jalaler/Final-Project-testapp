@@ -95,11 +95,12 @@ function SubjectDetailPage() {
                     </div>
                 </div>
             </div>
-            <div class="flex grid grid-cols-2 mt-14 mb-10 mx-8 w-5/6 md:w-3/4 lg:w-2/3 sm:mx-auto">
+            <div class="flex grid grid-cols-2 mt-14 mb-10 mx-8 w-5/6 md:w-3/4 lg:w-2/3 mx-auto">
                 <div class="flex items-center font-bold text-xl md:text-2xl">
                     Review of this course
                 </div>
                 <div class="flex items-center justify-end">
+                    <img src="https://cdn-icons-png.flaticon.com/512/617/617502.png" class="mr-6 w-9 h-9 cursor-pointer hidden sm:block" />
                     <a href={"/review/" + abbr} class="px-6 py-4 md:px-8 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Write Review!</a>
                 </div>
             </div>

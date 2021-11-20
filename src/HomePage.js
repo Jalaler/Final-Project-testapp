@@ -60,8 +60,8 @@ function HomePage() {
             return <PostBox data={currentPost} currentUser={currentUser} />
         })
     }
-    
-    
+
+
     return (
         <div className="HomePage">
             <Navbar />

@@ -1,8 +1,12 @@
 import IMAGES from "./IMAGES";
+import Navbar from "./Navbar";
 
 function ErrorPage() {
     return (
         <div class="flex flex-col justify-center min-h-screen">
+            <div class="hidden">
+                <Navbar />
+            </div>
             <div class="flex justify-center">
                 <img class="w-20 h-20 animate-bounce" src={IMAGES.SmallAnt} />
             </div>
