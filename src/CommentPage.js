@@ -39,14 +39,16 @@ function CommentPage() {
             <Navbar />
             <Scroll showBelow={250} />
 
-            <NavLink exact activeClassName="active" to='/' class="pl-8 sm:pl-0 flex items-center space-x-2 text-gray-400 hover:text-gray-500 cursor-pointer transition duration-100 pt-28 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
-                <p class="text-md font-semibold">
-                    Back
-                </p>
-            </NavLink>
+            <div class="flex pl-8 sm:pl-0 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-1/2">
+                <NavLink exact activeClassName="active" to='/' class="flex items-center space-x-2 text-gray-400 hover:text-gray-500 cursor-pointer transition duration-100 pt-28">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="text-md font-semibold">
+                        Back
+                    </p>
+                </NavLink>
+            </div>
 
             <div class="flex-grow">
                 <div class="grid grid-row-2 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-1/2">

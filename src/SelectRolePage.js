@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Navbar from './Navbar.js';
 
 function SelectRolePage() {
 
@@ -18,6 +19,9 @@ function SelectRolePage() {
     return (
 
         <div>
+            <div class="hidden">
+                <Navbar />
+            </div>
             <img src={IMAGES.Orange1} class="absolute z-40 hidden md:block md:w-36 lg:w-44 pt-10" />
             <img src={IMAGES.Orange2} class="absolute z-40 hidden md:block md:w-36 lg:w-40 bottom-0 right-0" />
             <div class="min-h-screen bg-gradient-to-t from-yellow-200 to-yellow-50 flex flex-col justify-center">
