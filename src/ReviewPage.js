@@ -14,7 +14,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Input } from '@material-ui/core';
-import {useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from "react-router";
 import backendURL from "./URL";
 
@@ -33,7 +33,6 @@ function ReviewPage() {
         let semester = document.getElementById('Semester').value;
         let student_id = document.getElementById('student_Id').value;
         let subject_id = document.getElementById('subject_id').value;
-
 
         let grade_received;
         for (let index = 0; index < gradeReceiveInput.length; index++) {
@@ -84,8 +83,8 @@ function ReviewPage() {
             force: true
         }
         return review;
-
     }
+
     const [sub, setSub] = useState({});
     const [allStudentReview, setAllStudentReview] = useState([]);
     const {abbr} =useParams();
@@ -105,15 +104,19 @@ function ReviewPage() {
             .then(res => console.log.res.data)
             .catch(err => console.log(err.message));
 
-        setAllStudentReview((prevAllStudentReview) => {
-            return [...prevAllStudentReview, getValue];
-        });
+            axios.post(backendURL + '/api/reviews', newReview)
+                .then(res => console.log.res.data)
+                .catch(err => console.log(err.message));
 
-        setTimeout(function () {
-            window.location = '/';
-        }, 2000);
+            setAllStudentReview((prevAllStudentReview) => {
+                return [...prevAllStudentReview, getValue];
+            });
 
-        setOpen(true);
+            setTimeout(function () {
+                window.location = '/';
+            }, 2000);
+
+            setOpen(true);
 
         } else {
             return false;
@@ -142,8 +145,8 @@ function ReviewPage() {
     const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
-        axios.get(backendURL + '/api/subjects/'+abbr)
-        .then(res => {
+        axios.get(backendURL + '/api/subjects/' + abbr)
+            .then(res => {
                 setSub(res.data)
             
         })
@@ -155,7 +158,7 @@ function ReviewPage() {
         .catch(err => console.log(err))
     }, []);
 
-    
+
     return (
         <div className="ReviewPage">
             <Navbar />

@@ -15,6 +15,8 @@ import EditPage from './EditPage';
 import SelectRolePage from './SelectRolePage';
 import ErrorPage from './ErrorPage';
 import SubjectPageForSearch from './SubjectPageForSearch';
+import CommentPage from './CommentPage';
+import ReportPage from './ReportPage';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -48,6 +50,12 @@ ReactDOM.render(
                 </Route>
                 <Route path="/404">
                     <ErrorPage />
+                </Route>
+                <Route path="/comment">
+                    <CommentPage />
+                </Route>
+                <Route path="/report">
+                    <ReportPage />
                 </Route>
             </Switch>
         </BrowserRouter>
