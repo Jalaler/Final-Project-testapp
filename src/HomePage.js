@@ -57,7 +57,7 @@ function HomePage() {
     const reviewList = () => {
         
         return data.map(currentPost => {
-            return <PostBox data={currentPost} currentUser={currentUser} />
+            return <PostBox data={currentPost} currentUser={currentUser} his={0} />
         })
     }
     

@@ -16,6 +16,7 @@ function HistoryPage() {
     const [data, setData] = useState([]);
     const { studentId } = useParams();
     const [currentUser, setCurrentUser] = useState({});
+    
 
     useEffect(() => {
 
@@ -37,7 +38,7 @@ function HistoryPage() {
 
     const historyList = () => {
         return data.map(currentPost => {
-            return <PostBox data={currentPost} />
+            return <PostBox data={currentPost} his={true} />
         })
     }
 
