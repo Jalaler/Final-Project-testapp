@@ -51,7 +51,7 @@ ReactDOM.render(
                 <Route path="/404">
                     <ErrorPage />
                 </Route>
-                <Route path="/comment">
+                <Route path="/comment/:basePost">
                     <CommentPage />
                 </Route>
                 <Route path="/report">

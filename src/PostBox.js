@@ -7,10 +7,10 @@ import LikeCheckbox from '../src/styles/LikeCheckbox.css';
 import backendURL from "./URL";
 import Modal from '@material-ui/core/Modal';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+// import Modal from '@mui/material/Modal';
 
 
 function PostBox(props) {
@@ -194,7 +194,7 @@ function PostBox(props) {
 
                             <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
                                 <header class="flex items-center p-4 pl-8 pr-8 select-none">
-                                    <a href="/comment" class="px-3 py-1 bg-gray-100 bg-opacity-75 hover:bg-gray-200 hover:bg-opacity-75 font-semibold rounded-full shadow-md transition duration-100">
+                                    <a href={"/comment/"+props.data._id} class="px-3 py-1 bg-gray-100 bg-opacity-75 hover:bg-gray-200 hover:bg-opacity-75 font-semibold rounded-full shadow-md transition duration-100">
                                         2 Comments
                                     </a>
                                     <div class="flex items-center absolute right-0 pr-4">
