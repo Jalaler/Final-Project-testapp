@@ -1,15 +1,15 @@
 
-function SubjectReportList() {
+function SubjectReportList(props) {
     return (
         <div class="bg-yellow-50 border-2 border-yellow-300 rounded-xl shadow-lg">
             <div class="py-3 px-3">
                 <div class="font-bold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-4 py-2 flex items-center justify-center">
                     {/* {lists.subject_abbr} */}
-                    GEN123
+                    {props.subject.subject_abbr}
                 </div>
                 <div class="rounded-l-full w-full py-3 md:py-4 px-4 text-black">
                     {/* <p class="text-lg font-semibold">{lists.subject_name}</p> */}
-                    <p class="text-md font-bold">GEN asldk al;ksd a;ks;dlk asjdk ahjsd aksd</p>
+                    <p class="text-md font-bold">{props.subject.subject_name}</p>
                 </div>
                 <div class="flex pt-3 justify-center">
                     <div class="grid grid-cols-3 grid-rows-4 gap-x-2 sm:gap-x-4 gap-y-1 mx-4">

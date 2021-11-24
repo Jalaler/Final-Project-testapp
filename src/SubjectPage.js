@@ -9,6 +9,7 @@ import axios from "axios";
 import backendURL from "./URL";
 import { useParams } from "react-router";
 import { easing } from "@material-ui/core";
+import useInfiniteScroll from './useInfiniteScroll.js';
 
 function SubjectPage() {
 
@@ -16,9 +17,32 @@ function SubjectPage() {
     const [currentUser, setCurrentUser] = useState({});
     const [urlForSeach,setUrlForSeach] = useState('/subjectsearch');
     const {search} = useParams();
+    const [page, setPage] = useState(2);
+    const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
+
+    const loadData = () => {
+        let url = backendURL + '/api/subjects/page/1/size/10';
+        axios.get(url, { withCredentials: true }).then(res => {
+            if (res.data.length > 0) {
+                setSubject(res.data)
+                console.log(res.data)
+            }
+        })
+            .catch(err => console.log(err))
+    }
+
+    function moreData() {
+        let url = backendURL + `/api/subjects/page/${page}/size/10`;
+        axios.get(url, { withCredentials: true }).then(res => {
+            setSubject([...subject, ...res.data]);
+            setPage(page + 1)
+            setIsFetching(false)
+        });
+    }
+    
     useEffect(() => {
-        
-        getSubject();
+
+        loadData();
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
@@ -29,16 +53,6 @@ function SubjectPage() {
 
     }, []);
 
-    function getSubject(){
-        
-            axios.get(backendURL + '/api/subjects')
-                .then((response) => {
-                    setSubject(response.data);
-                    console.log(response.data);
-                });
-                         
-
-    }
 
     if (!subject) return null;
 

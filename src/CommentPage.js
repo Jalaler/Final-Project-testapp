@@ -44,6 +44,7 @@ function CommentPage() {
     const { basePost } = useParams();
     const [page, setPage] = useState(2);
     const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
+    const [loading, setLoading] = useState(true);
 
     const loadData = () => {
         let url = backendURL + '/api/comments/post/' + basePost + '/page/1/size/10';
@@ -67,13 +68,28 @@ function CommentPage() {
 
     useEffect(() => {
 
-        
-        axios.get(backendURL + '/api/reviews/' + basePost)
-            .then(res => {
-                setdata(res.data)
-                console.log(res.data)
-            })
-            .catch(err => console.log(err))
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                axios.get(backendURL + '/api/reviews/' + basePost)
+                .then(res => {
+                    setdata(res.data)
+                    console.log(res.data)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+            setTimeout(()=>{setLoading(false);},100)
+            // setLoading(false);
+        }
+
+        fetchData();
+        // axios.get(backendURL + '/api/reviews/' + basePost)
+        //     .then(res => {
+        //         setdata(res.data)
+        //         console.log(res.data)
+        //     })
+        //     .catch(err => console.log(err))
 
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
@@ -81,6 +97,7 @@ function CommentPage() {
                 console.log(res.data)
             })
             .catch(err => console.log(err))
+
         loadData();
 
 
@@ -115,10 +132,12 @@ function CommentPage() {
     // }
     function myFunction() {
         alert("Page is loaded");
-      }
+    }
 
     return (
-
+        <div>
+        {loading && <div>Loading</div>}
+        { !loading && (
         <div class="flex flex-col h-screen" >
 
             <Navbar />
@@ -135,7 +154,7 @@ function CommentPage() {
                     </p>
                 </NavLink>
             </div>
-
+            
             <div class="flex-grow" >
                 <div class="grid grid-row-2 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-1/2">
                     <div class="flex justify-end mt-6 mr-4 sm:mr-0">
@@ -173,128 +192,129 @@ function CommentPage() {
                             </div>
                         </Modal>
                     </div>
+                    
+                        <main class="pt-3 pb-8 bg-white">
+                            <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
+                                <div class="tabs">
+                                    <div class="border-b tab">
+                                        <div class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
 
-                    <main class="pt-3 pb-8 bg-white" onLoadedData={myFunction()} >
-                        <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
-                            <div class="tabs">
-                                <div class="border-b tab">
-                                    <div class="border-l-4 border-t-4 border-r-4 border-yellow-400 border-opacity-50 rounded-t-xl border-transparent relative">
+                                            <input class="w-full absolute z-10 cursor-pointer opacity-0 h-10 top-52 md:h-28 md:top-0" type="checkbox" id="chck1" />
+                                            <header class="md:flex justify-between items-center p-6 sm:p-8 cursor-pointer select-none tab-label" for="chck1">
+                                                <div class="flex font-semibold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-2 mb-4 md:mb-0 flex items-center justify-center">
+                                                    {data.reviewedSubject.subject_abbr}
+                                                </div>
+                                                <div class="rounded-l-full w-full px-1 md:pl-6 text-black">
+                                                    <p class="text-lg font-semibold">{data.reviewedSubject.subject_name}</p>
+                                                    <p class="text-md text-gray-400">({data.reviewedSubject.subject_abbr})</p>
+                                                </div>
+                                                <div class="flex font-bold pr-9 mt-4 md:mt-0">
+                                                    <span class="text-lg bg-white text-yellow-600 px-4 py-2 shadow-lg border-2 border-yellow-400 rounded-full">
+                                                        {data.grade_received}
+                                                    </span>
+                                                </div>
+                                                <div class="flex rounded-full border border-grey mx-auto mt-4 md:mt-0 w-1/2 md:w-10 h-7 items-center justify-center test">
+                                                    {/* <!-- icon by feathericons.com --> */}
+                                                    <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                                        <polyline points="6 9 12 15 18 9">
+                                                        </polyline>
+                                                    </svg>
+                                                </div>
+                                            </header>
 
-                                        <input class="w-full absolute z-10 cursor-pointer opacity-0 h-10 top-52 md:h-28 md:top-0" type="checkbox" id="chck1" />
-                                        <header  class="md:flex justify-between items-center p-6 sm:p-8 cursor-pointer select-none tab-label" for="chck1">
-                                            <div class="flex font-semibold text-lg bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-2 mb-4 md:mb-0 flex items-center justify-center">
-                                                {data.reviewedSubject.subject_abbr}
+                                            <div class="pb-8 px-6 sm:pl-10 sm:pr-10 md:pl-44 md:pr-24">
+                                                {`${data.review_detail}`}
                                             </div>
-                                            <div  class="rounded-l-full w-full px-1 md:pl-6 text-black">
-                                                <p class="text-lg font-semibold">{data.reviewedSubject.subject_name}</p>
-                                                <p class="text-md text-gray-400">({data.reviewedSubject.subject_abbr})</p>
-                                            </div>
-                                            <div class="flex font-bold pr-9 mt-4 md:mt-0">
-                                                <span class="text-lg bg-white text-yellow-600 px-4 py-2 shadow-lg border-2 border-yellow-400 rounded-full">
-                                                    {data.grade_received}
-                                                </span>
-                                            </div>
-                                            <div class="flex rounded-full border border-grey mx-auto mt-4 md:mt-0 w-1/2 md:w-10 h-7 items-center justify-center test">
-                                                {/* <!-- icon by feathericons.com --> */}
-                                                <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                    <polyline points="6 9 12 15 18 9">
-                                                    </polyline>
-                                                </svg>
-                                            </div>
-                                        </header>
-
-                                        <div class="pb-8 px-6 sm:pl-10 sm:pr-10 md:pl-44 md:pr-24">
-                                            {`${data.review_detail}`}
-                                        </div>
-                                        <div class="tab-content">
-                                            <div class="pl-6 md:pl-40 pr-8 pb-6 text-grey-darkest">
-                                                <div class="">
-                                                    <div class="flex">
-                                                        <div class="pb-8 pr-4 font-semibold sm:pl-4">Section:</div>
-                                                        <div>{data.section}</div>
-                                                    </div>
-                                                    <div class="grid grid-cols-3 md:grid-cols-2 grid-rows-3 gap-1 sm:pl-4">
-                                                        <div class="pb-1 font-semibold col-span-2 md:col-span-1">Teaching:</div>
-                                                        <div class="flex space-x-1">
-                                                            {data.teacher_rating}/5
+                                            <div class="tab-content">
+                                                <div class="pl-6 md:pl-40 pr-8 pb-6 text-grey-darkest">
+                                                    <div class="">
+                                                        <div class="flex">
+                                                            <div class="pb-8 pr-4 font-semibold sm:pl-4">Section:</div>
+                                                            <div>{data.section}</div>
                                                         </div>
-                                                        <div class="pb-1 font-semibold col-span-2 md:col-span-1">Bring knowledge to use:</div>
-                                                        <div class="flex space-x-1">
-                                                            {data.usefulness_rating}/5
-                                                        </div>
-                                                        <div class="pb-1 font-semibold col-span-2 md:col-span-1">Partipation:</div>
-                                                        <div class="flex space-x-1">
-                                                            {data.participation_rating}/5
+                                                        <div class="grid grid-cols-3 md:grid-cols-2 grid-rows-3 gap-1 sm:pl-4">
+                                                            <div class="pb-1 font-semibold col-span-2 md:col-span-1">Teaching:</div>
+                                                            <div class="flex space-x-1">
+                                                                {data.teacher_rating}/5
+                                                            </div>
+                                                            <div class="pb-1 font-semibold col-span-2 md:col-span-1">Bring knowledge to use:</div>
+                                                            <div class="flex space-x-1">
+                                                                {data.usefulness_rating}/5
+                                                            </div>
+                                                            <div class="pb-1 font-semibold col-span-2 md:col-span-1">Partipation:</div>
+                                                            <div class="flex space-x-1">
+                                                                {data.participation_rating}/5
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="border-t-2 border-b-4 border-l-4 border-r-4 border-yellow-400 border-opacity-50 rounded-b-xl bg-yellow-300 bg-opacity-5">
-                                    <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
-                                        <header class="flex items-center p-5 pl-8 pr-8 select-none">
-                                            <div class="font-semibold">
-                                                2 Comments
-                                            </div>
-                                            <div class="flex items-center absolute right-0 pr-4">
-                                                <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-blue-50 transition duration-100">
-                                                    <input type="checkbox" onClick={LikePost} class="like_btn like_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="like_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                                                    </svg>
-                                                    <input type="number" id="like_count" value={data.like_rating} class="like_input z-10 pl-2 w-10"></input>
-                                                </label>
-                                                <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-red-50 transition duration-100">
-                                                    <input type="checkbox" onClick={DislikePost} class="dislike_btn dislike_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="dislike_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
-                                                    </svg>
-                                                    <input type="number" id="dislike_count" value={data.dislike_rating} class="like_input z-10 pl-2 w-10"></input>
-                                                </label>
-                                            </div>
-                                        </header>
-                                    </div>
-                                    <div class="pt-6 pl-6 sm:pl-10 md:pl-14 pb-6 font-bold border-t-2 border-yellow-400 border-opacity-50 border-transparent relative">
-                                        Comments
-                                    </div>
-                                    {
-                                        allComments.map(com => (
-                                            <div class="relative">
-                                                <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
-                                                    <div class="flex flex-row justify-center p-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    <div class="border-t-2 border-b-4 border-l-4 border-r-4 border-yellow-400 border-opacity-50 rounded-b-xl bg-yellow-300 bg-opacity-5">
+                                        <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
+                                            <header class="flex items-center p-5 pl-8 pr-8 select-none">
+                                                <div class="font-semibold">
+                                                    2 Comments
+                                                </div>
+                                                <div class="flex items-center absolute right-0 pr-4">
+                                                    <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-blue-50 transition duration-100">
+                                                        <input type="checkbox" onClick={LikePost} class="like_btn like_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="like_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                                                         </svg>
-                                                        <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">{com.commenter.displayName}</h3>
-                                                    </div>
-                                                    <p class="text-gray-600 text-md text-left pt-2 pl-1"> {com.comment_detail} </p>
+                                                        <input type="number" id="like_count" value={data.like_rating} class="like_input z-10 pl-2 w-10"></input>
+                                                    </label>
+                                                    <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-red-50 transition duration-100">
+                                                        <input type="checkbox" onClick={DislikePost} class="dislike_btn dislike_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="dislike_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+                                                        </svg>
+                                                        <input type="number" id="dislike_count" value={data.dislike_rating} class="like_input z-10 pl-2 w-10"></input>
+                                                    </label>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            </header>
+                                        </div>
+                                        <div class="pt-6 pl-6 sm:pl-10 md:pl-14 pb-6 font-bold border-t-2 border-yellow-400 border-opacity-50 border-transparent relative">
+                                            Comments
+                                        </div>
+                                        {
+                                            allComments.map(com => (
+                                                <div class="relative">
+                                                    <div class="mx-6 md:mx-20 bg-white rounded-lg p-3 flex flex-col justify-center items-start shadow-lg mb-4">
+                                                        <div class="flex flex-row justify-center p-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 bg-yellow-100 p-2 rounded-full" viewBox="0 0 20 20" fill="currentColor">
+                                                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                                            </svg>
+                                                            <h3 class="text-yellow-600 font-semibold text-md text-left pl-2 pt-1">{com.commenter.displayName}</h3>
+                                                        </div>
+                                                        <p class="text-gray-600 text-md text-left pt-2 pl-1"> {com.comment_detail} </p>
+                                                    </div>
+                                                </div>
+                                            ))}
 
-                                    <div class="flex justify-center items-center mt-8 mx-6 md:mx-20">
-                                        <textarea class="pt-2 pb-2 px-4 w-full h-20 border-2 border-gray-300 rounded-xl focus:border-yellow-300 focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-200" id="comment" type="text" placeholder="Comment..."></textarea>
-                                        <label for="comment" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Comment...</label>
-                                    </div>
-                                    <div class="flex justify-end pr-6 md:pr-20 pt-2 pb-7">
-                                        <button onClick={commentsPost} class="cursor-pointer py-2 px-4 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Comment</button>
+                                        <div class="flex justify-center items-center mt-8 mx-6 md:mx-20">
+                                            <textarea class="pt-2 pb-2 px-4 w-full h-20 border-2 border-gray-300 rounded-xl focus:border-yellow-300 focus:outline-none focus:bg-white focus:ring-2 focus:ring-yellow-200" id="comment" type="text" placeholder="Comment..."></textarea>
+                                            <label for="comment" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Comment...</label>
+                                        </div>
+                                        <div class="flex justify-end pr-6 md:pr-20 pt-2 pb-7">
+                                            <button onClick={commentsPost} class="cursor-pointer py-2 px-4 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Comment</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
-                    </main>
-
+                            </section>
+                        </main>
+                   
                 </div>
             </div>
-
+                                               
             <footer>
                 <FooterEmpty />
             </footer>
 
         </div>
-
+        )}  
+        </div>
     );
 
 }

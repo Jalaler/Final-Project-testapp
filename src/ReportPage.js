@@ -2,8 +2,58 @@ import FooterEmpty from "./FooterEmpty";
 import Navbar from "./Navbar";
 import Scroll from "./ReturntotopButton";
 import SubjectReportList from "./SubjectReportList";
+import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import backendURL from './URL';
+import useInfiniteScroll from './useInfiniteScroll.js';
 
 function ReportPage() {
+
+    const [subject, setSubject] = useState([]);
+    const [page, setPage] = useState(2);
+    const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
+    const [currentUser, setCurrentUser] = useState({});
+
+    const loadData = () => {
+        let url = backendURL + '/api/subjects/page/1/size/10';
+        axios.get(url, { withCredentials: true }).then(res => {
+            if (res.data.length > 0) {
+                setSubject(res.data)
+                console.log(res.data)
+            }
+        })
+            .catch(err => console.log(err))
+    }
+
+    function moreData() {
+        let url = backendURL + `/api/subjects/page/${page}/size/10`;
+        axios.get(url, { withCredentials: true }).then(res => {
+            setSubject([...subject, ...res.data]);
+            setPage(page + 1)
+            setIsFetching(false)
+        });
+    }
+
+    useEffect(() => {
+        
+        loadData()
+
+        axios.get(backendURL + '/api/users/current', { withCredentials: true })
+            .then(res => {
+                setCurrentUser(res.data)
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
+    }, []);
+
+    const subjectList = () => {
+
+        return subject.map(currentSubject => {
+            return <SubjectReportList subject={currentSubject} currentUser={currentUser} />
+        })
+    }
+
+
     return (
         <div>
             <Navbar />
@@ -19,11 +69,12 @@ function ReportPage() {
                 </a>
             </div>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
+               {subjectList()}
+                {/* <SubjectReportList />
                 <SubjectReportList />
                 <SubjectReportList />
                 <SubjectReportList />
-                <SubjectReportList />
-                <SubjectReportList />
+                <SubjectReportList /> */}
             </div>
             <FooterEmpty />
         </div>
