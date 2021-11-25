@@ -94,8 +94,7 @@ function PostBox(props) {
 
     return (
         <div class="grid grid-row-2 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-1/2">
-            {/* <script>
-                 if ({props.his==true}) { */}
+                {props.his && (
                     <div class="flex justify-end mt-10 mr-4 sm:mr-0">
                         <a href={'/edit/' + props.data._id} key={props.data._id} class="cursor-pointer py-3 px-6 font-semibold text-white bg-gray-400 rounded-full shadow-md hover:bg-gray-500 transition duration-300">Edit</a>
                         <button /* href="" key="" */ onClick={handleOpen} class="cursor-pointer ml-2 py-3 px-4 font-semibold text-white bg-red-500 rounded-full shadow-md hover:bg-red-600 transition duration-300">Delete</button>
@@ -131,8 +130,8 @@ function PostBox(props) {
                             </div>
                         </Modal>
                     </div>
-                 {/* } 
-            </script> */}
+                )}
+                {!props.his && <div></div>}
             <main class="pt-3 pb-8 bg-white">
                 <section class="shadow-lg row rounded-xl bg-yellow-100 bg-opacity-5">
                     <div class="tabs">

@@ -243,7 +243,7 @@ function CommentPage() {
                                         <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
                                             <header class="flex items-center p-5 pl-8 pr-8 select-none">
                                                 <div class="font-semibold">
-                                                    2 Comments
+                                                     Comments
                                                 </div>
                                                 <div class="flex items-center absolute right-0 pr-4">
                                                     <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-blue-50 transition duration-100">
