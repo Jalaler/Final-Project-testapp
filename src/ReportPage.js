@@ -11,11 +11,11 @@ function ReportPage() {
 
     const [subject, setSubject] = useState([]);
     const [page, setPage] = useState(2);
-    const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
+    // const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
     const [currentUser, setCurrentUser] = useState({});
 
     const loadData = () => {
-        let url = backendURL + '/api/subjects/page/1/size/10';
+        let url = backendURL + '/api/subjects/ratings/avg';
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setSubject(res.data)
@@ -25,14 +25,14 @@ function ReportPage() {
             .catch(err => console.log(err))
     }
 
-    function moreData() {
-        let url = backendURL + `/api/subjects/page/${page}/size/10`;
-        axios.get(url, { withCredentials: true }).then(res => {
-            setSubject([...subject, ...res.data]);
-            setPage(page + 1)
-            setIsFetching(false)
-        });
-    }
+    // function moreData() {
+    //     let url = backendURL + `/api/subjects/page/${page}/size/10`;
+    //     axios.get(url, { withCredentials: true }).then(res => {
+    //         setSubject([...subject, ...res.data]);
+    //         setPage(page + 1)
+    //         setIsFetching(false)
+    //     });
+    // }
 
     useEffect(() => {
         
