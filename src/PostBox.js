@@ -195,7 +195,7 @@ function PostBox(props) {
                             <div class="flex border-yellow-400 border-opacity-50 border-transparent relative">
                                 <header class="flex items-center p-4 pl-8 pr-8 select-none">
                                     <a href={"/comment/"+props.data._id} class="px-3 py-1 bg-gray-100 bg-opacity-75 hover:bg-gray-200 hover:bg-opacity-75 font-semibold rounded-full shadow-md transition duration-100">
-                                        2 Comments
+                                         Comments
                                     </a>
                                     <div class="flex items-center absolute right-0 pr-4">
                                         <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-blue-50 transition duration-100">

@@ -80,16 +80,10 @@ function CommentPage() {
                 console.log(error)
             }
             setTimeout(()=>{setLoading(false);},100)
-            // setLoading(false);
         }
 
         fetchData();
-        // axios.get(backendURL + '/api/reviews/' + basePost)
-        //     .then(res => {
-        //         setdata(res.data)
-        //         console.log(res.data)
-        //     })
-        //     .catch(err => console.log(err))
+        
 
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
@@ -126,13 +120,7 @@ function CommentPage() {
 
         window.location.reload();
     }
-    // function lodePage(){
-    //     delay
 
-    // }
-    function myFunction() {
-        alert("Page is loaded");
-    }
 
     return (
         <div>

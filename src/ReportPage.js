@@ -70,11 +70,6 @@ function ReportPage() {
             </div>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
                {subjectList()}
-                {/* <SubjectReportList />
-                <SubjectReportList />
-                <SubjectReportList />
-                <SubjectReportList />
-                <SubjectReportList /> */}
             </div>
             <FooterEmpty />
         </div>
