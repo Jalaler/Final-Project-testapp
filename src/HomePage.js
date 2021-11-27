@@ -23,7 +23,6 @@ function HomePage() {
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setData(res.data)
-                console.log(res.data)
             }
         })
         .catch(err => console.log(err))
@@ -45,7 +44,6 @@ function HomePage() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
             })
             .catch(err => console.log(err))
     }, []);
@@ -64,6 +62,7 @@ function HomePage() {
 
     return (
         <div className="HomePage">
+            
             <Navbar />
             <Banner urlForSeach={urlForSeach} />
             <TopicHome  />

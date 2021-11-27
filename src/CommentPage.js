@@ -51,7 +51,7 @@ function CommentPage() {
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setAllComments(res.data)
-                console.log(res.data)
+              
             }
         })
             .catch(err => console.log(err))
@@ -74,7 +74,7 @@ function CommentPage() {
                 axios.get(backendURL + '/api/reviews/' + basePost)
                 .then(res => {
                     setdata(res.data)
-                    console.log(res.data)
+                    
                 })
             } catch (error) {
                 console.log(error)
@@ -88,7 +88,7 @@ function CommentPage() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
+                
             })
             .catch(err => console.log(err))
 

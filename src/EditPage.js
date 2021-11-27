@@ -124,7 +124,6 @@ function EditPage(props) {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
             })
             .catch(err => console.log(err))
 

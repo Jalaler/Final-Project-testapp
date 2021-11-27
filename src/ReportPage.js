@@ -19,7 +19,7 @@ function ReportPage() {
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setSubject(res.data)
-                console.log(res.data)
+               
             }
         })
             .catch(err => console.log(err))
