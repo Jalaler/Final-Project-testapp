@@ -8,27 +8,6 @@ import FooterEmpty from "./FooterEmpty";
 
 function CSVPage() {
 
-    const [data, setData] = useState([]);
-    const [sub, setSub] = useState({});
-    const { abbr } = useParams()
-
-    useEffect(() => {
-        axios.get(backendURL + '/api/subjects/' + abbr + '/posts')
-            .then(res => {
-                if (res.data.length > 0) {
-                    setData(res.data)
-                }
-            })
-            .catch(err => console.log(err))
-
-        axios.get(backendURL + '/api/subjects/' + abbr)
-            .then(res => {
-
-                setSub(res.data)
-
-            })
-    }, []);
-
     return (
         <div class="flex flex-col h-screen">
             <Navbar />
@@ -48,19 +27,19 @@ function CSVPage() {
                 </div>
                 <div class="mt-16 sm:mt-32 grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-y-16 sm:gap-2 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
                     <div class="mx-auto">
-                        <a href={backendURL + '/api/subjects/csv/export', { withCredentials: true }} download="mod-checkup-subjects.csv">
+                        <a href={backendURL + '/api/subjects/csv/export'} download="mod-checkup-subjects.csv">
                             <img src="https://cdn-icons-png.flaticon.com/512/617/617502.png" class="w-14 h-14 cursor-pointer mx-auto" />
                         </a>
                         <p class="text-xl font-semibold mt-6 sm:mt-8">Subjects</p>
                     </div>
                     <div class="mx-auto">
-                        <a href={backendURL + '/api/subjects/csv/export', { withCredentials: true }} download="mod-checkup-subjects.csv">
+                        <a href={backendURL + '/api/reviews/csv/export'} download="mod-checkup-subjects.csv">
                             <img src="https://cdn-icons-png.flaticon.com/512/617/617502.png" class="w-14 h-14 cursor-pointer mx-auto" />
                         </a>
                         <p class="text-xl font-semibold mt-6 sm:mt-8">Reviews</p>
                     </div>
                     <div class="mx-auto">
-                        <a href={backendURL + '/api/subjects/csv/export', { withCredentials: true }} download="mod-checkup-subjects.csv">
+                        <a href={backendURL + '/api/comments/csv/export'} download="mod-checkup-subjects.csv">
                             <img src="https://cdn-icons-png.flaticon.com/512/617/617502.png" class="w-14 h-14 cursor-pointer mx-auto" />
                         </a>
                         <p class="text-xl font-semibold mt-6 sm:mt-8">Comments</p>
