@@ -17,6 +17,7 @@ import ErrorPage from './ErrorPage';
 import SubjectPageForSearch from './SubjectPageForSearch';
 import CommentPage from './CommentPage';
 import ReportPage from './ReportPage';
+import CSVPage from './CSVPage';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -56,6 +57,9 @@ ReactDOM.render(
                 </Route>
                 <Route path="/report">
                     <ReportPage />
+                </Route>
+                <Route path="/csv">
+                    <CSVPage />
                 </Route>
             </Switch>
         </BrowserRouter>
