@@ -69,12 +69,12 @@ function SubjectPage() {
             <SearchBanner urlForSeach={urlForSeach}/>
             <Scroll showBelow={250} />
             <main class="flex-grow">
-                <div class="pt-36 md:pt-40 pb-4 md:pb-8 flex justify-around">
+                <div class="pt-36 md:pt-40 pb-4 md:pb-8 flex justify-around items-center">
                     <div class="font-bold text-2xl lg:text-3xl items-center">
                         Subject
                     </div>
-                    <a href="/report" class="flex items-center space-x-2 text-yellow-600 hover:text-yellow-700 transition duration-100">
-                        <div class="font-semibold text-md">
+                    <a href="/report" class="rounded-full bg-yellow-500 shadow-lg hover:bg-yellow-600 py-3 px-5 flex items-center space-x-2 text-white transition duration-100">
+                        <div class="font-semibold text-lg">
                             Report
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
