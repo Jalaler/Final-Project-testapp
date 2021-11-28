@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function Navbar() {
 
     const [open, setOpen] = React.useState(false);
+    const [user,setUser] = useState(false);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -34,6 +35,7 @@ function Navbar() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
+                setUser(true);
             })
             .catch(err => console.log(err))
     }, []);
@@ -42,6 +44,7 @@ function Navbar() {
         axios.get(backendURL + '/api/auth/logout', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
+                setUser(false)
             })
             .catch(err => console.log(err))
         window.location = '/'
@@ -61,8 +64,8 @@ function Navbar() {
                     <li><NavLink activeClassName="active" to='/review/GEN111'>Review</NavLink></li>
                     <li><NavLink activeClassName="active" to={'/history/' + currentUser._id}>History</NavLink></li>
                 </ul>
-                {!currentUser && <LoginButton />}
-                {currentUser &&
+                {!user && <LoginButton />}
+                {user &&
                     <div class="flex">
                         <button class="" id="btn" aria-describedby="tooltip" data-tooltip-text={currentUser.displayName}>
                             <svg xmlns={currentUser.image} class="h-6 w-6 opacity-50" viewBox="0 0 20 20" fill="currentColor">

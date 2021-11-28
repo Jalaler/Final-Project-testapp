@@ -1,10 +1,12 @@
 import IMAGES from './IMAGES.js';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
 import Navbar from './Navbar.js';
 import Modal from '@material-ui/core/Modal';
+import backendURL from './URL';
+import axios from 'axios';
 
 function SelectRolePage() {
 
@@ -15,6 +17,41 @@ function SelectRolePage() {
     const [open2, setOpen2] = React.useState(false);
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false);
+    const [currentUser, setCurrentUser] = useState({});
+    const [selectRole, setSelectRole] = useState([]);
+    useEffect(() => {
+        axios.get(backendURL + '/api/users/current', { withCredentials: true })
+            .then(res => {
+                setCurrentUser(res.data)
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    function roleStudent() {
+        const role = {
+            role : "STUDENT"
+        }
+        axios.put(backendURL + '/api/users/' + currentUser._id + '/student',role, { withCredentials: true })
+            .then(res => console.log.res.data)
+            .catch(err => console.log(err.message));
+        
+
+    }
+
+    function roleTeacher() {
+
+        const role = {
+            role : "TEACHER"
+        }
+    
+        axios.put(backendURL + '/api/users/' + currentUser._id + '/teacher',role, { withCredentials: true })
+            .then(res => console.log.res.data)
+            .catch(err => console.log(err.message));
+            
+
+    }
+
 
     return (
 
@@ -60,7 +97,7 @@ function SelectRolePage() {
                                         <button onClick={handleClose} class="mb-2 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 transition duration-300">
                                             Cancel
                                         </button>
-                                        <a href="/" class="mb-2 bg-green-500 border border-green-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600 transition duration-300">
+                                        <a href="/" class="mb-2 bg-green-500 border border-green-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600 transition duration-300" onClick={roleStudent}>
                                             Confirm
                                         </a>
                                     </div>
@@ -97,7 +134,7 @@ function SelectRolePage() {
                                         <button onClick={handleClose2} class="mb-2 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 transition duration-300">
                                             Cancel
                                         </button>
-                                        <a href="/" class="mb-2 bg-green-500 border border-green-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600 transition duration-300">
+                                        <a href="/" class="mb-2 bg-green-500 border border-green-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600 transition duration-300" onClick={roleTeacher}>
                                             Confirm
                                         </a>
                                     </div>
