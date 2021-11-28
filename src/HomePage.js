@@ -9,6 +9,8 @@ import React, { useState, useEffect } from 'react';
 import backendURL from './URL';
 import useInfiniteScroll from './useInfiniteScroll.js';
 import SelectRolePage from './SelectRolePage.js'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
 
 function HomePage() {
 
@@ -53,12 +55,12 @@ function HomePage() {
             .catch(err => console.log(err))
     }, []);
 
-    if (data.length == 0) {
-        return <h1>Loading...</h1>;
-    }
-  
-    
-    
+    if (data.length==0) {
+        return  <Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+                    <CircularProgress class="text-yellow-500" />
+                    <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+                </Box>;
+      }
 
     const reviewList = () => {
         if(currentUser.role == ''){
