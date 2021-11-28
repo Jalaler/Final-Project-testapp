@@ -8,6 +8,8 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import backendURL from './URL';
 import useInfiniteScroll from './useInfiniteScroll.js';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
 
 function HomePage() {
 
@@ -51,7 +53,10 @@ function HomePage() {
     }, []);
 
     if (data.length==0) {
-        return <h1>Loading...</h1>;
+        return  <Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+                    <CircularProgress class="text-yellow-500" />
+                    <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+                </Box>;
       }
 
     const reviewList = () => {

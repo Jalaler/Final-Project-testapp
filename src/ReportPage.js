@@ -76,7 +76,13 @@ function ReportPage() {
                     </a>
                 </div>
             </div>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
+            <div class="flex justify-center mt-10">
+                <iframe class="bg-white rounded-lg shadow-lg w-1/2 h-96" src="https://charts.mongodb.com/charts-project-0-sjcig/embed/charts?id=f265fcd5-0d65-4bb9-9cf5-9cd0ca0d4db7&maxDataAge=10&theme=light&autoRefresh=true"></iframe>
+            </div>
+            <div class="flex justify-center mt-10">
+                <iframe class="bg-white rounded-lg shadow-lg w-1/2 h-96" src="https://charts.mongodb.com/charts-project-0-sjcig/embed/charts?id=73074014-8fc2-47cb-ae93-3f37fd63b4b7&maxDataAge=10&theme=light&autoRefresh=true"></iframe>
+            </div>
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
                 {subjectList()}
             </div>
             <FooterEmpty />
