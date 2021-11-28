@@ -10,6 +10,8 @@ import backendURL from "./URL";
 import { useParams } from "react-router";
 import { easing } from "@material-ui/core";
 import useInfiniteScroll from './useInfiniteScroll.js';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
 
 function SubjectPage() {
 
@@ -54,7 +56,13 @@ function SubjectPage() {
     }, []);
 
 
-    if (!subject) return null;
+    if (subject.length==0) {
+        return  <Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+        <CircularProgress class="text-yellow-500" />
+        <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+    </Box>;
+    }
+    
 
     const subjectList = () => {
 

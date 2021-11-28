@@ -8,6 +8,8 @@ import backendURL from "./URL";
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
 
 function SubjectDetailPage() {
 
@@ -30,6 +32,13 @@ function SubjectDetailPage() {
 
             })
     }, []);
+
+    if(data.length==0){
+        return<Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+        <CircularProgress class="text-yellow-500" />
+        <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+    </Box>;
+    }
 
     const reviewList = () => {
         return data.map(currentPost => {

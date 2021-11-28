@@ -14,6 +14,9 @@ import SelectRadio from '../src/styles/SelectRadio.css';
 import { useParams } from "react-router";
 import { list } from "purgecss/node_modules/postcss";
 import backendURL from "./URL";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
+
 
 function EditPage(props) {
 
@@ -76,7 +79,6 @@ function EditPage(props) {
             active: true,
             review_detail: review_detail,
             section: section,
-            force: true
         }
         return review;
     }
@@ -148,6 +150,13 @@ function EditPage(props) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    if(data.length==0){
+        <Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+                    <CircularProgress class="text-yellow-500" />
+                    <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+                </Box>;
+    }
 
 
     return (

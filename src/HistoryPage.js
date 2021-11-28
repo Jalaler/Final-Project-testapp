@@ -7,7 +7,8 @@ import React, { useState, useEffect } from 'react';
 import backendURL from "./URL";
 import Scroll from './ReturntotopButton.js';
 import { useParams } from "react-router";
-
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
 import BackgroundBanner from "../src/styles/BackgroundBanner.css";
 
 
@@ -38,6 +39,14 @@ function HistoryPage() {
         return data.map(currentPost => {
             return <PostBox data={currentPost} his={true} />
         })
+    }
+    if(!currentUser){
+    if(data.length==0){
+        return <Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+        <CircularProgress class="text-yellow-500" />
+        <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+    </Box>;
+    }
     }
 
     return (

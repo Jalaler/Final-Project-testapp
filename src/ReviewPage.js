@@ -17,6 +17,9 @@ import { Input } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useParams } from "react-router";
 import backendURL from "./URL";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
+
 
 
 function ReviewPage() {
@@ -80,7 +83,7 @@ function ReviewPage() {
             active: true,
             review_detail: review_detail,
             section: section,
-            force: true
+            
         }
         return review;
     }
@@ -157,6 +160,13 @@ function ReviewPage() {
         })
         .catch(err => console.log(err))
     }, []);
+
+    if(sub.length==0){
+        <Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
+                    <CircularProgress class="text-yellow-500" />
+                    <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
+                </Box>;
+    }
 
 
     return (
