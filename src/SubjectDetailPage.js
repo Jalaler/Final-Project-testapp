@@ -23,7 +23,7 @@ function SubjectDetailPage() {
                     setData(res.data)
                 }
             })
-            .catch(err => console.log(err))
+            .catch()
 
         axios.get(backendURL + '/api/subjects/' + abbr)
             .then(res => {

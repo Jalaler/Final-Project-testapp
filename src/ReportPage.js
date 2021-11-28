@@ -27,7 +27,7 @@ function ReportPage() {
                 checkRole();
             }
         })
-            .catch(err => console.log(err))
+            .catch()
     }
 
     // function moreData() {
@@ -44,11 +44,11 @@ function ReportPage() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
+                
                 
             })
             
-        .catch (err => console.log(err)) 
+        .catch () 
         setTimeout(()=>{checkRole();},10)     
         
     }, []);

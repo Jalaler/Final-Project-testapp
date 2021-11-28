@@ -41,7 +41,7 @@ export default function TransitionsModal() {
                 setCurrentUser(res.data)
               
             })
-            .catch(err => console.log(err))
+            .catch()
     }, []);
 
 

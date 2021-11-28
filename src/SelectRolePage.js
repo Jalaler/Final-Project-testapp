@@ -23,9 +23,9 @@ function SelectRolePage() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
+                
             })
-            .catch(err => console.log(err))
+            .catch()
     }, [])
 
     function roleStudent() {
@@ -33,8 +33,8 @@ function SelectRolePage() {
             role : "STUDENT"
         }
         axios.put(backendURL + '/api/users/' + currentUser._id + '/student',role, { withCredentials: true })
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            .then()
+            .catch();
         
 
     }
@@ -46,8 +46,8 @@ function SelectRolePage() {
         }
     
         axios.put(backendURL + '/api/users/' + currentUser._id + '/teacher',role, { withCredentials: true })
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            .then()
+            .catch();
             
 
     }

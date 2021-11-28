@@ -27,10 +27,10 @@ function SubjectPage() {
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setSubject(res.data)
-                console.log(res.data)
+                
             }
         })
-            .catch(err => console.log(err))
+            .catch()
     }
 
     function moreData() {
@@ -48,9 +48,9 @@ function SubjectPage() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
+                
             })
-            .catch(err => console.log(err))
+            .catch()
 
 
     }, []);

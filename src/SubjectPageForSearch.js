@@ -21,9 +21,9 @@ function SubjectPageForSearch(){
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
-                console.log(res.data)
+               
             })
-            .catch(err => console.log(err))
+            .catch()
 
 
     }, []);
@@ -33,7 +33,7 @@ function SubjectPageForSearch(){
                  axios.get(backendURL + '/api/subjects/search/' + abbr)
                 .then((response) => {
                     setSubject(response.data);
-                    console.log(response.data);
+                    
                 });
     
     }

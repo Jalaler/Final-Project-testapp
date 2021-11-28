@@ -39,8 +39,8 @@ function PostBox(props) {
     function deletePost() {
 
         axios.delete(backendURL + '/api/reviews/' + props.data._id, { withCredentials: true })
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            .then()
+            .catch();
 
         window.location.reload();
 
@@ -54,21 +54,12 @@ function PostBox(props) {
 
     useEffect(() => {
 
-        // axios.get(backendURL + '/api/comments/post/' + props.data._id, { withCredentials: true })
-        //     .then(res => {
-        //         if (res.data.length > 0) {
-        //             setAllComments(res.data)
-        //             console.log(res.data)
-        //         }
-        //     })
-        //     .catch(err => console.log(err))
-
+       
 
     }, []);
     const [allStudentComment, setAllStudentComment] = useState([]);
     function commentsPost() {
         let comment_detail = document.getElementsByName('testcomment').values;
-        console.log(comment_detail);
         let basePost = props.data._id;
         let commenter = props.currentUser._id;
 
@@ -80,8 +71,8 @@ function PostBox(props) {
         }
 
         axios.post(backendURL + '/api/comments', comment, { withCredentials: true })
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            .then()
+            .catch();
 
         setAllStudentComment((prevAllStudentComment) => {
             return [...prevAllStudentComment, comment];

@@ -37,7 +37,7 @@ function Navbar() {
                 setCurrentUser(res.data)
                 setUser(true);
             })
-            .catch(err => console.log(err))
+            .catch()
     }, []);
 
     function logOut() {
@@ -46,7 +46,7 @@ function Navbar() {
                 setCurrentUser(res.data)
                 setUser(false)
             })
-            .catch(err => console.log(err))
+            .catch()
         window.location = '/'
     }
 

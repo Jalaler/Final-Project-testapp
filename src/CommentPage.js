@@ -56,7 +56,7 @@ function CommentPage() {
 
             }
         })
-            .catch(err => console.log(err))
+            .catch()
     }
 
     function moreData() {
@@ -79,7 +79,7 @@ function CommentPage() {
 
                     })
             } catch (error) {
-                console.log(error)
+                
             }
             setTimeout(() => { setLoading(false); }, 100)
         }
@@ -92,7 +92,7 @@ function CommentPage() {
                 setCurrentUser(res.data)
 
             })
-            .catch(err => console.log(err))
+            .catch()
 
         loadData();
 
@@ -102,7 +102,7 @@ function CommentPage() {
     const [allStudentComment, setAllStudentComment] = useState([]);
     function commentsPost() {
         let comment_detail = document.getElementById('comment').value;
-        // console.log(comment_detail);
+     
         let commenter = currentUser._id;
 
         const comment = {
@@ -113,8 +113,8 @@ function CommentPage() {
         }
 
         axios.post(backendURL + '/api/comments', comment, { withCredentials: true })
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            .then()
+            .catch();
 
         setAllStudentComment((prevAllStudentComment) => {
             return [...prevAllStudentComment, comment];

@@ -104,12 +104,12 @@ function ReviewPage() {
             newReview.participation_rating != null) {
             
         axios.post(backendURL+'/api/reviews', newReview,{ withCredentials: true })
-            .then(res => console.log.res.data)
-            .catch(err => console.log(err.message));
+            .then()
+            .catch();
 
             axios.post(backendURL + '/api/reviews', newReview)
-                .then(res => console.log.res.data)
-                .catch(err => console.log(err.message));
+                .then()
+                .catch();
 
             setAllStudentReview((prevAllStudentReview) => {
                 return [...prevAllStudentReview, getValue];
@@ -158,7 +158,7 @@ function ReviewPage() {
             setCurrentUser(res.data)
            
         })
-        .catch(err => console.log(err))
+        .catch()
     }, []);
 
     if(sub.length==0){

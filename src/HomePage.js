@@ -29,10 +29,10 @@ function HomePage() {
             if (res.data.length > 0) {
                 setData(res.data)
                 setUser(true)
-                console.log(user)
+               
             }
         })
-            .catch(err => console.log(err))
+            .catch()
     }
 
     function moreData() {
@@ -52,7 +52,7 @@ function HomePage() {
             .then(res => {
                 setCurrentUser(res.data)
             })
-            .catch(err => console.log(err))
+            .catch()
     }, []);
 
     if (data.length==0) {
@@ -65,7 +65,6 @@ function HomePage() {
     const reviewList = () => {
         if(currentUser.role == ''){
             setRole(true)
-            console.log(role)
         }
 
         return data.map(currentPost => {

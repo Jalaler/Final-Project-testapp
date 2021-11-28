@@ -8,7 +8,7 @@ function SubjectListType1(props) {
         <div>
                 <div class="flex justify-center">
                     <div class="pt-4 w-5/6 sm:w-3/4 md:w-2/3 lg:w-1/2">
-                        <a href={"subjectdetail/" + props.subject.subject_abbr} class="bg-yellow-300 bg-opacity-5 border-2 border-yellow-300 block md:flex items-center rounded-2xl md:rounded-full shadow-lg hover:bg-yellow-200 hover:bg-opacity-20 cursor-pointer">
+                        <a href={"/subjectdetail/" + props.subject.subject_abbr} class="bg-yellow-300 bg-opacity-5 border-2 border-yellow-300 block md:flex items-center rounded-2xl md:rounded-full shadow-lg hover:bg-yellow-200 hover:bg-opacity-20 cursor-pointer">
                             <div class="py-3 md:py-2 px-3">
                                 <div class="font-bold text-xl bg-yellow-500 bg-opacity-20 text-black rounded-full px-7 py-4 flex items-center justify-center">
                                     {props.subject.subject_abbr}

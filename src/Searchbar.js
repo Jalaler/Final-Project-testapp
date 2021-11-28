@@ -8,7 +8,7 @@ function Searchbar(props) {
     
     function click(){
         const abbr = document.getElementById('seach').value;
-        console.log();
+        
         window.location = props.urlForSeach +'/' +abbr ;
     }
  

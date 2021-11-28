@@ -27,12 +27,12 @@ function HistoryPage() {
                     setData(res.data)
                 }
             })
-            .catch(err => console.log(err))
+            .catch()
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
             })
-            .catch(err => console.log(err))
+            .catch()
     }, []);
 
     const historyList = () => {

@@ -98,8 +98,8 @@ function EditPage(props) {
             newReview.usefulness_rating != null &&
             newReview.participation_rating != null) {
             axios.put(backendURL + '/api/reviews/' + postId, getValue(),{ withCredentials: true })
-                .then(res => console.log.res.data)
-                .catch(err => console.log(err.message));
+                .then()
+                .catch();
 
             setAllStudentReview((prevAllStudentReview) => {
                 return [...prevAllStudentReview, getValue];
@@ -127,7 +127,7 @@ function EditPage(props) {
             .then(res => {
                 setCurrentUser(res.data)
             })
-            .catch(err => console.log(err))
+            .catch()
 
     }, []);
 
