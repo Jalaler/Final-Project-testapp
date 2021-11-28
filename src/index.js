@@ -12,6 +12,12 @@ import ReviewPage from './ReviewPage';
 import HistoryPage from './HistoryPage';
 import SubjectDetailPage from './SubjectDetailPage';
 import EditPage from './EditPage';
+import SelectRolePage from './SelectRolePage';
+import ErrorPage from './ErrorPage';
+import SubjectPageForSearch from './SubjectPageForSearch';
+import CommentPage from './CommentPage';
+import ReportPage from './ReportPage';
+import CSVPage from './CSVPage';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -21,16 +27,17 @@ ReactDOM.render(
                 <Route path="/" exact>
                     <HomePage />
                 </Route>
+                
                 <Route path="/subject">
                     <SubjectPage />
                 </Route>
-                {/* <Route path="/review">
-                    <ReviewPage />
-                </Route> */}
+                <Route path="/subjectsearch/:abbr">
+                    <SubjectPageForSearch />
+                </Route>
                 <Route path="/review/:abbr">
                     <ReviewPage />
                 </Route>
-                <Route path="/history">
+                <Route path="/history/:studentId">
                     <HistoryPage />
                 </Route>
                 <Route path="/subjectdetail/:abbr">
@@ -38,6 +45,21 @@ ReactDOM.render(
                 </Route>
                 <Route path="/edit/:postId">
                     <EditPage />
+                </Route>
+                <Route path="/selectrole">
+                    <SelectRolePage />
+                </Route>
+                <Route path="/404">
+                    <ErrorPage />
+                </Route>
+                <Route path="/comment/:basePost">
+                    <CommentPage />
+                </Route>
+                <Route path="/report">
+                    <ReportPage />
+                </Route>
+                <Route path="/csv">
+                    <CSVPage />
                 </Route>
             </Switch>
         </BrowserRouter>

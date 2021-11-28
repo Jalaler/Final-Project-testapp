@@ -7,20 +7,40 @@ import PostBox from './PostBox.js';
 import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import backendURL from './URL';
-
+import useInfiniteScroll from './useInfiniteScroll.js';
 
 function HomePage() {
 
     const [data, setData] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
+    const [allComments, setAllComments] = useState([]);
+    const [page, setPage] = useState(2);
+    const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
+    const [urlForSeach,setUrlForSeach] = useState('/subjectsearch');
+
+    const loadData = () =>{
+        let url = backendURL + '/api/reviews/page/1/size/10' ;
+        axios.get(url, { withCredentials: true }).then(res => {
+            if (res.data.length > 0) {
+                setData(res.data)
+            }
+        })
+        .catch(err => console.log(err))
+      }
+
+      function moreData() {
+        let url = backendURL +`/api/reviews/page/${page}/size/10`;
+        axios.get(url,{ withCredentials: true }).then(res => {
+          setData([...data, ...res.data]);
+          setPage(page+1)
+          setIsFetching(false)
+        });
+      }
+
     useEffect(() => {
-        axios.get(backendURL + '/api/reviews/')
-            .then(res => {
-                if (res.data.length > 0) {
-                    setData(res.data)
-                }
-            })
-            .catch(err => console.log(err))
+        
+        loadData()
+
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
@@ -28,18 +48,24 @@ function HomePage() {
             .catch(err => console.log(err))
     }, []);
 
+    if (data.length==0) {
+        return <h1>Loading...</h1>;
+      }
+
     const reviewList = () => {
+        
         return data.map(currentPost => {
-            return <PostBox data={currentPost} />
+            return <PostBox data={currentPost} currentUser={currentUser} />
         })
     }
-    
+
 
     return (
         <div className="HomePage">
+            
             <Navbar />
-            <Banner />
-            <TopicHome />
+            <Banner urlForSeach={urlForSeach} />
+            <TopicHome  />
             <Scroll showBelow={250} />
             {reviewList()}
             <Footer />
