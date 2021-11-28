@@ -49,7 +49,7 @@ ReactDOM.render(
                 <Route path="/selectrole">
                     <SelectRolePage />
                 </Route>
-                <Route path="/404">
+                <Route >
                     <ErrorPage />
                 </Route>
                 <Route path="/comment/:basePost">
