@@ -108,20 +108,20 @@ export default function TransitionsModal() {
                         <li><a href="/subject" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-1">Subject</a></li>
                         <li><a href="/review/GEN111" class="block py-3 text-md mx-5 border-b border-b-1 border-opacity-50" role="menuitem" tabindex="-1" id="menu-item-2">Review</a></li>
                         <li><a href={'/history/'+ currentUser._id} class="block py-3 text-md mx-5" role="menuitem" tabindex="-1" id="menu-item-2">History</a></li>
-                        <li class="pt-2 sm:hidden">
+                        <li class="mt-2 mb-4 sm:hidden">
                             <button type="button" onClick={handleOpen}>
                                 <div class="flex lg:pr-10 text-center">
                                     <a href="#" class="py-2 px-6 font-semibold text-white bg-yellow-500 rounded-full shadow-md hover:bg-yellow-600 transition duration-300">Login</a>
                                 </div>
                             </button>
                         </li>
-                        <li class="pb-4 pt-2">
+                        {/* <li class="pb-4 pt-2">
                             <form method="POST" action="#" role="none">
                                 <button type="submit" class="block border-2 border-gray-200 ml-6 px-3 py-1 rounded-full text-md text-gray-400" role="menuitem" tabindex="-1" id="menu-item-3">
                                     Sign out
                                 </button>
                             </form>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
