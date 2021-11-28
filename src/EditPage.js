@@ -71,7 +71,7 @@ function EditPage(props) {
             participation_rating: participation_rating,
             academic_year: academic_year,
             semester: semester,
-            reviewer: "6124839e65cfb652d8df2b67",
+            reviewer:   reviewer ,
             reviewedSubject: reviewedSubject,
             active: true,
             review_detail: review_detail,
@@ -104,7 +104,7 @@ function EditPage(props) {
             });
 
             setTimeout(function () {
-                window.location = '/';
+                window.location = '/history/' + currentUser._id;
             }, 2000);
 
             setOpen(true);
