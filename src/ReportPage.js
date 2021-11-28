@@ -7,19 +7,22 @@ import React, { useState, useEffect } from 'react';
 import backendURL from './URL';
 import useInfiniteScroll from './useInfiniteScroll.js';
 
+
 function ReportPage() {
 
     const [subject, setSubject] = useState([]);
     const [page, setPage] = useState(2);
     // const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
     const [currentUser, setCurrentUser] = useState({});
+    const [userRole, setUserRole] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const loadData = () => {
         let url = backendURL + '/api/subjects/ratings/avg';
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setSubject(res.data)
-               
+                checkRole();
             }
         })
             .catch(err => console.log(err))
@@ -35,27 +38,50 @@ function ReportPage() {
     // }
 
     useEffect(() => {
-
         loadData()
-
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
                 console.log(res.data)
+                
             })
-            .catch(err => console.log(err))
+            
+        .catch (err => console.log(err)) 
+        setTimeout(()=>{checkRole();},10)     
+        
     }, []);
 
-    const subjectList = () => {
+    if (subject.length == 0) {
+        return <h1>Loading...</h1>;
+    }
 
+    
+    const subjectList = () => {
+        
         return subject.map(currentSubject => {
             return <SubjectReportList subject={currentSubject} currentUser={currentUser} />
         })
     }
+    function checkRole(){
+
+        if (currentUser.role == 'ADMIN') {
+            setUserRole(true)
+        } else if(currentUser.role == 'RESEARCHER'){
+            setUserRole(true)
+        }else if(currentUser.role == 'SUPERADMIN'){
+            setUserRole(true)
+        }else{
+            setUserRole(false)
+        }
+
+        return userRole;
+
+    }
 
 
     return (
-        <div>
+        <div >
+            
             <Navbar />
             <Scroll showBelow={250} />
             <div class="sm:flex px-8 sm:px-0 pt-28 sm:grid sm:grid-cols-2 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
@@ -67,6 +93,8 @@ function ReportPage() {
                         Back
                     </p>
                 </a>
+            {/* {!userRole && <div></div>} */}
+            {/* {userRole &&  */}
                 <div class="flex justify-end">
                     <span class="mr-1 text-gray-400 flex text-md pt-6">(For Researcher)</span>
                     <a href="/csv" class="border-2 border-yellow-400 hover:border-yellow-500 rounded-full bg-white py-2 px-4 flex items-center text-yellow-500 hover:text-yellow-600 transition duration-100">
@@ -75,12 +103,14 @@ function ReportPage() {
                         </div>
                     </a>
                 </div>
+                {/* } */}
+                
             </div>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 sm:mx-auto w-full sm:w-10/12 md:w-9/12 lg:w-3/5 xl:w-2/3">
                 {subjectList()}
             </div>
             <FooterEmpty />
-        </div>
+            </div>
     );
 }
 
