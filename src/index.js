@@ -49,9 +49,7 @@ ReactDOM.render(
                 <Route path="/selectrole">
                     <SelectRolePage />
                 </Route>
-                <Route >
-                    <ErrorPage />
-                </Route>
+                
                 <Route path="/comment/:basePost">
                     <CommentPage />
                 </Route>
@@ -60,6 +58,9 @@ ReactDOM.render(
                 </Route>
                 <Route path="/csv">
                     <CSVPage />
+                </Route>
+                <Route >
+                    <ErrorPage />
                 </Route>
             </Switch>
         </BrowserRouter>
