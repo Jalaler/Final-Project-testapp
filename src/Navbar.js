@@ -11,15 +11,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('#btn');
     const tooltip = document.querySelector('#tooltip');
 
-    tooltip.innerHTML = btn.dataset.tooltipText
+    // tooltip.innerHTML = btn.dataset.tooltipText
 
-    btn.addEventListener('mouseenter', () => {
-        tooltip.classList.remove('hidden');
-    })
+    // btn.addEventListener('mouseenter', () => {
+    //     tooltip.classList.remove('hidden');
+    // })
 
-    btn.addEventListener('mouseleave', () => {
-        tooltip.classList.add('hidden');
-    })
+    // btn.addEventListener('mouseleave', () => {
+    //     tooltip.classList.add('hidden');
+    // })
 })
 
 function Navbar() {
@@ -72,7 +72,7 @@ function Navbar() {
                         <div class="text-md mt-20 right-2 sm:right-8 md:right-16 lg:right-8 xl:right-auto bg-gray-700 text-white py-2 px-4 absolute rounded-3xl bg-opacity-50 shadow-lg hidden" id="tooltip" role="tooltip">
                         </div>
                         <button type="submit" class="flex items-center ml-4 hidden sm:block">
-                            <a href="#" class="py-1 px-4 font-semibold text-yellow-500 bg-white border-2 border-yellow-300 rounded-full shadow-md hover:bg-yellow-50 transition duration-300">Logout</a>
+                            <a href="#" class="py-1 px-4 font-semibold text-yellow-500 bg-white border-2 border-yellow-300 rounded-full shadow-md hover:bg-yellow-50 transition duration-300" onClick={logOut}>Logout</a>
                         </button>
 
                         <div class="relative lg:hidden flex inline-flex ml-2">
@@ -109,7 +109,7 @@ function Navbar() {
                                                 Sign out
                                             </button> */}
                                             <button type="submit" class="flex items-center mx-auto">
-                                                <a href="#" class="py-1 px-4 font-semibold text-yellow-500 bg-white border-2 border-yellow-300 rounded-full shadow-md hover:bg-yellow-50 transition duration-300">Logout</a>
+                                                <a href="#" class="py-1 px-4 font-semibold text-yellow-500 bg-white border-2 border-yellow-300 rounded-full shadow-md hover:bg-yellow-50 transition duration-300" onClick={logOut}>Logout</a>
                                             </button>
                                         </form>
                                     </li>
