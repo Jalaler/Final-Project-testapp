@@ -16,33 +16,24 @@ import Modal from '@material-ui/core/Modal';
 function PostBox(props) {
     const [rating, setRating] = useState({});
     function LikePost() {
-        axios.patch( backendURL+"/api/reviews/" + props.data._id + "/like" , { withCredentials: true })
-        .then(res =>{
-            setRating(res.data)
-        }
+        axios.patch( backendURL+"/api/reviews/" + props.data._id + "/like", null , { withCredentials: true })
+        .then(
+            axios.get(backendURL + '/api/reviews/rating_count/' + props.data._id , { withCredentials: true })
+            .then(res => {
+                setRating(res.data);
+                console.log(res.data)
+            })
         )
-        
-        const like_btn = document.querySelector('.like_btn');
-        const like_count = document.querySelector('#like_count');
-        if (like_btn.checked) {
-            like_count.value++;
-        } else {
-            like_count.value--;
-        }
     }
     function DislikePost() {
-        axios.patch(backendURL + "/api/reviews/" + props.data._id + "/dislike" , { withCredentials: true })
-        .then(res =>{
-            setRating(res.data)
-        }
+        axios.patch(backendURL + "/api/reviews/" + props.data._id + "/dislike", null , { withCredentials: true })
+        .then(
+            axios.get(backendURL + '/api/reviews/rating_count/' + props.data._id , { withCredentials: true })
+            .then(res => {
+                setRating(res.data);
+                console.log(res.data)
+            })
         )
-        const dislike_btn = document.querySelector('.dislike_btn');
-        const dislike_count = document.querySelector('#dislike_count');
-        if (dislike_btn.checked) {
-            dislike_count.value++;
-        } else {
-            dislike_count.value--;
-        }
     }
 
 
