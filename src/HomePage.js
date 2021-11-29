@@ -29,6 +29,9 @@ function HomePage() {
             if (res.data.length > 0) {
                 setData(res.data)
                 setUser(true)
+                if(currentUser.role == '' ){
+                    setRole(true)
+                }
                
             }
         })
@@ -63,9 +66,9 @@ function HomePage() {
       }
 
     const reviewList = () => {
-        if(currentUser.role == ''){
-            setRole(true)
-        }
+        // if(currentUser.role == '' || currentUser.role == null){
+        //     setRole(true)
+        // }
 
         return data.map(currentPost => {
             return <PostBox data={currentPost} currentUser={currentUser} />
@@ -77,7 +80,7 @@ function HomePage() {
 
     return (
         <div>
-            {!user && !role && 
+            {!user && 
                 <div className="HomePage">
 
                     <Navbar />
@@ -88,8 +91,8 @@ function HomePage() {
                     <Footer />
                 </div>
             }
-             {user && !role &&
-            
+             {user &&
+            ! role &&
                 <div className="HomePage">
                     <Navbar />
                     <Banner urlForSeach={urlForSeach} />
@@ -98,7 +101,8 @@ function HomePage() {
                     {reviewList()}
                     <Footer />
                 </div>
-
+             
+            
             } 
              { user && role &&
             

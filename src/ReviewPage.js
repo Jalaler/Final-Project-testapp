@@ -107,10 +107,6 @@ function ReviewPage() {
             .then()
             .catch();
 
-            axios.post(backendURL + '/api/reviews', newReview)
-                .then()
-                .catch();
-
             setAllStudentReview((prevAllStudentReview) => {
                 return [...prevAllStudentReview, getValue];
             });

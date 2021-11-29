@@ -33,7 +33,7 @@ function SubjectDetailPage() {
             })
     }, []);
 
-    if(data.length==0){
+    if(sub.length==0){
         return<Box class="flex justify-center items-center h-screen" sx={{ display: 'flex' }}>
         <CircularProgress class="text-yellow-500" />
         <p class="ml-6 font-semibold text-yellow-600">Loading...</p>
