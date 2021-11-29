@@ -98,7 +98,7 @@ function CommentPage() {
         axios.get(backendURL + '/api/reviews/rating_count/' +basePost , { withCredentials: true })
         .then(res => {
             setRating(res.data);
-            console.log(res.data)
+           
         })
         .catch();
 
