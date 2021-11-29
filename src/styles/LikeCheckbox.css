@@ -1,0 +1,20 @@
+.like_checkbox:checked {
+    background-color: #DBEAFE;
+    border: 2px solid #93C5FD;
+    opacity: 50%;
+    right: 0;
+}
+.dislike_checkbox:checked {
+    background-color: #FEE2E2;
+    border: 2px solid #FCA5A5;
+    opacity: 50%;
+    right: 0;
+}
+
+
+.like_input {
+    background: none;
+    outline: none;
+    border: none;
+    pointer-events: none;
+}

@@ -1,0 +1,35 @@
+.scrollToTopBtn {
+    box-shadow: 1px 1px 24px #FBBF24;
+    /* background-color: black; */
+    border: none;
+    border-radius: 100%;
+    color: #F59E0B;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 48px;
+    width: 48px;
+    height: 48px;
+    
+    /* place it at the bottom right corner */
+    position: fixed;
+    bottom: 60px;
+    right: 60px;
+    /* keep it at the top of everything else */
+    z-index: 100;
+    /* hide with opacity */
+    opacity: 0;
+    /* also add a translate effect */
+    transform: translateY(100px);
+    /* and a transition */
+    transition: all .5s ease
+  }
+
+  .scrollToTopBtn:hover{
+    color: white;
+    background-color: #FBBF24;
+  }
+      
+  .showBtn {
+    opacity: 1;
+    transform: translateY(0)
+  }
