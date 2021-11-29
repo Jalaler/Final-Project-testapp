@@ -79,8 +79,7 @@ function HomePage() {
         })
     }
 
-    console.log(user);
-    console.log(role);
+  
 
     
 
