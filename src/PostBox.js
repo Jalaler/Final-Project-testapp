@@ -21,7 +21,6 @@ function PostBox(props) {
             axios.get(backendURL + '/api/reviews/rating_count/' + props.data._id , { withCredentials: true })
             .then(res => {
                 setRating(res.data);
-                console.log(res.data)
             })
         )
     }
@@ -31,7 +30,6 @@ function PostBox(props) {
             axios.get(backendURL + '/api/reviews/rating_count/' + props.data._id , { withCredentials: true })
             .then(res => {
                 setRating(res.data);
-                console.log(res.data)
             })
         )
     }
@@ -57,7 +55,6 @@ function PostBox(props) {
         axios.get(backendURL + '/api/reviews/rating_count/' + props.data._id , { withCredentials: true })
         .then(res => {
             setRating(res.data);
-            
         })
         .catch();
 
