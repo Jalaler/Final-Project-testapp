@@ -28,11 +28,8 @@ function HomePage() {
         axios.get(url, { withCredentials: true }).then(res => {
             if (res.data.length > 0) {
                 setData(res.data)
-                setUser(true)
-                if(currentUser.role == '' ){
-                    setRole(true)
-                }
-               
+                
+                
             }
         })
             .catch()
@@ -54,6 +51,7 @@ function HomePage() {
         axios.get(backendURL + '/api/users/current', { withCredentials: true })
             .then(res => {
                 setCurrentUser(res.data)
+                    setUser(true)
             })
             .catch()
     }, []);
@@ -70,10 +68,19 @@ function HomePage() {
         //     setRole(true)
         // }
 
+        if(user){
+            if(currentUser.role == '' || currentUser.role == null ){
+                setRole(true)
+            }
+        }
+
         return data.map(currentPost => {
             return <PostBox data={currentPost} currentUser={currentUser} />
         })
     }
+
+    console.log(user);
+    console.log(role);
 
     
 
