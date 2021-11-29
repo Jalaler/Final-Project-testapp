@@ -14,8 +14,14 @@ import Modal from '@material-ui/core/Modal';
 
 
 function PostBox(props) {
-
+    const [rating, setRating] = useState({});
     function LikePost() {
+        axios.patch( backendURL+"/api/reviews/" + props.data._id + "/like" , { withCredentials: true })
+        .then(res =>{
+            setRating(res.data)
+        }
+        )
+        
         const like_btn = document.querySelector('.like_btn');
         const like_count = document.querySelector('#like_count');
         if (like_btn.checked) {
@@ -25,6 +31,11 @@ function PostBox(props) {
         }
     }
     function DislikePost() {
+        axios.patch(backendURL + "/api/reviews/" + props.data._id + "/dislike" , { withCredentials: true })
+        .then(res =>{
+            setRating(res.data)
+        }
+        )
         const dislike_btn = document.querySelector('.dislike_btn');
         const dislike_count = document.querySelector('#dislike_count');
         if (dislike_btn.checked) {
@@ -49,38 +60,22 @@ function PostBox(props) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [allComments, setAllComments] = useState([]);
-    // const  setComments = useState([])
 
+    const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
+        axios.get(backendURL + '/api/reviews/rating_count/' + props.data._id , { withCredentials: true })
+        .then(res => {
+            setRating(res.data);
+            console.log(res.data)
+        })
+        .catch();
 
-       
-
-    }, []);
-    const [allStudentComment, setAllStudentComment] = useState([]);
-    function commentsPost() {
-        let comment_detail = document.getElementsByName('testcomment').values;
-        let basePost = props.data._id;
-        let commenter = props.currentUser._id;
-
-        const comment = {
-            comment_detail: comment_detail,
-            basePost: basePost,
-            commenter: commenter,
-            active: true
-        }
-
-        axios.post(backendURL + '/api/comments', comment, { withCredentials: true })
-            .then()
-            .catch();
-
-        setAllStudentComment((prevAllStudentComment) => {
-            return [...prevAllStudentComment, comment];
-        });
-
-
-        window.location.reload();
-    }
+        axios.get(backendURL + '/api/users/current', { withCredentials: true })
+            .then(res => {
+                setCurrentUser(res.data)})
+            .catch()
+            
+    }, [])
 
 
     return (
@@ -193,14 +188,14 @@ function PostBox(props) {
                                             <svg xmlns="http://www.w3.org/2000/svg" class="like_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                                 <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                                             </svg>
-                                            <input type="number" id="like_count" value={props.data.like_rating} class="like_input z-10 pl-2 w-10"></input>
+                                            <input type="number" id="like_count" value={rating.like_count} class="like_input z-10 pl-2 w-10"></input>
                                         </label>
                                         <label class="flex justify-end items-center relative cursor-pointer select-none w-24 h-10 rounded-xl hover:bg-red-50 transition duration-100">
                                             <input type="checkbox" onClick={DislikePost} class="dislike_btn dislike_checkbox absolute cursor-pointer appearance-none w-24 h-10 rounded-xl"></input>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="dislike_icon z-10 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                                 <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
                                             </svg>
-                                            <input type="number" id="dislike_count" value={props.data.dislike_rating} class="like_input z-10 pl-2 w-10"></input>
+                                            <input type="number" id="dislike_count" value={rating.dislike_count} class="like_input z-10 pl-2 w-10"></input>
                                         </label>
                                     </div>
                                 </header>
